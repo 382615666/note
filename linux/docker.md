@@ -14,3 +14,6 @@
 > yum install docker-ce
 
 > systemctl start docker
+
+4. 启动docker
+
