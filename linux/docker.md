@@ -1,5 +1,7 @@
 # docker
 
+### centos 安装docker
+
 1. 先删除已安装docker
 > yum remove docker-xxx
 
