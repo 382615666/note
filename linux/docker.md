@@ -16,4 +16,9 @@
 > systemctl start docker
 
 4. 启动docker
+> systemctl start docker
+
+> systemctl enable docker 开机启动
+
+> docker search metasploit 查询镜像
 
