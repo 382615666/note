@@ -40,3 +40,12 @@
 [超链接](http://www.baidu.com)
 
 ![图片](http://img5.imgtn.bdimg.com/it/u=415293130,2419074865&fm=26&gp=0.jpg)
+
+
+`hello world`
+
+```
+    function test () {
+        console.log('hello world')
+    }
+```
