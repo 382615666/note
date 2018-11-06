@@ -23,6 +23,8 @@ http：//prompt.ml/0 B方向 国外的xss测试
 http://redtiger.labs.overthewire.org/ B方向 国外sql注入挑战网站，10关，过关的形式 不同的注入，循序渐近地练习
 
 
+http://www.icoolxue.com/album/affix/view/hack/1/12
+
 工具：
 https://github.com/truongkma/ctf-tools
 https://github.com/Plkachu/v0lt
