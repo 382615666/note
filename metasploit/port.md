@@ -2,7 +2,7 @@
 
 > msfconsole
 
-> set auxiliary/scanner/portscan/syn
+> use auxiliary/scanner/portscan/syn
 
 > show options
 
