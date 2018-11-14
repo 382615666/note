@@ -5,7 +5,6 @@
 [tcp原理参考链接](https://www.cnblogs.com/buxiangxin/p/8336022.html)
 
 
-<<<<<<< HEAD
 ### tcp三次握手
 
 client -> server
@@ -30,7 +29,6 @@ client(establish) -> server
 ![数据包](../img/sfsdffdsf.png)
 
 
-=======
 ### 发送
 
 * tcp发送过程中，第一个sequence number 一般是1，则next sequence number = sequence number + tcp length
@@ -65,4 +63,3 @@ client -> server
 ![OSI七层模型和TCP四层模型](../img/1542163448(1).jpg)
 
 * 数据链路层的最大限度MTU是1500字节
->>>>>>> 89bc6e5c84b6e5fd513ef1af09c9af13b7e86f13
