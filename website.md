@@ -44,3 +44,5 @@ http：//www.xctf.org.cn/ 国内比赛，比较难
 
 https://blog.csdn.net/deepweb0/article/details/37560915
 http://www.91ri.org/?s=3389
+
+https://www.zhihu.com/question/24954543?rf=20640324
