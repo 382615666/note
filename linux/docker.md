@@ -2,23 +2,19 @@
 
 ### centos 安装docker
 
-1. 先删除已安装docker
-> yum remove docker-xxx
+> yum remove docker-xxx #先删除已安装docker
 
-2. 配置yum源
 > yum install yum-utils
 
-> yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+> yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo #配置yum源
 
-3. 安装docker
-> yum install docker-ce
+> yum install docker-ce #安装docker
 
-> systemctl start docker
+> systemctl start docker #启动docker
 
-4. 启动docker
-> systemctl start docker
+> systemctl enable docker #开机启动
 
-> systemctl enable docker 开机启动
+> docker run --name xxx -d -p hostport:containerport imagename #启动容器
 
-> docker search metasploit 查询镜像
+> docker exec -it containerId #进入容器
 
