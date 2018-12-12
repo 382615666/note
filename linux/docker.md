@@ -20,8 +20,8 @@
 
 > docker exec -it containerId bash #进入容器
 
-> docker commit -a author -m message containerId repository:tag path
+> docker commit -a author -m message containerId repository:tag path #修改容器，重新生成镜像
 
-> docker build -f ../Dockerfile -t repository:tag path
+> docker build -f ../Dockerfile -t repository:tag path #Dockerfile生成镜像
 
 * Dockerfile 中的 COPY 相对路径 容器路径 #相对路径是指docker build命令所在的目录
