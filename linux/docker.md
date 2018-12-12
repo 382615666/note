@@ -39,3 +39,37 @@
 > curl 127.0.0.1:5000/v2/_catalog #查看镜像
 
 * 暂时没找到完美的删除镜像的方式
+
+
+#### Dockerfile
+
+1. CMD有三种形式
+
+    1. ["executable", "param1", "param2"]
+        * 推荐始终 [] 形式
+    2. ["param1", "param2"]
+    3. command param1 param2
+        * 默认调用bash
+        * 最终会被解释为 ["/bin/bash", "-c", "param2"]
+
+* 当无ENTRYPOINT，CMD为默认命令
+* 当有ENTRYPOINT，且docker run containerId 后面无参数的时候，CMD使用上面的第2种形式，并且值会成为ENTRYPOINT的参数
+> CMD ["-u"]
+
+> ENTRYPOINT ps -a || ENTRYPOINT ["/bin/bash", "-c", "ps -a"]
+
+> docker run container
+
+> ps -a -u #最终命令
+
+* 当有ENTRYPOINT，且docker run containerId 后面有参数的时候，CMD使用上面的第2种形式，但是会无效，docker run 后面的值会成为ENTRYPOINT的参数
+
+> CMD ["-u"]
+
+> ENTRYPOINT ps -a || ENTRYPOINT ["/bin/bash", "-c", "ps -a"]
+
+> docker run container -t
+
+> ps -a -t #最终命令
+
+* 简而言之，CMD很多时候相当于一个默认值或者默认命令的作用
