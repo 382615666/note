@@ -75,3 +75,10 @@
 * 简而言之，CMD很多时候相当于一个默认值或者默认命令的作用
 
 * VOLUMN 指的是目录
+
+
+### docker-compose
+
+[参考资料](https://blog.csdn.net/u011781521/article/details/80464826)
+
+> pip install docker-compose
