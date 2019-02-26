@@ -50,3 +50,5 @@ https://www.zhihu.com/question/24954543?rf=20640324
 https://www.bugbank.cn/live/
 
 https://blog.csdn.net/Fly_hps/article/details/79783253
+
+http://www.vuln.cn/8247
