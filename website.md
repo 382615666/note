@@ -8,7 +8,6 @@
 
 入门----从基础题目出发（推荐资源）：
 
-http://ctf.idf.cn !!!首推 idf实验室：题目非常基础，只1个点
 www.ichunqiu.com 有线下决赛题目复现
 http://oj.xctf.org.cn/xctf 题库网站，历年题，练习场，比较难
 www.wechall.net/challs !!!!!!非常入门的国外ctf题库，很多国内都是从这里刷题成长起来的
