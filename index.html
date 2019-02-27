@@ -1,0 +1,12 @@
+<script>
+    let arr = 'QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD LC ZXBPXO XKA VLRO RKFNRB PLIRQFLK FP ZFACKXLLYXXX'.split('')
+    for (let i = 0; i < 26; i++) {
+      let result = arr.map(item => {
+        if (item === ' ') {
+          return item
+        }
+        return String.fromCharCode((item.charCodeAt(0) + i - 65) % 26 + 65).toLowerCase()
+      })
+      console.log(result.join(''))
+    }
+</script>
