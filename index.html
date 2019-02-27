@@ -1,12 +1,5 @@
 <script>
-    let arr = 'QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD LC ZXBPXO XKA VLRO RKFNRB PLIRQFLK FP ZFACKXLLYXXX'.split('')
-    for (let i = 0; i < 26; i++) {
-      let result = arr.map(item => {
-        if (item === ' ') {
-          return item
-        }
-        return String.fromCharCode((item.charCodeAt(0) + i - 65) % 26 + 65).toLowerCase()
-      })
-      console.log(result.join(''))
-    }
+
+    let arr = [84, 104, 101, 32, 115, 111, 108, 117, 116, 105, 111, 110, 32, 105, 115, 58, 32, 99, 100, 101, 100, 103, 100, 97, 112, 104, 99, 110, 102]
+    console.log(arr.map(item => String.fromCharCode(item)).join(''))
 </script>

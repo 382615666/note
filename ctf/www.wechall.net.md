@@ -12,6 +12,7 @@
         ```
             hexdump -C file.name
         ```
+        
 1. [参考链接](http://www.wechall.net/challenge/training/crypto/caesar/index.php)
     * 恺撒加密[参考资料](https://www.cnblogs.com/dmego/p/6007143.html)
         ```ecmascript 6
@@ -26,4 +27,11 @@
                  console.log(result.join(''))
                }
         ```
-
+1. [参考链接](http://www.wechall.net/challenge/training/www/robots/index.php)
+    * robots.txt
+    
+1. [参考链接](http://www.wechall.net/challenge/training/encodings/ascii/index.php)
+    ```ecmascript 6
+        let arr = [84, 104, 101, 32, 115, 111, 108, 117, 116, 105, 111, 110, 32, 105, 115, 58, 32, 99, 100, 101, 100, 103, 100, 97, 112, 104, 99, 110, 102]
+        console.log(arr.map(item => String.fromCharCode(item)).join(''))
+    ```
