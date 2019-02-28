@@ -5,6 +5,8 @@
     * 点击右键查看源码
 
 1. [参考链接](http://www.wechall.net/challenge/training/stegano1/index.php)
+    * [图像相关知识参考链接](https://blog.csdn.net/u013378306/article/details/65936192)
+    * [隐写术参考链接](https://blog.csdn.net/u011028345/article/details/75311346)
     * 通过图片编辑工具查看ascII值
     * window winhex、nodepad++ hex插件
     * [参考资料](https://blog.csdn.net/binwalker/article/details/77716326)
