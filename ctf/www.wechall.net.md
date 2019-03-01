@@ -73,7 +73,7 @@
     * [js match结果](https://www.jianshu.com/p/f09508c14e65)
     * /^$/
     * /^wechall$/
-    * /^wechall4?\.(?:jpg|gif|tiff|bmp|png)$/
+    * /^(wechall4?)\.(?:jpg|gif|tiff|bmp|png)$/
     >>>
         (?=exp) 'sing'.match(/\w(?=ing)/) 匹配后面是ing的字符，匹配结果：s
         (?<=exp) 'sing'.match(/(?<=sin)\w/) 匹配前面是sin的字符，匹配结果：g
