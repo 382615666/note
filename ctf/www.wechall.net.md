@@ -1,5 +1,7 @@
 # [参考链接](http://www.wechall.net/challs)
 
+## [答案参考链接](http://winkar.github.io/2015/01/24/wechall.html)
+
 
 1. [参考链接](http://www.wechall.net/challenge/training/get_sourced/index.php)
     * 点击右键查看源码
@@ -71,7 +73,10 @@
     * /^wechall$/
     
 1. [参考链接](http://www.wechall.net/challenge/training/encodings1/index.php)
-    
+    * [解题思路](https://blog.csdn.net/smoggyxhdz/article/details/79885903)
+    * 0-127基本字符, 128-255扩展字符.
+    * ASCII 码使用指定的 7 位或 8 位二进制数组合来表示 128 或 256 种可能的字符。标准 ASCII 码使用 7 位二进制数来表示所有的大写和小写字母，数字 0 到 9、标点符号，以及在美式英语中使用的特殊控制字符。目前许多基于 x86 的系统都支持使用扩展（或“高”）ASCII。扩展 ASCII 码允许将每个字符的第 8 位用于确定附加的 128 个特殊符号字符、外来语字母和图形符号。
+    * [编码相关的一些发展史](https://blog.csdn.net/dk_0520/article/details/70157426)
     
 1. [参考链接](http://www.wechall.net/challenge/training/prime_factory/index.php)
     ```ecmascript 6
