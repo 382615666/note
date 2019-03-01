@@ -69,8 +69,17 @@
     ```
 
 1. [参考链接](http://www.wechall.net/challenge/training/regex/index.php)
+    * [正则表达式三十分钟入门](https://www.cnblogs.com/sunny3096/p/7201403.html)
+    * [js match结果](https://www.jianshu.com/p/f09508c14e65)
     * /^$/
     * /^wechall$/
+    * /^wechall4?\.(?:jpg|gif|tiff|bmp|png)$/
+    >>>
+        (?=exp) 'sing'.match(/\w(?=ing)/) 匹配后面是ing的字符，匹配结果：s
+        (?<=exp) 'sing'.match(/(?<=sin)\w/) 匹配前面是sin的字符，匹配结果：g
+        (?!exp) 'sing'.match(/\w{2}(?!\w)/) 匹配两个字符，但是后面不能有字符，匹配结果：ng
+        (?<!exp) 'sing'.match(/(?<!\w)\w{2}/) 匹配两个字符，但是前面不能有字符，匹配结果：si
+    >>>
     
 1. [参考链接](http://www.wechall.net/challenge/training/encodings1/index.php)
     * [解题思路](https://blog.csdn.net/smoggyxhdz/article/details/79885903)
