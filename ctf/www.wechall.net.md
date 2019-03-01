@@ -44,6 +44,7 @@
     ```
     
 1. [参考链接](http://www.wechall.net/challenge/training/programming1/index.php)
+    * 先从浏览器获取cookie
     ```ecmascript 6
         const http = require('http')
         const opn = require('opn')
@@ -64,5 +65,38 @@
         request.write('')
         request.end()
     ```
+
+1. [参考链接](http://www.wechall.net/challenge/training/regex/index.php)
+    * /^$/
+    * /^wechall$/
+    
+1. [参考链接](http://www.wechall.net/challenge/training/encodings1/index.php)
+    
+    
+1. [参考链接](http://www.wechall.net/challenge/training/prime_factory/index.php)
+    ```ecmascript 6
+       function prime(num) {
+         let i = 2
+         while (i <= num / 2) {
+           if (num % i === 0) {
+             return false
+           }
+           i++
+         }
+         return true
+       }
+   
+       let start = 1000000
+       let result = []
+       while (result.length < 2) {
+         let sum = eval(start.toString().split('').join('+'))
+         if (prime(start) && prime(sum)) {
+           result.push(start)
+         }
+         start++
+       }
+       console.log(result.join(''))
+    ```
+
 
 

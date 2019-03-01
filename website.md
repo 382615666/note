@@ -21,7 +21,15 @@ http://ctf.moonsoscom/pentest/index.php B方向 米安的Web漏洞靶场，基�
 http：//prompt.ml/0 B方向 国外的xss测试
 http://redtiger.labs.overthewire.org/ B方向 国外sql注入挑战网站，10关，过关的形式 不同的注入，循序渐近地练习
 
-
+http://pwdme.cc/tag/idf%E5%AE%9E%E9%AA%8C%E5%AE%A4/ 
+https://microcorruption.com/login 
+http://smashthestack.org/ 
+http://overthewire.org/wargames/ 
+http://pwnable.kr/ 
+http://prompt.ml/0 
+https://ctftime.org/ 
+https://www.xctf.org.cn/ 
+https://redtiger.labs.overthewire.org/
 http://www.icoolxue.com/album/affix/view/hack/1/12
 
 工具：
