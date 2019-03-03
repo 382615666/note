@@ -112,5 +112,9 @@
        console.log(result.join(''))
     ```
 
+1. [参考链接](http://www.wechall.net/challenge/training/php/lfi/up/index.php)
+    * [文件上传常用方式](https://blog.csdn.net/qq_25987491/article/details/79965742)
+    * [php%00截断](https://www.freebuf.com/articles/web/179401.html)
+
 
 
