@@ -1,14 +1,190 @@
 <html>
+    <head>
+        <meta charset="utf-8">
+    </head>
     <body>
+    <div>
+        大半径：<input type="range" min="1" max="150" id="max">
+    </div>
+    <div>
+        小半径：<input type="range" min="1" max="150" id="min">
+    </div>
+    <div>
+        颜色：<input type="color" id="color">
+    </div>
     <script>
-      function test(e) {
-        console.log(11)
-        let value = e.target.value
-        console.log(value.replace(/(?<=\.\d{0,})\D*/, ''))
-      }
-    </script>
-    <input type="text" oninput="test">
+        function Paint(config) {
+          this.config = Object.assign({
+            width: 300,
+            height: 300,
+            color: ['yellow', 'red'],
+            center: {
+              x: 150,
+              y: 150,
+            },
+            radius: {
+              max: 101,
+              min: 100
+            }
+          }, config)
+          this.createCanvas()
+          this.init()
+        }
+        Paint.prototype.createCanvas = function () {
+          this.canvas = document.createElement('canvas')
+          this.context = this.canvas.getContext('2d')
+          this.canvas.width = this.config.width
+          this.canvas.height = this.config.height
+          document.body.append(this.canvas)
+        }
+        Paint.prototype.reviseRadius = function () {
+          // 修正参数大半径和小半径
+          if (this.config.radius.max < this.config.radius.min) {
+            const radius = {
+              max: this.config.radius.min,
+              min: this.config.radius.max
+            }
+            this.config.radius = radius
+          }
 
+          // 最大半径长度
+          const radiusMax = Math.min(this.config.width, this.config.height) / 2
+
+          if (this.config.radius.min >= radiusMax) {
+            this.config.radius = {
+              max: radiusMax,
+              min: radiusMax
+            }
+          }
+          if (this.config.radius.max >= radiusMax) {
+            this.config.radius.max = radiusMax
+          }
+        }
+        Paint.prototype.setCenterPoint = function (x, y) {
+          this.config.center = {x, y}
+          if (this.config.radius.max > x) {
+            this.config.center.x = this.config.radius.max
+          }
+          if (this.config.width - this.config.radius.max < x) {
+            this.config.center.x = this.config.width - this.config.radius.max
+          }
+          if (this.config.radius.max > y) {
+            this.config.center.y = this.config.radius.max
+          }
+          if (this.config.height - this.config.radius.max < y) {
+            this.config.center.y = this.config.height - this.config.radius.max
+          }
+        }
+        Paint.prototype.drawCircle = function () {
+          this.context.save()
+          this.context.beginPath()
+          this.context.arc(this.config.center.x, this.config.center.y, this.config.radius.max, 0, 2 * Math.PI)
+          this.context.stroke()
+          this.context.closePath()
+          this.context.restore()
+          this.context.save()
+          this.context.beginPath()
+          this.context.arc(this.config.center.x, this.config.center.y, this.config.radius.min, 0, 2 * Math.PI)
+          this.context.stroke()
+          this.context.closePath()
+          this.context.restore()
+        }
+        Paint.prototype.calcPoint = function () {
+          this.pointers = []
+          this.pointers.push({
+            x: this.config.center.x,
+            y: this.config.center.y - this.config.radius.max
+          })
+          this.pointers.push({
+            x: Math.cos(Math.PI * 54 / 180) * this.config.radius.min + this.config.center.x,
+            y: this.config.center.y - Math.sin(Math.PI * 54 / 180) * this.config.radius.min
+          })
+          this.pointers.push({
+            x: Math.cos(Math.PI * 18 / 180) * this.config.radius.max + this.config.center.x,
+            y: this.config.center.y - Math.sin(Math.PI * 18 / 180) * this.config.radius.max
+          })
+          this.pointers.push({
+            x: Math.cos(Math.PI * 18 / 180) * this.config.radius.min + this.config.center.x,
+            y: this.config.center.y + Math.sin(Math.PI * 18 / 180) * this.config.radius.min
+          })
+          this.pointers.push({
+            x: Math.cos(Math.PI * 54 / 180) * this.config.radius.max + this.config.center.x,
+            y: this.config.center.y + Math.sin(Math.PI * 54 / 180) * this.config.radius.max
+          })
+          this.pointers.push({
+            x: this.config.center.x,
+            y: this.config.center.y + this.config.radius.min
+          })
+          this.pointers.push({
+            x: this.config.center.x - Math.cos(Math.PI * 54 / 180) * this.config.radius.max,
+            y: this.config.center.y + Math.sin(Math.PI * 54 / 180) * this.config.radius.max
+          })
+          this.pointers.push({
+            x: this.config.center.x - Math.cos(Math.PI * 18 / 180) * this.config.radius.min,
+            y: this.config.center.y + Math.sin(Math.PI * 18 / 180) * this.config.radius.min
+          })
+          this.pointers.push({
+            x: this.config.center.x - Math.cos(Math.PI * 18 / 180) * this.config.radius.max,
+            y: this.config.center.y - Math.sin(Math.PI * 18 / 180) * this.config.radius.max
+          })
+          this.pointers.push({
+            x: this.config.center.x - Math.cos(Math.PI * 54 / 180) * this.config.radius.min,
+            y: this.config.center.y - Math.sin(Math.PI * 54 / 180) * this.config.radius.min
+          })
+          this.pointers.push({
+            x: this.config.center.x,
+            y: this.config.center.y - this.config.radius.max
+          })
+        }
+        Paint.prototype.draw = function () {
+          for (let i = 0; i < this.pointers.length - 1; i++) {
+            this.context.save()
+            this.context.beginPath()
+            this.context.moveTo(this.config.center.x, this.config.center.y)
+            this.context.lineTo(this.pointers[i].x, this.pointers[i].y)
+            this.context.lineTo(this.pointers[i + 1].x, this.pointers[i + 1].y)
+            this.context.fillStyle = this.config.color[i % 2]
+            this.context.fill()
+            this.context.stroke()
+            this.context.closePath()
+            this.context.restore()
+          }
+        }
+        Paint.prototype.setRadius = function (radius) {
+          this.config.radius = Object.assign(this.config.radius, radius)
+          this.init()
+        }
+        Paint.prototype.init = function () {
+          this.context.clearRect(0, 0, this.config.width, this.config.height)
+          this.reviseRadius()
+          this.setCenterPoint(this.config.center.x, this.config.center.y)
+          this.calcPoint()
+          this.draw()
+          this.drawCircle()
+        }
+        const p = new Paint()
+
+        document.querySelector('#max').addEventListener('input', function (e) {
+          p.setRadius({
+            max: parseInt(e.target.value),
+            min: parseInt(document.querySelector('#min').value)
+          })
+        })
+        document.querySelector('#min').addEventListener('input', function (e) {
+          p.setRadius({
+            max: parseInt(document.querySelector('#max').value),
+            min: parseInt(e.target.value)
+          })
+        })
+        document.querySelector('#color').addEventListener('change', function (e) {
+          document.querySelector('#color').click()
+          console.log(this.value)
+          // p.setRadius({
+          //   max: parseInt(document.querySelector('#max').value),
+          //   min: parseInt(e.target.value)
+          // })
+        })
+    </script>
     </body>
 
 </html>
