@@ -115,6 +115,39 @@
 1. [参考链接](http://www.wechall.net/challenge/training/php/lfi/up/index.php)
     * [文件上传常用方式](https://blog.csdn.net/qq_25987491/article/details/79965742)
     * [php%00截断](https://www.freebuf.com/articles/web/179401.html)
+    * ../../solution.php%00
 
+1. [参考链接](http://www.wechall.net/challenge/php0817/index.php)
+    * which=solution
+    ```ecmascript 6
+       const str = 'oWdnreuf.lY uoc nar ae dht eemssga eaw yebttrew eh nht eelttre sra enic roertco drre . Ihtni koy uowlu dilekt  oes eoyrup sawsro don:wf lldreslsas.b'
+       for (let i = 2; i <= 5; i++) {
+         let position = 0
+         while (position < str.length) {
+           console.log(str.substr(position, i).split('').reverse().join(''))
+           position = position + i
+         }
+         console.log('--------------------------------------')
+       }
+    ```
+
+1. [参考链接](http://www.wechall.net/challenge/training/crypto/simplesub1/index.php)
+    * [单表代替密码原理及算法实现](https://www.cnblogs.com/ECJTUACM-873284962/p/7872114.html)
+    * [自动置换网址](https://quipqiup.com/)
+    
+1. [参考链接](http://www.wechall.net/challenge/training/crypto/caesar2/index.php)
+    ```ecmascript 6
+          let str = '57 7F 7F 74 20 7A 7F 72 3C 20 09 7F 05 20 03 7F 7C 06 75 74 20 7F 7E 75 20 7D 7F 02 75 20 73 78 71 7C 7C 75 7E 77 75 20 79 7E 20 09 7F 05 02 20 7A 7F 05 02 7E 75 09 3E 20 64 78 79 03 20 7F 7E 75 20 07 71 03 20 76 71 79 02 7C 09 20 75 71 03 09 20 04 7F 20 73 02 71 73 7B 3E 20 67 71 03 7E 37 04 20 79 04 4F 20 41 42 48 20 7B 75 09 03 20 79 03 20 71 20 01 05 79 04 75 20 03 7D 71 7C 7C 20 7B 75 09 03 00 71 73 75 3C 20 03 7F 20 79 04 20 03 78 7F 05 7C 74 7E 37 04 20 78 71 06 75 20 04 71 7B 75 7E 20 09 7F 05 20 04 7F 7F 20 7C 7F 7E 77 20 04 7F 20 74 75 73 02 09 00 04 20 04 78 79 03 20 7D 75 03 03 71 77 75 3E 20 67 75 7C 7C 20 74 7F 7E 75 3C 20 09 7F 05 02 20 03 7F 7C 05 04 79 7F 7E 20 79 03 20 02 78 79 74 7E 02 71 71 75 7D 7D 7F 3E'
+          str = str.split(' ')
+          const arr = str.map(item => String.fromCharCode('0x' + item))
+          for (let i = 0; i < 128 - 26; i++) {
+            let result = arr.map(item => {
+              return String.fromCharCode((item.charCodeAt(0) + i) % 128 + 26).toLowerCase()
+            })
+            if (/^[a-zA-Z]/.test(result[0])) {
+              console.log(i, result.join(''))
+            }
+          }
+    ```
 
 
