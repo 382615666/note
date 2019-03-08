@@ -66,3 +66,6 @@ https://www.cnblogs.com/ECJTUACM-873284962/
 // mysql注入
 https://www.cnblogs.com/pursuitofacm/
 https://www.cnblogs.com/pursuitofacm/p/6706961.html
+
+// 内网穿透
+https://blog.csdn.net/yjc_1111/article/details/79353718
