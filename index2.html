@@ -10,6 +10,7 @@
 <script>
   function MyDate(timestamp = Date.now()) {
         this.date = new Date(timestamp)
+
 }
   MyDate.prototype.toString = function (fmt = 'yyyy-MM-dd hh:mm:ss') {
     const fmtObj = {

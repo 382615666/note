@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test">aa</div>
+<script>
+    var jquery = function (selector) {
+      if (!(this instanceof jquery)) {
+        return new jquery.init(selector)
+      }
+      var elem = document.querySelector(selector)
+      this[0] = elem
+      this.get = function () {
+        return this[0]
+      }
+      return this
+    }
+    jquery.prototype = {
+      constructor: jquery,
+      init (select) {
+
+        return this
+      }
+    }
+</script>
+</body>
+</html>
