@@ -2,29 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Document</title>
+    <style>
+        .box1{
+            height: 20px;
+            width: 10px;
+            margin: 100px auto;
+            background: red;
+            box-shadow: 0px -10px 0px 0px #000;
+            animation: move 4s infinite;
+            position: relative;
+        }
+        .box1:before{
+            content: '';
+            top: 0;
+            transform: translate(-200%, 0);
+            display: block;
+            height: 20px;
+            position: absolute;
+            width: 10px;
+            background: red;
+            box-shadow: 0px -10px 0px 0px #000;
+            animation: move 2s infinite -1s;
+        }
+        .box1:after{
+            content: '';
+            top: 0;
+            transform: translate(200%, 0);
+            display: block;
+            height: 20px;
+            position: absolute;
+            width: 10px;
+            background: red;
+            box-shadow: 0px -10px 0px 0px #000;
+            animation: move 2s infinite -1s;
+        }
+        @keyframes move{
+            50%{
+                box-shadow: 0px -20px 0px 0px #000;
+            }
+        }
+    </style>
 </head>
 <body>
-<div id="test">aa</div>
-<script>
-    var jquery = function (selector) {
-      if (!(this instanceof jquery)) {
-        return new jquery.init(selector)
-      }
-      var elem = document.querySelector(selector)
-      this[0] = elem
-      this.get = function () {
-        return this[0]
-      }
-      return this
-    }
-    jquery.prototype = {
-      constructor: jquery,
-      init (select) {
-
-        return this
-      }
-    }
-</script>
+<div class="box1"></div>
 </body>
 </html>
