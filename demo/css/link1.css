@@ -9,8 +9,10 @@ html{
 }
 
 @media screen and (max-width: 1200px){
-    .img{
-        content: attr(data-src-1200 url);
+    .img:after{
+        content: var(--tool-tip);
     }
 }
+
+
 
