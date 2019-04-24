@@ -1,0 +1,16 @@
+html{
+    background: #ccc;
+}
+
+@media only screen {
+    .test{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .img{
+        content: attr(data-src-1200 url);
+    }
+}
+
