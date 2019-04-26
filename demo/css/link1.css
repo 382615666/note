@@ -8,11 +8,5 @@ html{
     }
 }
 
-@media screen and (max-width: 1200px){
-    .img:after{
-        content: var(--tool-tip);
-    }
-}
-
 
 
