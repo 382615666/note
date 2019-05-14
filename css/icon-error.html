@@ -31,7 +31,7 @@
                 transform: scale(1);
             }
         }
-        .test{
+        .error{
             display: inline-block;
             color: #f27474;
             border: .2em solid;
@@ -42,7 +42,7 @@
             animation: error-circle .5s;
             position: relative;
         }
-        .test1{
+        .error-x{
             color: inherit;
             position: absolute;
             left: .75em;
@@ -52,7 +52,7 @@
             transform-origin: bottom center;
             animation: error-x .5s;
         }
-        .test1::before{
+        .error-x::before{
             content: '';
             width: 110%;
             height: .2em;
@@ -63,7 +63,7 @@
             left: 50%;
             transform: translate(-50%, -50%) rotate(45deg);
         }
-        .test1::after{
+        .error-x::after{
             content: '';
             width: 110%;
             height: .2em;
@@ -77,8 +77,8 @@
     </style>
 </head>
 <body>
-    <div class="test">
-        <div class="test1"></div>
+    <div class="error">
+        <div class="error-x"></div>
     </div>
 </body>
 <script>
