@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @keyframes error-circle {
+            0%{
+                transform: rotateX(100deg);
+                opacity: 0;
+            }
+            100%{
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        @keyframes error-x {
+            0%{
+                opacity: 0;
+                transform: scale(.4);
+            }
+            50%{
+                opacity: 0;
+                transform: scale(.4);
+            }
+            80%{
+                opacity: 1;
+                transform: scale(1.15) translate(0, -.15em);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        .error{
+            display: inline-block;
+            color: #f27474;
+            border: .2em solid;
+            border-radius: 50%;
+            font-size: 1rem;
+            height: 3em;
+            width: 3em;
+            animation: error-circle .5s;
+            position: relative;
+        }
+        .error-x{
+            color: inherit;
+            position: absolute;
+            left: .75em;
+            top: .75em;
+            height: 1.5em;
+            width: 1.5em;
+            transform-origin: bottom center;
+            animation: error-x .5s;
+        }
+        .error-x::before{
+            content: '';
+            width: 110%;
+            height: .2em;
+            border-radius: .125em;
+            background: currentColor;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        .error-x::after{
+            content: '';
+            width: 110%;
+            height: .2em;
+            border-radius: .125em;
+            background: currentColor;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="error">
+        <div class="error-x"></div>
+    </div>
+</body>
+<script>
+
+</script>
+</html>
