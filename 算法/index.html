@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  // var romanToInt = function(s) {
+  //   const dictionaries = {
+  //     'I': 1,
+  //     'V': 5,
+  //     'X': 10,
+  //     'L': 50,
+  //     'C': 100,
+  //     'D': 500,
+  //     'M': 1000
+  //   }
+  //   const length = s.length
+  //   let previous = ''
+  //   let i = 0
+  //   let result = 0
+  //   for(i = 0; i < length; i++) {
+  //     let c = s.charAt(i)
+  //     result += dictionaries[c]
+  //     // 前一位小于当前位
+  //     if (dictionaries[previous] < dictionaries[c]) {
+  //       result = result - dictionaries[previous] - dictionaries[previous]
+  //     }
+  //     previous = c
+  //   }
+  //   return result
+  // };
+  // console.log(romanToInt("MCMXCIV"))
+  var reverse = function(x) {
+    let limit = Math.pow(2, 31) - 1
+    let result = 0
+    let flag = 1
+    if (x < 0) {
+      flag = -1
+    }
+    x = x * flag
+    while (x) {
+      result = result * 10 + x % 10
+      x = ~~(x / 10)
+    }
+    if (result > limit) {
+      result = 0
+    }
+    return result * flag
+  };
+  console.log(reverse(-123))
+
+</script>
+</html>
