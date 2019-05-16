@@ -5,57 +5,45 @@
     <title>Title</title>
 </head>
 <body>
-
+    <div class="a"></div>
+    <div class="b"></div>
+    <div class="c"></div>
 </body>
 <script>
   /**
    * @param {string} s
    * @return {number}
    */
-  // var romanToInt = function(s) {
-  //   const dictionaries = {
-  //     'I': 1,
-  //     'V': 5,
-  //     'X': 10,
-  //     'L': 50,
-  //     'C': 100,
-  //     'D': 500,
-  //     'M': 1000
-  //   }
-  //   const length = s.length
-  //   let previous = ''
-  //   let i = 0
-  //   let result = 0
-  //   for(i = 0; i < length; i++) {
-  //     let c = s.charAt(i)
-  //     result += dictionaries[c]
-  //     // 前一位小于当前位
-  //     if (dictionaries[previous] < dictionaries[c]) {
-  //       result = result - dictionaries[previous] - dictionaries[previous]
-  //     }
-  //     previous = c
-  //   }
-  //   return result
-  // };
-  // console.log(romanToInt("MCMXCIV"))
-  var reverse = function(x) {
-    let limit = Math.pow(2, 31) - 1
-    let result = 0
-    let flag = 1
-    if (x < 0) {
-      flag = -1
+
+  function ListNode(val) {
+      this.val = val;
+      this.next = null;
+  }
+  var a1 = new ListNode(1)
+  var a2 = new ListNode(2)
+  var a4 = new ListNode(4)
+  a1.next = a2
+  a2.next = a4
+
+  var b1 = new ListNode(1)
+  var b3 = new ListNode(3)
+  var b4 = new ListNode(4)
+  b1.next = b3
+  b3.next = b4
+
+  var mergeTwoLists = function(l1, l2) {
+    if (!l1 || !l2) {
+      return null
     }
-    x = x * flag
-    while (x) {
-      result = result * 10 + x % 10
-      x = ~~(x / 10)
+    if (l1.val < l2.val) {
+      l1.next = mergeTwoLists(l1.next, l2)
+      return l1
+    } else {
+      l2.next = mergeTwoLists(l1, l2.next)
+      return l2
     }
-    if (result > limit) {
-      result = 0
-    }
-    return result * flag
   };
-  console.log(reverse(-123))
+  console.log(mergeTwoLists(a1, b1))
 
 </script>
 </html>
