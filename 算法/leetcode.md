@@ -3,6 +3,27 @@
 
 
 
+[26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/submissions/)
+
+>>>
+    给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+    
+    不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 
+>>>
+
+```ecmascript 6
+    var removeDuplicates = function(nums) {
+      let i = 0
+      for (let j = 0; j <nums.length; j++) {
+        if (nums[i] !== nums[j]) {
+          i++
+          nums[i] = nums[j]
+        }
+      }
+      return i + 1
+    };
+```
+
 [21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/submissions/)
 
 >>>
@@ -40,8 +61,6 @@
       }
     };
 ```
-
-
 
 [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/submissions/)
 

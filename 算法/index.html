@@ -5,45 +5,33 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="a"></div>
+    <div class="a">
+        aaaaaaaaa
+    </div>
     <div class="b"></div>
     <div class="c"></div>
 </body>
 <script>
+    document.querySelector('div').addEventListener('click', function (e) {
+      console.log(e)
+      console.log(window.event)
+    })
   /**
    * @param {string} s
    * @return {number}
    */
 
-  function ListNode(val) {
-      this.val = val;
-      this.next = null;
-  }
-  var a1 = new ListNode(1)
-  var a2 = new ListNode(2)
-  var a4 = new ListNode(4)
-  a1.next = a2
-  a2.next = a4
-
-  var b1 = new ListNode(1)
-  var b3 = new ListNode(3)
-  var b4 = new ListNode(4)
-  b1.next = b3
-  b3.next = b4
-
-  var mergeTwoLists = function(l1, l2) {
-    if (!l1 || !l2) {
-      return null
+  var removeElement = function(nums, val) {
+    let i = 0
+    for (let j = 0; j <nums.length; j++) {
+      if (nums[j] !== val) {
+        nums[i] = nums[j]
+        i++
+      }
     }
-    if (l1.val < l2.val) {
-      l1.next = mergeTwoLists(l1.next, l2)
-      return l1
-    } else {
-      l2.next = mergeTwoLists(l1, l2.next)
-      return l2
-    }
+    return i
   };
-  console.log(mergeTwoLists(a1, b1))
+  console.log(removeElement([3,3,4,2,3,2,3], 3))
 
 </script>
 </html>
