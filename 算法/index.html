@@ -12,26 +12,16 @@
     <div class="c"></div>
 </body>
 <script>
-    document.querySelector('div').addEventListener('click', function (e) {
-      console.log(e)
-      console.log(window.event)
-    })
-  /**
-   * @param {string} s
-   * @return {number}
-   */
-
-  var removeElement = function(nums, val) {
-    let i = 0
-    for (let j = 0; j <nums.length; j++) {
-      if (nums[j] !== val) {
-        nums[i] = nums[j]
-        i++
-      }
+  var countAndSay = function(n) {
+    let str = '1'
+    let i = 1
+    while (i < n) {
+      
+      i++
     }
-    return i
+    return str
   };
-  console.log(removeElement([3,3,4,2,3,2,3], 3))
+  console.log(countAndSay(1))
 
 </script>
 </html>

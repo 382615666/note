@@ -1,7 +1,55 @@
 # leetcode
 
 
+[35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/submissions/)
 
+>>>
+    给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+    
+    你可以假设数组中无重复元素。
+>>>
+
+```ecmascript 6
+  var searchInsert = function(nums, target) {
+      if (nums[nums.length - 1] < target) {
+        return nums.length
+      }
+      for(let i = 0; i < nums.length; i++) {
+        if (nums[i] >= target){
+          return i
+        }
+      }
+      // return nums.length
+    };
+```
+
+[28. 实现strStr()](https://leetcode-cn.com/problems/implement-strstr/submissions/)
+
+>>>
+    给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+>>>
+
+```ecmascript 6
+  // kmp 算法
+  var strStr = function(haystack, needle) {
+    if (!needle) {
+      return 0
+    }
+    let j = 0
+    for (let i = 0; i <= haystack.length; i++) {
+      if (j === needle.length) {
+        return i - j
+      }
+      if (haystack[i] === needle[j]) {
+        j++
+      } else {
+        i = i - j
+        j = 0
+      }
+    }
+    return -1
+  };
+```
 
 [26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/submissions/)
 
