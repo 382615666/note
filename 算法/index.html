@@ -12,16 +12,23 @@
     <div class="c"></div>
 </body>
 <script>
-  var countAndSay = function(n) {
-    let str = '1'
-    let i = 1
-    while (i < n) {
-      
-      i++
+  var plusOne = function(digits) {
+    let flag = 1
+    for (let i = digits.length - 1; i >= 0; i--) {
+      if (digits[i] === 9 && flag) {
+        digits[i] = 0
+        flag = 1
+      } else {
+        digits[i] = digits[i] + flag
+        flag = 0
+        break
+      }
     }
-    return str
+    if (flag) {
+      digits.unshift(1)
+    }
+    return digits
   };
-  console.log(countAndSay(1))
-
+  console.log(plusOne([9]))
 </script>
 </html>

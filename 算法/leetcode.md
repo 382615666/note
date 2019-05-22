@@ -1,6 +1,98 @@
 # leetcode
 
 
+[58. 最后一个单词的长度](https://leetcode-cn.com/problems/length-of-last-word/)
+
+>>>
+    给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。
+    
+    最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。
+    
+    你可以假设除了整数 0 之外，这个整数不会以零开头。
+    
+    输入: [1,2,3]
+    输出: [1,2,4]
+    解释: 输入数组表示数字 123。
+>>>
+
+```ecmascript 6
+      var plusOne = function(digits) {
+        let flag = 1
+        for (let i = digits.length - 1; i >= 0; i--) {
+          if (digits[i] === 9 && flag) {
+            digits[i] = 0
+            flag = 1
+          } else {
+            digits[i] = digits[i] + flag
+            flag = 0
+            break
+          }
+        }
+        if (flag) {
+          digits.unshift(1)
+        }
+        return digits
+      };
+```
+
+[58. 最后一个单词的长度](https://leetcode-cn.com/problems/length-of-last-word/)
+
+>>>
+    给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。
+    
+    如果不存在最后一个单词，请返回 0 。
+    
+    说明：一个单词是指由字母组成，但不包含任何空格的字符串
+>>>
+
+```ecmascript 6
+    var lengthOfLastWord = function(s) {
+      s = s.trim()
+      for (let i = s.length - 1; i >= 0; i--) {
+        if (i == 0) {
+          return s.length
+        }
+        if (s[i] === ' ') {
+          return s.length - 1 - i
+        }
+      }
+      return 0
+    };
+```
+
+[38. 报数](https://leetcode-cn.com/problems/count-and-say/)
+
+>>>
+    报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
+    
+    1.     1
+    2.     11
+    3.     21
+    4.     1211
+    5.     111221
+>>>
+
+```ecmascript 6
+  var countAndSay = function(n) {
+    let str = '1'
+    let len = 1
+    let temp = ''
+    for (let j = 1; j < n; j++) {
+      temp = ''
+      for (let i = 0; i < str.length; i++) {
+        if (str[i] === str[i+1]) {
+          len++
+        } else {
+          temp += `${len}${str[i]}`
+          len = 1
+        }
+      }
+      str = temp
+    }
+    return str
+  };
+```
+
 [35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/submissions/)
 
 >>>
