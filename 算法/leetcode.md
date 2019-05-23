@@ -1,6 +1,46 @@
 # leetcode
 
 
+[67. 二进制求和](https://leetcode-cn.com/problems/add-binary/)
+
+>>>
+    给定两个二进制字符串，返回他们的和（用二进制表示）。
+    
+    输入为非空字符串且只包含数字 1 和 0。
+    
+    示例 1:
+    
+    输入: a = "11", b = "1"
+    输出: "100"
+>>>
+
+```ecmascript 6
+        var addBinary = function(a, b) {
+          let i = a.length - 1
+          let j = b.length - 1
+          let flag = 0
+          let result = ''
+      
+          while (i >= 0 || j >= 0) {
+            let sum = flag
+            if (i >= 0) {
+              sum = a[i] - 0 + sum
+              i--
+            }
+            if (j >= 0) {
+              sum = b[j] - 0 + sum
+              j--
+            }
+            result = sum % 2 + result
+            flag = Math.trunc(sum / 2)
+          }
+          if (flag) {
+            result = flag + result
+          }
+          return result
+        };
+```
+
 [58. 最后一个单词的长度](https://leetcode-cn.com/problems/length-of-last-word/)
 
 >>>

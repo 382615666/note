@@ -15,7 +15,25 @@
   var addBinary = function(a, b) {
     let i = a.length - 1
     let j = b.length - 1
+    let flag = 0
+    let result = ''
 
+    while (i >= 0 || j >= 0) {
+      let sum = flag
+      if (i >= 0) {
+        sum = a[i] - 0 + sum
+        i--
+      }
+      if (j >= 0) {
+        sum = b[j] - 0 + sum
+        j--
+      }
+      result = sum % 2 + result
+      flag = Math.trunc(sum / 2)
+    }
+    if (flag) {
+      result = flag + result
+    }
     return result
   };
   console.log(addBinary('1111', '1'))
