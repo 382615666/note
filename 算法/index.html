@@ -12,36 +12,17 @@
     <div class="c"></div>
 </body>
 <script>
-  var deleteDuplicates = function(head) {
-    let cur = head
-    while(cur && cur.next) {
-      if (cur.val === cur.next.val) {
-        cur.next = cur.next.next
-      } else {
-        cur = cur.next
-      }
+  var mySqrt = function(x) {
+    if (x === 1) {
+      return 1
     }
-    return head
+    let i = Math.trunc(x / 2)
+    while (i * i > x) {
+      i--
+    }
+    return i
   };
-   function ListNode(val) {
-       this.val = val;
-       this.next = null;
-   }
 
-   var a1 = new ListNode(1)
-  var a2 = new ListNode(1)
-  var a3 = new ListNode(2)
-  var a4 = new ListNode(2)
-  var a5 = new ListNode(3)
-  var a6 = new ListNode(3)
-  var a7 = new ListNode(1)
-
-  a1.next = a2
-  a2.next = a3
-  // a3.next = a4
-  // a4.next = a5
-  // a5.next = a6
-
-  console.log(deleteDuplicates(a1))
+  console.log(mySqrt(8))
 </script>
 </html>
