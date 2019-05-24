@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        svg{
+            border: thin dashed red;
+        }
+        text{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <p>无viewbox</p>
+    <svg width="100" height="100">
+        <rect x="0" y="0" width="100" height="100"></rect>
+    </svg>
+    <p>viewbox 大于 宽高</p>
+    <svg width="100" height="100" viewBox="0 0 200 200">
+        <rect x="100" y="100" width="100" height="100"></rect>
+    </svg>
+    <p>viewbox 小于 宽高</p>
+    <svg width="200" height="200" viewBox="0 0 100 100">
+        <rect x="90" y="90" width="10" height="10" fill="red"></rect>
+    </svg>
+    <p>viewbox 大于 宽高</p>
+    <svg style="width:150px; height:300px" viewBox="0 0 400 400">
+        <circle cx="200" cy="200" r="200" fill="#fdd" stroke="none"></circle>
+    </svg>
+    <p>preserveAspectRatio: none     viewbox伸缩到宽高一样大</p>
+    <svg style="width:150px; height:300px" viewBox="0 0 400 400" preserveAspectRatio="none">
+        <circle cx="200" cy="200" r="200" fill="#fdd" stroke="none"></circle>
+    </svg>
+    <p>preserveAspectRatio: slice     viewbox伸缩到宽高一样大</p>
+    <svg style="width:150px; height:300px" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+        <circle cx="200" cy="200" r="200" fill="#fdd" stroke="none"></circle>
+    </svg>
+    <p>dasharray</p>
+    <svg width="300" height="300" viewBox="0 0 300 300">
+        <line x1="10" y1="10" x2="200" y2="200" stroke="#000" stroke-dasharray="20 5"></line>
+        <text x="20" y="20">偶数</text>
+    </svg>
+    <svg width="300" height="300" viewBox="0 0 300 300">
+        <line x1="10" y1="10" x2="200" y2="200" stroke="#000" stroke-dasharray="20 5 10"></line>
+        <text x="20" y="20">奇数</text>
+    </svg>
+    <p>fill-rule</p>
+    <svg width="200" height="200">
+        <polygon points="48,16 16,96 96,48 0,48 80,96" fill-rule="nonzero"></polygon>
+        <text x="20" y="20">nonzero</text>
+    </svg>
+    <svg width="200" height="200">
+        <polygon points="48,16 16,96 96,48 0,48 80,96" fill-rule="evenodd"></polygon>
+        <text x="20" y="20">evenodd</text>
+    </svg>
+    <p>内部样式</p>
+    <svg width="200" height="200">
+        <defs>
+            <style>
+                text{
+                    font-size: 30px;
+                }
+            </style>
+        </defs>
+        <style>
+            text{
+                font-size: 30px;
+            }
+        </style>
+        <polygon points="48,16 16,96 96,48 0,48 80,96" fill-rule="evenodd"></polygon>
+        <text x="20" y="20">evenodd</text>
+    </svg>
+    <p>内联</p>
+    <svg width="200" height="200">
+        <style>
+            .test12{
+                fill: red;
+            }
+        </style>
+        <rect class="test12" x="0" y="0" height="100" width="100" fill="blue"></rect>
+    </svg>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
+	<pattern id="avator" width="100%" height="100%" patternContentUnits="userSpaceOnUse">
+		<rect width="100%" height="100%" fill="#000"></rect>
+        <image xlink:href="../img/sfsdffdsf.png"
+               width="100%" height="100%"/>
+	</pattern>
+    <style type="text/css">
+	    .st0{fill:url(#avator);}
+    </style>
+    <path class="st0" d="M31,37c0-3.3,2.7-6,6-6c1.3,0,2.5,0.4,3.4,1.1c1.6-3,2.6-6.4,2.6-10.1c0-11.6-9.4-21-21-21S1,10.4,1,22
+	c0,11.6,9.4,21,21,21c3.7,0,7.1-0.9,10.1-2.6C31.4,39.5,31,38.3,31,37z">
+</path>
+</svg>
