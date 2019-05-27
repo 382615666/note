@@ -21,3 +21,13 @@
 >>>
 
 [fill-rule渲染规则](https://blog.csdn.net/wjnf012/article/details/72875739)
+
+[symbol和defs的区别](https://blog.csdn.net/chy555chy/article/details/53364561)
+
+[相关知识传送门](https://www.zhangxinxu.com/wordpress/2014/08/svg-viewport-viewbox-preserveaspectratio/)
+
+> path  M(move to) L(line to) Z(close path) H(水平移动) V(垂直移动)
+
+> path m l h v小写代表相对坐标
+
+> 椭圆弧命令  (A | a)  rx  ry x-axis-rotation large-arc-flag sweep-flag x y

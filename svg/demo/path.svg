@@ -1,0 +1,5 @@
+<svg width="140" height="170" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path d="M 30 30 L 55 5 L 80 30 L 55 55 Z" fill="none" stroke="#000"></path>
+    <path d="M 30 30 55 5 80 30 55 55 Z" fill="none" stroke="#000" transform="translate(0, 55)"></path>
+    <path d="M30 30 55 5 80 30 55 55Z" fill="none" stroke="#000" transform="translate(0, 110)"></path>
+</svg>

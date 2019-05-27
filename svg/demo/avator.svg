@@ -4,7 +4,7 @@
      viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
 	<pattern id="avator" width="100%" height="100%" patternContentUnits="userSpaceOnUse">
 		<rect width="100%" height="100%" fill="#000"></rect>
-        <image xlink:href="../img/sfsdffdsf.png"
+        <image xlink:href="../../img/sfsdffdsf.png"
                width="100%" height="100%"/>
 	</pattern>
     <style type="text/css">

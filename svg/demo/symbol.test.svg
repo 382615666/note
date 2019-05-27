@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300">
+    <symbol id="shape1" preserveAspectRatio="xMinYMin meet" viewBox="0 0 50 100">
+        <rect x="0" y="0" width="50" height="50" style="fill:green;"/>
+    </symbol>
+    <symbol id="shape2" preserveAspectRatio="xMinYMin slice" viewBox="0 0 50 100" >
+        <rect x="0" y="0" width="50" height="50" style="fill:blue"/>
+    </symbol>
+
+    <rect x="0" y="0" width="50" height="50" fill="red" />
+    <use xlink:href="#shape1" x="25" y="25" width="200" height="100"/>
+    <use xlink:href="#shape2" x="75" y="50" width="200" height="100"/>
+</svg>
