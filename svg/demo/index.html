@@ -61,5 +61,19 @@
         <path d="M30 100Q80 30 100 100T200 80" stroke="#000" fill="none"></path>
         <polyline points="30 100 80 30 100 100 130 65 200 80" stroke="#000" fill="none"></polyline>
     </svg>
+    <svg width="200" height="200">
+        <defs>
+            <marker id="mc" markerWidth="10" markerHeight="10" refX="5" refY="5">
+                <circle cx="5" cy="5" r="4" fill="#000"></circle>
+            </marker>
+            <marker id="ma" markerWidth="4" markerHeight="8" refX="0" refY="5" orient="auto">
+                <path d="M0 0 4 4 0 8" stroke="#000" fill="none"></path>
+            </marker>
+            <marker id="mt" markerWidth="5" markerHeight="10" refX="5" refY="5" orient="auto">
+                <path d="M0 0 5 5 0 10z"></path>
+            </marker>
+        </defs>
+        <path d="M30 20 100 20 A20 30 0 0 1 120 50 L120 110" stroke="#000" fill="none" marker-start="url(#mc)" marker-mid="url(#ma)" marker-end="url(#mt)"></path>
+    </svg>
 </body>
 </html>
