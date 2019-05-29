@@ -1,6 +1,62 @@
 # leetcode
 
 
+[53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/submissions/)
+
+>>>
+    给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+    
+    示例:
+    
+    输入: [-2,1,-3,4,-1,2,1,-5,4],
+    输出: 6
+    解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+>>>
+
+```ecmascript 6
+              var maxSubArray = function(nums) {
+                let sum = nums[0]
+                let result = sum
+                for (let i = 1; i < nums.length; i++) {
+                  sum = Math.max(nums[i], sum + nums[i])
+                  result = Math.max(sum, result)
+                }
+                return result
+              };
+```
+
+[69. x 的平方根](https://leetcode-cn.com/problems/sqrtx/)
+
+>>>
+    实现 int sqrt(int x) 函数。
+    
+    计算并返回 x 的平方根，其中 x 是非负整数。
+    
+    由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+    
+    示例 1:
+    
+    输入: 4
+    输出: 2
+>>>
+
+[牛顿迭代法传送门](https://www.cnblogs.com/qlky/p/7735145.html)
+[相关知识点传送门](https://blog.csdn.net/ccnt_2012/article/details/81837154)
+![推导过程](../img/niudun.jpg)
+
+```ecmascript 6
+            var mySqrt = function(x) {
+              let i = x
+              while (i * i > x) {
+                i = (i + x / i) / 2
+              }
+              return Math.trunc(i)
+              // return ~~Math.pow(x, .5)
+              // return ~~Math.sqrt(x)
+              // return ~~x**.5
+            };
+```
+
 [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
 
 >>>
