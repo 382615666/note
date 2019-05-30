@@ -1,6 +1,37 @@
 # leetcode
 
 
+[14. 最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/solution/)
+
+>>>
+    给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+    
+    示例:
+    
+    输入: [-2,1,-3,4,-1,2,1,-5,4],
+    输出: 6
+    解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+>>>
+
+```ecmascript 6
+                var longestCommonPrefix = function(strs) {
+                  if (!strs.length) {
+                    return ''
+                  }
+                  let first = strs[0]
+                  let i = first.length - 1
+                  let j = 1
+                  while (i > -1 && j < strs.length) {
+                    if (first[i] === strs[j][i] && first.substring(0, i + 1) === strs[j].substring(0, i + 1)) {
+                      j++
+                    } else {
+                      i--
+                    }
+                  }
+                  return first.substring(0, i + 1) || ''
+                };
+```
+
 [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/submissions/)
 
 >>>
