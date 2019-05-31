@@ -1,6 +1,26 @@
 # leetcode
 
 
+[100. 相同的树](https://leetcode-cn.com/problems/same-tree/submissions/)
+
+>>>
+    给定两个二叉树，编写一个函数来检验它们是否相同。
+    
+    如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
+>>>
+
+```ecmascript 6
+                  var isSameTree = function(p, q) {
+                    if (!p && !q) {
+                      return true
+                    }
+                    if (p && q && p.val === q.val) {
+                      return arguments.callee(p.left, q.left) && arguments.callee(p.right, q.right)
+                    }
+                    return false
+                  };
+```
+
 [14. 最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/solution/)
 
 >>>
