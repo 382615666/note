@@ -33,11 +33,19 @@
        this.left = this.right = null;
    }
 
-   let a1 = new TreeNode(10)
-   let a2 = new TreeNode(5)
-   let a3 = new TreeNode(15)
+   let a1 = new TreeNode(1)
+   let a2 = new TreeNode(2)
+   let a3 = new TreeNode(3)
+   let a4 = new TreeNode(4)
+   let a5 = new TreeNode(5)
+   let a6 = new TreeNode(6)
+   let a7 = new TreeNode(7)
    a1.left = a2
    a1.right = a3
+   a2.left = a4
+   a2.right = a5
+   a3.left = a6
+   a3.right = a7
 
    let b1 = new TreeNode(10)
    let b2 = new TreeNode(5)
@@ -50,18 +58,30 @@
    b2.left = b4
    b2.right = b5
 
-   var isSymmetric = function(root) {
-        return mirror(root, root)
+   var levelOrderBottom = function(root) {
+     if (!root) {
+       return []
+     }
+     root.deep = 0
+     let arr = [[root.val]]
+     loop(root, arr)
+     return arr.reverse()
    };
-   function mirror (left, right) {
-     if (!left && !right) {
-       return true
+   function loop (root, arr) {
+     if (root.left || root.right) {
+       arr[root.deep + 1] = arr[root.deep + 1] || []
      }
-     if (left || !right) {
-       return false
+     if (root.left) {
+       root.left.deep = root.deep + 1
+       arr[root.deep + 1].push(root.left.val)
+       arguments.callee(root.left, arr)
      }
-     return left.val === right.val && arguments.callee(left.left, right.right) && arguments.callee(left.right, right.left)
+     if (root.right) {
+       root.right.deep = root.deep + 1
+       arr[root.deep + 1].push(root.right.val)
+       arguments.callee(root.right, arr)
+     }
    }
-  console.log(isSymmetric(a1, b1))
+  console.log(levelOrderBottom(a1))
 </script>
 </html>

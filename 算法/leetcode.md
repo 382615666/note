@@ -1,6 +1,156 @@
 # leetcode
 
 
+[107. 二叉树的层次遍历 II](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
+
+>>>
+    给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+    
+    例如：
+    给定二叉树 [3,9,20,null,null,15,7],
+>>>
+
+```ecmascript 6
+     var levelOrderBottom = function(root) {
+       if (!root) {
+         return []
+       }
+       root.deep = 0
+       let result = []
+       let arr = [root]
+       while (arr.length) {
+         let node = arr.pop()
+         result[node.deep] = result[node.deep] || []
+         result[node.deep].push(node.val)
+         if (node.right) {
+           node.right.deep = node.deep + 1
+           arr.push(node.right)
+         }
+         if (node.left) {
+           node.left.deep = node.deep + 1
+           arr.push(node.left)
+         }
+       }
+       return result.reverse()
+     };
+   
+     var levelOrderBottom = function(root) {
+       if (!root) {
+         return []
+       }
+       root.deep = 0
+       let arr = [[root.val]]
+       loop(root, arr)
+       return arr.reverse()
+     };
+     function loop (root, arr) {
+       if (root.left || root.right) {
+         arr[root.deep + 1] = arr[root.deep + 1] || []
+       }
+       if (root.left) {
+         root.left.deep = root.deep + 1
+         arr[root.deep + 1].push(root.left.val)
+         arguments.callee(root.left, arr)
+       }
+       if (root.right) {
+         root.right.deep = root.deep + 1
+         arr[root.deep + 1].push(root.right.val)
+         arguments.callee(root.right, arr)
+       }
+     }
+```
+
+[104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+
+>>>
+    给定一个二叉树，找出其最大深度。
+    
+    二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+    
+    说明: 叶子节点是指没有子节点的节点。
+    
+    示例：
+    给定二叉树 [3,9,20,null,null,15,7]，
+>>>
+
+```ecmascript 6
+      var maxDepth = function(root) {
+        if (!root) {
+          return 0
+        }
+        return Math.max(arguments.callee(root.left), arguments.callee(root.right)) + 1
+      };
+   
+      var maxDepth = function(root) {
+        if (!root) {
+          return 0
+        }
+        let arr = []
+        let deep = 1
+        root.deep = 1
+        arr.push(root)
+        while (arr.length) {
+          let node = arr.pop()
+          deep = Math.max(node.deep, deep)
+          if (node.left) {
+            node.left.deep = node.deep + 1
+            arr.push(node.left)
+          }
+          if (node.right) {
+            node.right.deep = node.deep + 1
+            arr.push(node.right)
+          }
+        }
+        return deep
+      };
+```
+
+[101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)
+
+>>>
+    给定一个二叉树，检查它是否是镜像对称的。
+    
+    例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+>>>
+
+```ecmascript 6
+   var isSymmetric = function(root) {
+        return mirror(root, root)
+   };
+   function mirror (left, right) {
+     if (!left && !right) {
+       return true
+     }
+     if (left && !right || !left && right) {
+       return false
+     }
+     return left.val === right.val && arguments.callee(left.left, right.right) && arguments.callee(left.right, right.left)
+   }
+      var isSymmetric = function(root) {
+        let arr = []
+        arr.push(root)
+        arr.push(root)
+        while (arr.length) {
+          let node1 = arr.pop()
+          let node2 = arr.pop()
+          if (!node2 && !node1) {
+            continue
+          }
+          if (!node1 && node2 || node1 && !node2) {
+            return false
+          }
+          if (node1.val !== node2.val) {
+            return false
+          }
+          arr.push(node1.left)
+          arr.push(node2.right)
+          arr.push(node1.right)
+          arr.push(node2.left)
+        }
+        return true
+      };
+```
+
 [100. 相同的树](https://leetcode-cn.com/problems/same-tree/submissions/)
 
 >>>
@@ -24,13 +174,14 @@
 [14. 最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/solution/)
 
 >>>
-    给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+    编写一个函数来查找字符串数组中的最长公共前缀。
     
-    示例:
+    如果不存在公共前缀，返回空字符串 ""。
     
-    输入: [-2,1,-3,4,-1,2,1,-5,4],
-    输出: 6
-    解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+    示例 1:
+    
+    输入: ["flower","flow","flight"]
+    输出: "fl"
 >>>
 
 ```ecmascript 6
