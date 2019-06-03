@@ -1,6 +1,108 @@
 # leetcode
 
 
+[111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/submissions/)
+
+>>>
+    给定一个二叉树，找出其最小深度。
+    
+    最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+    
+    说明: 叶子节点是指没有子节点的节点。
+    
+    示例:
+    
+    给定二叉树 [3,9,20,null,null,15,7],
+>>>
+
+```ecmascript 6
+   var minDepth = function(root) {
+     if (!root) {
+       return 0
+     }
+     let min = 0
+     root.deep = 1
+     let arr = [root]
+     while (arr.length) {
+       let node = arr.pop()
+       if (!node.left && !node.right) {
+         min = min || node.deep
+         min = Math.min(min, node.deep)
+       }
+       if (node.left) {
+         node.left.deep = node.deep + 1
+         arr.push(node.left)
+       }
+       if (node.right) {
+         node.right.deep = node.deep + 1
+         arr.push(node.right)
+       }
+     }
+     return min
+   };
+   var minDepth = function(root) {
+     if (!root) {
+       return 0
+     }
+     let left = arguments.callee(root.left)
+     let right = arguments.callee(root.right)
+     return left && right ? Math.min(left, right) + 1 : 1 + left + right
+   };
+```
+
+[110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
+
+>>>
+    给定一个二叉树，判断它是否是高度平衡的二叉树。
+    
+    本题中，一棵高度平衡二叉树定义为：
+    
+    一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1。
+    
+    示例 1:
+    
+    给定二叉树 [3,9,20,null,null,15,7]
+>>>
+
+```ecmascript 6
+   var isBalanced = function(root) {
+     if (!root) {
+       return true
+     }
+     return  Math.abs(deep(root.left) - deep(root.right)) < 2 && arguments.callee(root.left) && arguments.callee(root.right)
+   };
+   function deep (root) {
+     if (!root) {
+       return 0
+     }
+     return Math.max(arguments.callee(root.left) + 1, arguments.callee(root.right) + 1)
+   }
+```
+
+[108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/)
+
+>>>
+    将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。
+    
+    本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。
+>>>
+
+```ecmascript 6
+   var sortedArrayToBST = function(nums) {
+        return loop(nums, 0, nums.length - 1)
+   };
+   function loop (nums, start, end) {
+     if (start > end) {
+       return null
+     }
+     let mid = Math.trunc(start + (end - start) / 2)
+     let root = new TreeNode(nums[mid])
+     root.left = arguments.callee(nums, start, mid - 1)
+     root.right = arguments.callee(nums, mid + 1, end)
+     return root
+   }
+```
+
 [107. 二叉树的层次遍历 II](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
 
 >>>

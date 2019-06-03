@@ -41,11 +41,11 @@
    let a6 = new TreeNode(6)
    let a7 = new TreeNode(7)
    a1.left = a2
-   a1.right = a3
-   a2.left = a4
-   a2.right = a5
-   a3.left = a6
-   a3.right = a7
+   // a1.right = a3
+   // a2.left = a4
+   // a2.right = a5
+   // a3.left = a6
+   // a3.right = a7
 
    let b1 = new TreeNode(10)
    let b2 = new TreeNode(5)
@@ -58,30 +58,14 @@
    b2.left = b4
    b2.right = b5
 
-   var levelOrderBottom = function(root) {
+   var minDepth = function(root) {
      if (!root) {
-       return []
+       return 0
      }
-     root.deep = 0
-     let arr = [[root.val]]
-     loop(root, arr)
-     return arr.reverse()
+     let left = arguments.callee(root.left)
+     let right = arguments.callee(root.right)
+     return left && right ? Math.min(left, right) + 1 : 1 + left + right
    };
-   function loop (root, arr) {
-     if (root.left || root.right) {
-       arr[root.deep + 1] = arr[root.deep + 1] || []
-     }
-     if (root.left) {
-       root.left.deep = root.deep + 1
-       arr[root.deep + 1].push(root.left.val)
-       arguments.callee(root.left, arr)
-     }
-     if (root.right) {
-       root.right.deep = root.deep + 1
-       arr[root.deep + 1].push(root.right.val)
-       arguments.callee(root.right, arr)
-     }
-   }
-  console.log(levelOrderBottom(a1))
+  console.log(minDepth(a1))
 </script>
 </html>
