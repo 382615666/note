@@ -1,6 +1,50 @@
 # leetcode
 
 
+[112. 路径总和](https://leetcode-cn.com/problems/path-sum/submissions/)
+
+>>>
+    给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
+    
+    说明: 叶子节点是指没有子节点的节点。
+    
+    示例: 
+    给定如下二叉树，以及目标和 sum = 22，
+>>>
+
+```ecmascript 6
+   var hasPathSum = function(root, sum) {
+     if (!root) {
+       return false
+     }
+     let arr = [root]
+     while (arr.length) {
+       let node = arr.pop()
+       if (!node.left && !node.right && node.val === sum) {
+         return true
+       }
+       if (node.left) {
+         node.left.val += node.val
+         arr.push(node.left)
+       }
+       if (node.right) {
+         node.right.val += node.val
+         arr.push(node.right)
+       }
+     }
+     return false
+   };
+   var hasPathSum = function(root, sum) {
+     if (!root) {
+       return false
+     }
+     if (!root.left && !root.right && root.val === sum) {
+       return true
+     }
+     return arguments.callee(root.left, sum - root.val) || arguments.callee(root.right, sum - root.val)
+   };
+```
+
 [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/submissions/)
 
 >>>

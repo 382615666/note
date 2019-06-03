@@ -58,14 +58,16 @@
    b2.left = b4
    b2.right = b5
 
-   var minDepth = function(root) {
+   var hasPathSum = function(root, sum) {
      if (!root) {
-       return 0
+       return false
      }
-     let left = arguments.callee(root.left)
-     let right = arguments.callee(root.right)
-     return left && right ? Math.min(left, right) + 1 : 1 + left + right
+     if (!root.left && !root.right && root.val === sum) {
+       return true
+     }
+     sum -= root.val
+     return arguments.callee(root.left, sum) || arguments.callee(root.right, sum)
    };
-  console.log(minDepth(a1))
+  console.log(hasPathSum(a1, 4))
 </script>
 </html>
