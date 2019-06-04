@@ -58,16 +58,27 @@
    b2.left = b4
    b2.right = b5
 
-   var hasPathSum = function(root, sum) {
-     if (!root) {
-       return false
+   var getRow = function(rowIndex) {
+     rowIndex++
+     if (rowIndex === 1) {
+       return [1]
      }
-     if (!root.left && !root.right && root.val === sum) {
-       return true
+     let result = [1]
+     for (let i = 1; i < rowIndex; i++) {
+       let arr = [1]
+       for (let j = 1; j < i; j++) {
+         arr[j] = result[j - 1] + result[j]
+       }
+       arr.push(1)
+       result = arr
      }
-     sum -= root.val
-     return arguments.callee(root.left, sum) || arguments.callee(root.right, sum)
+     return result
    };
-  console.log(hasPathSum(a1, 4))
+  console.log(getRow(0))
+  console.log(getRow(1))
+  console.log(getRow(2))
+  console.log(getRow(3))
+  console.log(getRow(4))
+  console.log(getRow(5))
 </script>
 </html>

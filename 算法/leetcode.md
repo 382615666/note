@@ -1,6 +1,68 @@
 # leetcode
 
 
+[119. 杨辉三角 II](https://leetcode-cn.com/problems/pascals-triangle-ii/)
+
+>>>
+    在杨辉三角中，每个数是它左上方和右上方的数的和。
+    
+    示例:
+    
+    输入: 3
+    输出: [1,3,3,1]
+>>>
+
+```ecmascript 6
+   var getRow = function(rowIndex) {
+     rowIndex++
+     if (rowIndex === 1) {
+       return [1]
+     }
+     let result = [1]
+     for (let i = 1; i < rowIndex; i++) {
+       let arr = [1]
+       for (let j = 1; j < i; j++) {
+         arr[j] = result[j - 1] + result[j]
+       }
+       arr.push(1)
+       result = arr
+     }
+     return result
+   };
+```
+
+[118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/)
+
+>>>
+    给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+>>>
+
+```ecmascript 6
+      var generate = function(numRows) {
+        if (!numRows) {
+          return []
+        }
+        if (numRows === 1) {
+          return [[1]]
+        }
+        let i = 2
+        let result = [
+          [1],
+          [1, 1]
+        ]
+        while (i < numRows) {
+          let arr = [1]
+          for (let j = 1; j < result[i - 1].length; j++) {
+            arr.push(result[i - 1][j - 1] + result[i - 1][j])
+          }
+          arr.push(1)
+          result.push(arr)
+          i++
+        }
+        return result
+      };
+```
+
 [112. 路径总和](https://leetcode-cn.com/problems/path-sum/submissions/)
 
 >>>
