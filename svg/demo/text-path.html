@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <svg width="200" height="200">
+        <defs>
+            <path id="upper-curve" d="M-8 154A162 130 0 1 1 316 154"></path>
+            <path id="lower-curve" d="M-21 154A175 140 0 1 0 329 154"></path>
+        </defs>
+        <ellipse cx="154" cy="154" rx="150" ry="120" fill="#999"></ellipse>
+        <ellipse cx="152" cy="152" rx="150" ry="120" fill="#cef"></ellipse>
+
+        <path d="M302 152A150 120 0 1 0 2 152" fill="#fcc"></path>
+        <path d="M152 152A75 60 0 1 1 302 152" fill="#cef"></path>
+        <path d="M2 152A75 60 0 1 0 152 152" fill="#fcc"></path>
+        <text text-anchor="middle">
+            <textPath xlink:href="#upper-curve" startOffset="50%">测试文字1</textPath>
+        </text>
+        <text text-anchor="middle">
+            <textPath xlink:href="#lower-curve" startOffset="50%">测试文字12</textPath>
+        </text>
+    </svg>
+</body>
+</html>
