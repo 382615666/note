@@ -28,54 +28,39 @@
     <div class="c"></div>
 </body>
 <script>
-   function TreeNode(val) {
+   function ListNode(val) {
        this.val = val;
-       this.left = this.right = null;
+     this.next = null;
    }
 
-   let a1 = new TreeNode(1)
-   let a2 = new TreeNode(2)
-   let a3 = new TreeNode(3)
-   let a4 = new TreeNode(4)
-   let a5 = new TreeNode(5)
-   let a6 = new TreeNode(6)
-   let a7 = new TreeNode(7)
-   a1.left = a2
-   // a1.right = a3
-   // a2.left = a4
-   // a2.right = a5
-   // a3.left = a6
-   // a3.right = a7
+   let a1 = new ListNode(8)
+   let b1 = new ListNode(4)
+   let b2 = new ListNode(1)
+   let b3 = new ListNode(8)
+   let b4 = new ListNode(4)
+   let b5 = new ListNode(5)
+   b1.next = b2
+   b2.next = b3
+   b3.next = b4
+   b4.next = b5
 
-   let b1 = new TreeNode(10)
-   let b2 = new TreeNode(5)
-   let b3 = new TreeNode(null)
-   let b4 = new TreeNode(null)
-   let b5 = new TreeNode(15)
-
-   b1.left = b2
-   b1.right = b3
-   b2.left = b4
-   b2.right = b5
-
-   var singleNumber = function(nums) {
-     let temp = {}
-     for (let i = 0; i < nums.length; i++) {
-       if (nums[i] in temp) {
-         delete temp[nums[i]]
-       } else {
-         temp[nums[i]] = i
-       }
-     }
-     return Object.keys(temp)[0]
+   var getIntersectionNode = function(headA, headB) {
+        let temp = {}
+        let cur = headA
+        while (cur) {
+          temp[cur.val] = cur
+          cur = cur.next
+        }
+        cur = headB
+        while (cur) {
+          if (cur.val in temp && cur === temp[cur.val]) {
+            return cur
+          }
+          cur = cur.next
+        }
+        return null
    };
-   var singleNumber = function (nums) {
-     var res;
-     nums.forEach(function (v) {
-       res = res ^ v;
-     });
-     return res;
-   };
-  console.log(singleNumber([4,1,2,1,2]))
+
+  console.log(getIntersectionNode(a1, b1))
 </script>
 </html>

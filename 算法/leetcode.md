@@ -1,6 +1,155 @@
 # leetcode
 
 
+[160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/submissions/)
+
+>>>
+    编写一个程序，找到两个单链表相交的起始节点。
+>>>
+
+```ecmascript 6
+   var getIntersectionNode = function(headA, headB) {
+        let temp = {}
+        let cur = headA
+        while (cur) {
+          temp[cur.val] = cur
+          cur = cur.next
+        }
+        cur = headB
+        while (cur) {
+          if (cur.val in temp && cur === temp[cur.val]) {
+            return cur
+          }
+          cur = cur.next
+        }
+        return null
+   };
+    // 0 0 0 0 1 1 1|0 0 0|1 1 1
+    // 0 0 0 1 1 1|0 0 0 0|1 1 1
+    var getIntersectionNode = function(headA, headB) {
+      let h1 = headA;
+      let h2 = headB;
+    
+      while (h1 !== h2) {
+        if (h1) {
+          h1 = h1.next;
+        } else {
+          h1 = headB;
+        }
+        if (h2) {
+          h2 = h2.next;
+        } else {
+          h2 = headA;
+        }
+      }
+      return h2;
+    };
+    // 0|0 0 0 1 1 1
+    //   0 0 0 1 1 1
+```
+
+[155. 最小栈](https://leetcode-cn.com/problems/min-stack/)
+
+>>>
+    设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+    
+    push(x) -- 将元素 x 推入栈中。
+    pop() -- 删除栈顶的元素。
+    top() -- 获取栈顶元素。
+    getMin() -- 检索栈中的最小元素。
+>>>
+
+```ecmascript 6
+   /**
+    * initialize your data structure here.
+    */
+   var MinStack = function() {
+     this.data = []
+     this.mins = []
+   };
+
+   /**
+    * @param {number} x
+    * @return {void}
+    */
+   MinStack.prototype.push = function(x) {
+     this.data.push(x)
+     if (this.mins.length) {
+       this.mins.push(Math.min(this.mins[this.mins.length - 1], x))
+     } else {
+       this.mins.push(x)
+     }
+   };
+
+   /**
+    * @return {void}
+    */
+   MinStack.prototype.pop = function() {
+     this.data.pop()
+     this.mins.pop()
+   };
+
+   /**
+    * @return {number}
+    */
+   MinStack.prototype.top = function() {
+     return this.data[this.data.length - 1]
+   };
+
+   /**
+    * @return {number}
+    */
+   MinStack.prototype.getMin = function() {
+     return this.mins[this.mins.length - 1]
+   };
+```
+
+[141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+>>>
+    给定一个链表，判断链表中是否有环。
+    
+    为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+    
+     
+    
+    示例 1：
+    
+    输入：head = [3,2,0,-4], pos = 1
+    输出：true
+    解释：链表中有一个环，其尾部连接到第二个节点。
+>>>
+
+```ecmascript 6
+   var hasCycle = function(head) {
+     if (!head) {
+       return false
+     }
+     let slow = head
+     let fast = head.next
+     while (fast && fast.next) {
+       if (fast === slow) {
+         return true
+       }
+       slow = slow.next
+       fast = fast.next.next
+     }
+     return false
+   };
+    var hasCycle = function(head) {
+      let tail = head;
+      const set = new Set();
+      while (tail) {
+        if (set.has(tail)) {
+          return true;
+        }
+        set.add(tail);
+        tail = tail.next;
+      }
+      return false;
+    };
+```
+
 [125. 验证回文串](https://leetcode-cn.com/problems/single-number/)
 
 >>>
