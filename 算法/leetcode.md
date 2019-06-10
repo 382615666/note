@@ -1,6 +1,170 @@
 # leetcode
 
 
+[167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/submissions/)
+
+>>>
+    给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
+    
+    函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。
+    
+    说明:
+    
+    返回的下标值（index1 和 index2）不是从零开始的。
+    你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。
+    示例:
+    
+    输入: numbers = [2, 7, 11, 15], target = 9
+    输出: [1,2]
+    解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。
+>>>
+
+```ecmascript 6
+   var twoSum = function(numbers, target) {
+     let temp = {}
+    for (let i = 0; i < numbers.length; i++) {
+      temp[target - numbers[i]] = i
+      if (numbers[i + 1] in temp) {
+        return [temp[numbers[i + 1]] + 1, i + 2]
+      }
+    }
+   };
+    var twoSum = function(numbers, target) {
+        var left = 0,
+            len = numbers.length;
+        for (var i = 0, j = len-1; i < j;){
+            var left = numbers[i];
+            var right = numbers[j];
+            if (left + right === target) {
+                return [i+1, j+1];
+            }else if (left + right > target) {
+                j--;
+            }else if (left + right < target) {
+                i++;
+            }
+        }
+        return []
+    };
+```
+
+[4. 寻找两个有序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/submissions/)
+
+>>>
+    给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
+    
+    请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
+    
+    你可以假设 nums1 和 nums2 不会同时为空。
+    
+    示例 1:
+    
+    nums1 = [1, 3]
+    nums2 = [2]
+    
+    则中位数是 2.0
+>>>
+
+```ecmascript 6
+   var findMedianSortedArrays = function(nums1, nums2) {
+     let arr = []
+     let i = 0
+     let j = 0
+     while (i < nums1.length && j < nums2.length) {
+       if (nums1[i] < nums2[j]) {
+         arr.push(nums1[i++])
+       } else {
+         arr.push(nums2[j++])
+       }
+     }
+     while(i < nums1.length) {
+       arr.push(nums1[i++])
+     }
+     while(j < nums2.length) {
+       arr.push(nums2[j++])
+     }
+     let l = Math.trunc(arr.length / 2)
+     if (arr.length % 2) {
+       return arr[l]
+     } else {
+       return (arr[l] + arr[l - 1]) / 2
+     }
+   };
+```
+
+[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+
+>>>
+    给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+    
+    示例 1:
+    
+    输入: "abcabcbb"
+    输出: 3 
+    解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+>>>
+
+```ecmascript 6
+   var lengthOfLongestSubstring = function(s) {
+     let i = 0
+     let j = 0
+     let temp = {}
+     let result = 0
+     while (i < s.length) {
+       if (s[i] in temp) {
+         // 一个一个的出栈
+         delete temp[s[j]]
+         j++
+       } else {
+         temp[s[i]] = s[i]
+         i++
+         result = Math.max(result, i - j)
+       }
+     }
+     return result
+   };
+   var lengthOfLongestSubstring = function(s) {
+     let i = 0
+     let j = 0
+     let temp = {}
+     let result = 0
+     while (i < s.length) {
+       // 一次性将游标跳到目标位置
+       if (s[i] in temp) {
+         j = Math.max(temp[s[i]], j)
+       }
+       result = Math.max(result, i - j + 1)
+       temp[s[i]] = i + 1
+       i++
+     }
+     return result
+   };
+    var lengthOfLongestSubstring = function(s) {
+        if (!s) {
+            return 0
+        }
+        let left = 0
+        let right = 1
+        let result = 0
+        const len = s.length
+        while(right < len) {
+            const text = s.substr(left, right - left)
+            const index = text.indexOf(s[right])
+            if (index >= 0) {
+                if (result < right - left) {
+                    result = right - left
+                }
+                left = left + index + 1
+            }
+            ++right
+        }
+        if (result < right - left) {
+            result = right - left
+        }
+        return result
+        
+    };
+```
+
 [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/submissions/)
 
 >>>
