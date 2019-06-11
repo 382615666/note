@@ -1,6 +1,43 @@
 # leetcode
 
 
+[1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
+
+>>>
+    给出由小写字母组成的字符串 S，重复项删除操作会选择两个相邻且相同的字母，并删除它们。
+    
+    在 S 上反复执行重复项删除操作，直到无法继续删除。
+    
+    在完成所有重复项删除操作后返回最终的字符串。答案保证唯一。
+    
+    示例：
+    
+    输入："abbaca"
+    输出："ca"
+    解释：
+    例如，在 "abbaca" 中，我们可以删除 "bb" 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 "aaca"，其中又只有 "aa" 可以执行重复项删除操作，所以最后的字符串为 "ca"。
+>>>
+
+```ecmascript 6
+   var removeDuplicates = function(S) {
+     let result = [S[0]]
+     for (let i = 1; i < S.length; i++) {
+       if (result[result.length - 1] === S[i]) {
+         result.pop()
+       } else {
+         result.push(S[i])
+       }
+     }
+     return result.join('')
+   };
+    var removeDuplicates = function(S) {
+        while(S.match(/(\w)\1/g)){
+            S = S.replace(/(\w)\1/g, '');
+        }
+        return S
+    };
+```
+
 [496. 下一个更大元素 I](https://leetcode-cn.com/problems/next-greater-element-i/submissions/)
 
 >>>
@@ -16,10 +53,6 @@
         对于num1中的数字4，你无法在第二个数组中找到下一个更大的数字，因此输出 -1。
         对于num1中的数字1，第二个数组中数字1右边的下一个较大数字是 3。
         对于num1中的数字2，第二个数组中没有下一个更大的数字，因此输出 -1。
-    
-    来源：力扣（LeetCode）
-    链接：https://leetcode-cn.com/problems/next-greater-element-i
-    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 >>>
 
 ```ecmascript 6
