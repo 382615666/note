@@ -1,6 +1,180 @@
 # leetcode
 
 
+[496. 下一个更大元素 I](https://leetcode-cn.com/problems/next-greater-element-i/submissions/)
+
+>>>
+    给定两个没有重复元素的数组 nums1 和 nums2 ，其中nums1 是 nums2 的子集。找到 nums1 中每个元素在 nums2 中的下一个比其大的值。
+    
+    nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的右边的第一个比 x 大的元素。如果不存在，对应位置输出-1。
+    
+    示例 1:
+    
+    输入: nums1 = [4,1,2], nums2 = [1,3,4,2].
+    输出: [-1,3,-1]
+    解释:
+        对于num1中的数字4，你无法在第二个数组中找到下一个更大的数字，因此输出 -1。
+        对于num1中的数字1，第二个数组中数字1右边的下一个较大数字是 3。
+        对于num1中的数字2，第二个数组中没有下一个更大的数字，因此输出 -1。
+    
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/next-greater-element-i
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+>>>
+
+```ecmascript 6
+   var nextGreaterElement = function(nums1, nums2) {
+    let temp = {}
+    let num = [nums2[0]]
+    // 将不满足条件的元素全部压入num中，然后跟当前元素对比，满足条件后保存到temp中
+     for (let i = 1; i < nums2.length; i++) {
+       while (num.length && num[num.length - 1] < nums2[i]) {
+        temp[num[num.length - 1]] = nums2[i]
+        num.pop()
+       }
+       num.push(nums2[i])
+     }
+     // 此时已经将所有满足条件的数据存入到temp中，不满足全部都是-1
+     let result = []
+     for (let j = 0; j < nums1.length; j++) {
+       if (nums1[j] in temp) {
+         result.push(temp[nums1[j]])
+       } else {
+         result.push(-1)
+       }
+     }
+     return result
+   };
+```
+
+[172. 阶乘后的零](https://leetcode-cn.com/problems/factorial-trailing-zeroes/)
+
+>>>
+    给定一个整数 n，返回 n! 结果尾数中零的数量。
+    
+    示例 1:
+    
+    输入: 3
+    输出: 0
+    解释: 3! = 6, 尾数中没有零。
+>>>
+
+```ecmascript 6
+   var trailingZeroes = function(n) {
+     let result = 0
+     while(n) {
+       n = n / 5 | 0
+       result += n
+     }
+     return result
+   };
+```
+
+[171. Excel表列序号](https://leetcode-cn.com/problems/excel-sheet-column-number/)
+
+>>>
+    给定一个Excel表格中的列名称，返回其相应的列序号。
+    
+    例如，
+    
+        A -> 1
+        B -> 2
+        C -> 3
+        ...
+        Z -> 26
+        AA -> 27
+        AB -> 28 
+>>>
+
+```ecmascript 6
+   var titleToNumber = function(s) {
+     let result = 0
+     for (let j = 0; j < s.length; j++) {
+       result = result * 26 + s.charCodeAt(j) - 64
+     }
+     return result
+   };
+```
+
+[169. 求众数](https://leetcode-cn.com/problems/majority-element/submissions/)
+
+>>>
+    给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+    
+    你可以假设数组是非空的，并且给定的数组总是存在众数。
+    
+    示例 1:
+    
+    输入: [3,2,3]
+    输出: 3
+>>>
+
+```ecmascript 6
+   var majorityElement = function(nums) {
+     let temp = {
+       [nums[0]]: 1
+     }
+     let index = nums[0]
+     for (let i = 1; i < nums.length; i++) {
+       temp[nums[i]] = temp[nums[i]] || 0
+       temp[nums[i]]++
+       if (temp[index] < temp[nums[i]]) {
+         index = nums[i]
+       }
+     }
+     return index
+   };
+   // 摩尔投票算法
+   var majorityElement = function(nums) {
+     var count = 1;
+     var maj = nums[0];
+     for (var i = 1; i < nums.length; i++) {
+       if (maj == nums[i])
+         count++;
+       else {
+         count--;
+         if (count == 0) {
+           maj = nums[i + 1];
+         }
+       }
+     }
+     return maj;
+   };
+```
+
+[168. Excel表列名称](https://leetcode-cn.com/problems/excel-sheet-column-title/submissions/)
+
+>>>
+    给定一个正整数，返回它在 Excel 表中相对应的列名称。
+    
+    例如，
+    
+        1 -> A
+        2 -> B
+        3 -> C
+        ...
+        26 -> Z
+        27 -> AA
+        28 -> AB 
+        ...
+>>>
+
+```ecmascript 6
+   var convertToTitle = function(n) {
+     let dictionary = []
+     for (let i = 65; i < 91; i++) {
+       dictionary.push(String.fromCharCode(i))
+     }
+     let result = ''
+     while (n) {
+       n--
+       result = dictionary[n%26] + result
+       n = n / 26 | 0
+     }
+     return result
+   };
+```
+
 [167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/submissions/)
 
 >>>
