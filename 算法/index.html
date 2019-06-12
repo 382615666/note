@@ -44,20 +44,26 @@
    b3.next = b4
    b4.next = b5
 
-   var removeDuplicates = function(S) {
-     let result = [S[0]]
-     for (let i = 1; i < S.length; i++) {
-       if (result[result.length - 1] === S[i]) {
-         result.pop()
-       } else {
-         result.push(S[i])
-       }
+   var rotate = function(nums, k) {
+     if (!k) {
+       return
      }
-     return result.join('')
+     if (k > nums.length) {
+       k = k % nums.length
+     }
+     reverse(nums, 0, nums.length - k - 1)
+     reverse(nums, nums.length - k, nums.length - 1)
+     reverse(nums, 0, nums.length - 1)
    };
-   var removeDuplicates = function(S) {
-     return S.replace(/(\w)\1/g, '')
-   };
-  console.log(removeDuplicates("abbaca"))
+   function reverse (nums, start, end) {
+     while (start < end) {
+       nums[start] ^= nums[end]
+       nums[end] ^= nums[start]
+       nums[start] ^= nums[end]
+       start++
+       end--
+     }
+   }
+   console.log(rotate([1,2], 1))
 </script>
 </html>

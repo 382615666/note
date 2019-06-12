@@ -1,6 +1,235 @@
 # leetcode
 
 
+[189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/)
+
+>>>
+    给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+    
+    示例 1:
+    
+    输入: [1,2,3,4,5,6,7] 和 k = 3
+    输出: [5,6,7,1,2,3,4]
+    解释:
+    向右旋转 1 步: [7,1,2,3,4,5,6]
+    向右旋转 2 步: [6,7,1,2,3,4,5]
+    向右旋转 3 步: [5,6,7,1,2,3,4]
+>>>
+
+```ecmascript 6
+   var rotate = function(nums, k) {
+     if (!k) {
+       return
+     }
+     k = k % nums.length
+     reverse(nums, 0, nums.length - k - 1)
+     reverse(nums, nums.length - k, nums.length - 1)
+     reverse(nums, 0, nums.length - 1)
+   };
+   function reverse (nums, start, end) {
+     while (start < end) {
+       nums[start] ^= nums[end]
+       nums[end] ^= nums[start]
+       nums[start] ^= nums[end]
+       start++
+       end--
+     }
+   };
+```
+
+[190. 颠倒二进制位](https://leetcode-cn.com/problems/reverse-bits/submissions/)
+
+>>>
+    颠倒给定的 32 位无符号整数的二进制位。
+    
+    示例 1：
+    
+    输入: 00000010100101000001111010011100
+    输出: 00111001011110000010100101000000
+    解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，
+          因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。
+>>>
+
+```ecmascript 6
+   var reverseBits = function(n) {
+     // return Number.parseInt([...n.toString(2)].reverse().join('').padEnd(32, '0'), 2)
+     let ans=0;
+     //进制的本质
+     let i=32;
+     while(i--)
+     {
+       // 左移 * 2
+       ans <<= 1;
+       // 得到n的最后一位，并且赋值给ans
+       ans+=n&1;
+       // 右移 / 2
+       // js里面默认是有符号，所以需要使用无符号右移
+       n = n >>> 1;
+     }
+     // 格式化成32位无符号
+     return ans >>> 0;
+   };
+```
+
+[268. 缺失数字](https://leetcode-cn.com/problems/missing-number/)
+
+>>>
+    给定一个包含 0, 1, 2, ..., n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。
+    
+    示例 1:
+    
+    输入: [3,0,1]
+    输出: 2
+>>>
+
+```ecmascript 6
+   var missingNumber = function(nums) {
+     let sum = 0
+     for (let i = 0; i < nums.length; i++) {
+       sum += i + 1 - nums[i]
+     }
+     return sum
+   };
+   var missingNumber = function(nums) {
+     let sum = nums.length
+     for (let i = 0; i < nums.length; i++) {
+       sum = sum ^ i ^ nums[i]
+     }
+     return sum
+   };
+```
+
+[844. 比较含退格的字符串](https://leetcode-cn.com/problems/backspace-string-compare/)
+
+>>>
+    给定 S 和 T 两个字符串，当它们分别被输入到空白的文本编辑器后，判断二者是否相等，并返回结果。 # 代表退格字符。
+    
+     
+    
+    示例 1：
+    
+    输入：S = "ab#c", T = "ad#c"
+    输出：true
+    解释：S 和 T 都会变成 “ac”。
+>>>
+
+```ecmascript 6
+   var backspaceCompare = function(S, T) {
+     let arr1 = []
+     let arr2 = []
+     for (let i = 0; i < S.length; i++) {
+       if (S[i] === '#') {
+         arr1.pop()
+       } else {
+         arr1.push(S[i])
+       }
+     }
+     for (let i = 0; i < T.length; i++) {
+       if (T[i] === '#') {
+         arr2.pop()
+       } else {
+         arr2.push(T[i])
+       }
+     }
+     return arr1.join('') === arr2.join('')
+   };
+```
+
+[1021. 删除最外层的括号](https://leetcode-cn.com/problems/remove-outermost-parentheses/)
+
+>>>
+    有效括号字符串为空 ("")、"(" + A + ")" 或 A + B，其中 A 和 B 都是有效的括号字符串，+ 代表字符串的连接。例如，""，"()"，"(())()" 和 "(()(()))" 都是有效的括号字符串。
+    
+    如果有效字符串 S 非空，且不存在将其拆分为 S = A+B 的方法，我们称其为原语（primitive），其中 A 和 B 都是非空有效括号字符串。
+    
+    给出一个非空有效字符串 S，考虑将其进行原语化分解，使得：S = P_1 + P_2 + ... + P_k，其中 P_i 是有效括号字符串原语。
+    
+    对 S 进行原语化分解，删除分解中每个原语字符串的最外层括号，返回 S 。
+    
+     
+    
+    示例 1：
+    
+    输入："(()())(())"
+    输出："()()()"
+    解释：
+    输入字符串为 "(()())(())"，原语化分解得到 "(()())" + "(())"，
+    删除每个部分中的最外层括号后得到 "()()" + "()" = "()()()"。
+>>>
+
+```ecmascript 6
+   var removeOuterParentheses = function(S) {
+     let result = []
+     let count = 0
+     for (let i = 0; i < S.length; i++) {
+        if (S[i] === '(') {
+          count++
+          if (count > 1) {
+            result.push(S[i])
+          }
+        } else {
+          count--
+          if (count > 0) {
+            result.push(S[i])
+          }
+        }
+     }
+     return result.join('')
+   };
+```
+
+[682. 棒球比赛](https://leetcode-cn.com/problems/baseball-game/)
+
+>>>
+    你现在是棒球比赛记录员。
+    给定一个字符串列表，每个字符串可以是以下四种类型之一：
+    1.整数（一轮的得分）：直接表示您在本轮中获得的积分数。
+    2. "+"（一轮的得分）：表示本轮获得的得分是前两轮有效 回合得分的总和。
+    3. "D"（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。
+    4. "C"（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。
+    
+    每一轮的操作都是永久性的，可能会对前一轮和后一轮产生影响。
+    你需要返回你在所有回合中得分的总和。
+    
+    示例 1:
+    
+    输入: ["5","2","C","D","+"]
+    输出: 30
+    解释: 
+    第1轮：你可以得到5分。总和是：5。
+    第2轮：你可以得到2分。总和是：7。
+    操作1：第2轮的数据无效。总和是：5。
+    第3轮：你可以得到10分（第2轮的数据已被删除）。总数是：15。
+    第4轮：你可以得到5 + 10 = 15分。总数是：30。
+>>>
+
+```ecmascript 6
+   var calPoints = function(ops) {
+     let result = [0]
+     for (let i = 0; i < ops.length; i++) {
+       switch (ops[i]) {
+         case '+':
+           result[0] += result[result.length - 2] + result[result.length - 1]
+           result.push(result[result.length - 2] + result[result.length - 1])
+           break
+         case 'D':
+           result[0] += result[result.length - 1] * 2
+           result.push(result[result.length - 1] * 2)
+           break
+         case 'C':
+           result[0] -= result[result.length - 1]
+           result.pop()
+           break
+         default:
+           result[0] += ops[i] - 0
+           result.push(ops[i] - 0)
+           break
+       }
+     }
+     return result[0]
+   };
+```
+
 [1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
 
 >>>
