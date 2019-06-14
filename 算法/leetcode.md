@@ -1,6 +1,83 @@
 # leetcode
 
 
+[258. 各位相加](https://leetcode-cn.com/problems/add-digits/solution/c-shu-zi-de-ge-wei-xiang-jia-by-steve_stone/)
+
+>>>
+    给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。
+    
+    示例:
+    
+    输入: 38
+    输出: 2 
+    解释: 各位相加的过程为：3 + 8 = 11, 1 + 1 = 2。 由于 2 是一位数，所以返回 2。
+>>>
+
+```ecmascript 6
+   var addDigits = function(num) {
+     if (num < 10) {
+       return num
+     }
+     let temp = 0
+     while (num > 0) {
+       temp = temp + num % 10
+       num = num / 10 | 0
+       if (!num && temp > 9) {
+         num = temp
+         temp = 0
+       }
+     }
+     return temp
+   };
+    // 方法2: 总结规律法。 时间复杂度为O(1)
+    // 设三位数 n = 100a + 10b + c 则 n - ( a+b+c) = 99a + 9b 也就是说n的每次各位求和结果与原n想比，
+    // 都减少了9的倍数，所以n对9取余的结果就是所求结果。
+    // n为其他位数时等同，注意 n > 0 且 n % 9 == 0 时，结果应为9
+    var addDigits = function(num) {
+       if(num>9) {
+           num %= 9
+           if(num ==0)
+               return 9
+       }
+        return num
+    };
+```
+
+[349. 两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
+
+>>>
+    给定两个数组，编写一个函数来计算它们的交集。
+    
+    示例 1:
+    
+    输入: nums1 = [1,2,2,1], nums2 = [2,2]
+    输出: [2]
+    示例 2:
+    
+    输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+    输出: [9,4]
+>>>
+
+```ecmascript 6
+   var intersection = function(nums1, nums2) {
+     let temp = {}
+     nums1.forEach(item => {
+       temp[item] = item
+     })
+     let temp1 = {}
+     nums2.forEach(item => {
+       if (item in temp) {
+         temp1[item] = item
+       }
+     })
+     let result = []
+     for (let item in temp1) {
+        result.push(item)
+     }
+     return result
+   };
+```
+
 [344. 反转字符串](https://leetcode-cn.com/problems/reverse-string/comments/)
 
 >>>
@@ -33,7 +110,6 @@
         // s.reverse()
     };
 ```
-
 
 [326. 3的幂](https://leetcode-cn.com/problems/power-of-three/)
 

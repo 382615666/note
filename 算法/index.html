@@ -44,26 +44,21 @@
    b3.next = b4
    b4.next = b5
 
-   var rotate = function(nums, k) {
-     if (!k) {
-       return
+   var addDigits = function(num) {
+     if (num < 10) {
+       return num
      }
-     if (k > nums.length) {
-       k = k % nums.length
+     let temp = 0
+     while (num > 0) {
+       temp = temp + num % 10
+       num = num / 10 | 0
+       if (!num && temp > 9) {
+         num = temp
+         temp = 0
+       }
      }
-     reverse(nums, 0, nums.length - k - 1)
-     reverse(nums, nums.length - k, nums.length - 1)
-     reverse(nums, 0, nums.length - 1)
+     return temp
    };
-   function reverse (nums, start, end) {
-     while (start < end) {
-       nums[start] ^= nums[end]
-       nums[end] ^= nums[start]
-       nums[start] ^= nums[end]
-       start++
-       end--
-     }
-   }
-   console.log(rotate([1,2], 1))
+   console.log(addDigits(119))
 </script>
 </html>
