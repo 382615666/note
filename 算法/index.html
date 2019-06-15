@@ -33,7 +33,7 @@
      this.next = null;
    }
 
-   let a1 = new ListNode(8)
+   let a1 = new ListNode(1)
    let b1 = new ListNode(4)
    let b2 = new ListNode(1)
    let b3 = new ListNode(8)
@@ -44,21 +44,18 @@
    b3.next = b4
    b4.next = b5
 
-   var addDigits = function(num) {
-     if (num < 10) {
-       return num
-     }
-     let temp = 0
-     while (num > 0) {
-       temp = temp + num % 10
-       num = num / 10 | 0
-       if (!num && temp > 9) {
-         num = temp
-         temp = 0
+   var removeElements = function(head, val) {
+     let cur = new ListNode()
+     cur.next = head
+     while (cur && cur.next) {
+       if (cur.next.val === val) {
+         cur.next = cur.next.next
+       } else {
+         cur = cur.next
        }
      }
-     return temp
+     return head
    };
-   console.log(addDigits(119))
+   console.log(removeElements(a1, 1))
 </script>
 </html>
