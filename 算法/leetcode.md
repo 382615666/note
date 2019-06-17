@@ -1,6 +1,218 @@
 # leetcode
 
 
+[367. 有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/submissions/)
+
+>>>
+    给定一个正整数 num，编写一个函数，如果 num 是一个完全平方数，则返回 True，否则返回 False。
+    
+    说明：不要使用任何内置的库函数，如  sqrt。
+    
+    示例 1：
+    
+    输入：16
+    输出：True
+    示例 2：
+    
+    输入：14
+    输出：False
+>>>
+
+```ecmascript 6
+   var isPerfectSquare = function(num) {
+     let i = num
+     while (i * i > num) {
+       i = (i + num / i) / 2
+     }
+     return i === (i | 0)
+   };
+   var isPerfectSquare = function(num) {
+     let i = 1
+     while (num > 0) {
+         num -= i
+         i += 2
+     }
+     return num === 0
+   };
+```
+
+[387. 字符串中的第一个唯一字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/)
+
+>>>
+    给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+    
+    案例:
+    
+    s = "leetcode"
+    返回 0.
+    
+    s = "loveleetcode",
+    返回 2.
+>>>
+
+```ecmascript 6
+   var firstUniqChar = function(s) {
+     let arr = []
+     for (let i = 0; i < s.length; i++) {
+       arr[s.charCodeAt(i) - 97] = i
+     }
+     for (let i = 0; i < s.length; i++) {
+       let index = s.charCodeAt(i) - 97
+       if (arr[index] === i) {
+         return i
+       } else {
+         arr[index] = -1
+       }
+     }
+     return -1
+   };
+```
+
+[278. 第一个错误的版本](https://leetcode-cn.com/problems/first-bad-version/)
+
+>>>
+    你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。
+    
+    假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。
+    
+    你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。
+    
+    示例:
+    
+    给定 n = 5，并且 version = 4 是第一个错误的版本。
+    
+    调用 isBadVersion(3) -> false
+    调用 isBadVersion(5) -> true
+    调用 isBadVersion(4) -> true
+    
+    所以，4 是第一个错误的版本。 
+>>>
+
+```ecmascript 6
+   var solution = function(isBadVersion) {
+     /**
+      * @param {integer} n Total versions
+      * @return {integer} The first bad version
+      */
+     return function(n) {
+       let left = 1
+       let right = n
+       let mid = 0
+       while (left < right) {
+         mid = left + ((right - left) / 2 | 0)
+         if (isBadVersion(mid)) {
+           right = mid
+         } else {
+           left = mid + 1
+         }
+       }
+       return right
+     };
+   };
+```
+
+[191. 位1的个数](https://leetcode-cn.com/problems/number-of-1-bits/)
+
+>>>
+    编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
+    
+     
+    
+    示例 1：
+    
+    输入：00000000000000000000000000001011
+    输出：3
+    解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 '1'。
+>>>
+
+```ecmascript 6
+    var hammingWeight = function(n) {
+        let sum = 0
+        while (n) {
+            sum += n & 1
+            n >>>= 1
+        }
+        return sum
+    };
+    var hammingWeight = function(n) {
+        let result = n.toString(2).match(/(1)/g) || []
+        return result.length
+    };
+    var hammingWeight = function(n) {
+        let sum = 0
+        while (n) {
+            n &= n - 1
+            sum++
+        }
+        return sum
+    };
+```
+
+[303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/submissions/)
+
+>>>
+    给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。
+    
+    示例：
+    
+    给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()
+    
+    sumRange(0, 2) -> 1
+    sumRange(2, 5) -> -1
+    sumRange(0, 5) -> -3
+>>>
+
+```ecmascript 6
+    var NumArray = function(nums) {
+        this.result = []
+        nums.reduce((total, item) => {
+            total += item
+            this.result.push(total)
+            return total
+        },0)
+    };
+
+/** 
+ * @param {number} i 
+ * @param {number} j
+ * @return {number}
+ */
+   NumArray.prototype.sumRange = function(i, j) {
+     if (i === 0) {
+       return this.result[j]
+     }
+     return this.result[j] - this.result[--i]
+   };
+```
+
+[342. 4的幂](https://leetcode-cn.com/problems/power-of-four/)
+
+>>>
+    给定一个整数 (32 位有符号整数)，请编写一个函数来判断它是否是 4 的幂次方。
+    
+    示例 1:
+    
+    输入: 16
+    输出: true
+>>>
+
+```ecmascript 6
+   var isPowerOfFour = function(num) {
+       if (num < 0) {
+           return false
+       }
+       return /^1(00)*$/.test(num.toString(2))
+       // return /^10*$/.test(num.toString(4))
+   };
+   var isPowerOfFour = function(num) {
+        if (num < 0 || num & (num-1))//排除不是2的幂次的数
+        {
+            return false;
+        }
+        return num & 0x55555555;//可以改为return num%3==1;
+   };
+```
+
 [258. 各位相加](https://leetcode-cn.com/problems/add-digits/solution/c-shu-zi-de-ge-wei-xiang-jia-by-steve_stone/)
 
 >>>
@@ -1499,16 +1711,16 @@
 ![推导过程](../img/niudun.jpg)
 
 ```ecmascript 6
-            var mySqrt = function(x) {
-              let i = x
-              while (i * i > x) {
-                i = (i + x / i) / 2
-              }
-              return Math.trunc(i)
-              // return ~~Math.pow(x, .5)
-              // return ~~Math.sqrt(x)
-              // return ~~x**.5
-            };
+    var mySqrt = function(x) {
+      let i = x
+      while (i * i > x) {
+        i = (i + x / i) / 2
+      }
+      return Math.trunc(i)
+      // return ~~Math.pow(x, .5)
+      // return ~~Math.sqrt(x)
+      // return ~~x**.5
+    };
 ```
 
 [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
