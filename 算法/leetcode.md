@@ -1,6 +1,204 @@
 # leetcode
 
 
+[754. 到达终点数字](https://leetcode-cn.com/problems/reach-a-number/)
+
+>>>
+    在一根无限长的数轴上，你站在0的位置。终点在target的位置。
+    
+    每次你可以选择向左或向右移动。第 n 次移动（从 1 开始），可以走 n 步。
+    
+    返回到达终点需要的最小移动次数。
+    
+    示例 1:
+    
+    输入: target = 3
+    输出: 2
+    解释:
+    第一次移动，从 0 到 1 。
+    第二次移动，从 1 到 3 。
+>>>
+
+```ecmascript 6
+   var reachNumber = function(target) {
+     if (target < 0) {
+       target = -target
+     }
+     let n = 0
+     while (target > 0 || target % 2) {
+       n++
+       target -= n
+     }
+     return n
+   };
+```
+
+[704. 二分查找](https://leetcode-cn.com/problems/binary-search/)
+
+>>>
+    给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+    
+    
+    示例 1:
+    
+    输入: nums = [-1,0,3,5,9,12], target = 9
+    输出: 4
+    解释: 9 出现在 nums 中并且下标为 4
+>>>
+
+```ecmascript 6
+   var search = function(nums, target) {
+     let left = 0
+     let right = nums.length - 1
+     while (left <= right) {
+       let mid = left + (right - left) / 2 | 0
+       if (nums[mid] === target) {
+         return mid
+       } else if (target < nums[mid]) {
+         right = mid - 1
+       } else if (target > nums[mid]){
+         left = mid + 1
+       }
+     }
+     return -1
+   };
+```
+
+[709. 转换成小写字母](https://leetcode-cn.com/problems/to-lower-case/)
+
+>>>
+    实现函数 ToLowerCase()，该函数接收一个字符串参数 str，并将该字符串中的大写字母转换成小写字母，之后返回新的字符串。
+    
+     
+    
+    示例 1：
+    
+    输入: "Hello"
+    输出: "hello"
+>>>
+
+```ecmascript 6
+   var toLowerCase = function(str) {
+     let result = ''
+     for (let i = 0; i < str.length; i++) {
+       if (str.charCodeAt(i) > 96) {
+         result += String.fromCharCode(str.charCodeAt(i) - 32)
+       } else {
+         result += str[i]
+       }
+     }
+     return result
+   };
+```
+
+[605. 种花问题](https://leetcode-cn.com/problems/can-place-flowers/)
+
+>>>
+    假设你有一个很长的花坛，一部分地块种植了花，另一部分却没有。可是，花卉不能种植在相邻的地块上，它们会争夺水源，两者都会死去。
+    
+    给定一个花坛（表示为一个数组包含0和1，其中0表示没种植花，1表示种植了花），和一个数 n 。能否在不打破种植规则的情况下种入 n 朵花？能则返回True，不能则返回False。
+    
+    示例 1:
+    
+    输入: flowerbed = [1,0,0,0,1], n = 1
+    输出: True
+>>>
+
+```ecmascript 6
+   var canPlaceFlowers = function(flowerbed, n) {
+     flowerbed.unshift(0)
+     flowerbed.push(0)
+     for (let i = 1; i < flowerbed.length - 1; i++) {
+       if (!flowerbed[i - 1] && !flowerbed[i] && !flowerbed[i + 1]) {
+         i++
+         n--
+       }
+     }
+     return n <= 0
+   };
+```
+
+[594. 最长和谐子序列](https://leetcode-cn.com/problems/longest-harmonious-subsequence/)
+
+>>>
+    和谐数组是指一个数组里元素的最大值和最小值之间的差别正好是1。
+    
+    现在，给定一个整数数组，你需要在所有可能的子序列中找到最长的和谐子序列的长度。
+    
+    示例 1:
+    
+    输入: [1,3,2,2,5,2,3,7]
+    输出: 5
+    原因: 最长的和谐数组是：[3,2,2,2,3].
+>>>
+
+```ecmascript 6
+   var findLHS = function(nums) {
+     let temp = {}
+     for (let i = 0; i < nums.length; i++) {
+       if (nums[i] in temp) {
+         temp[nums[i]]++
+       } else {
+         temp[nums[i]] = 1
+       }
+     }
+     let result = 0
+     for (let key in temp) {
+       if ((key - 0 + 1) in temp) {
+         result = Math.max(result, temp[key] + temp[key - 0 + 1])
+       }
+     }
+     return result
+   };
+```
+
+[283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)
+
+>>>
+    给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+    
+    示例:
+    
+    输入: [0,1,0,3,12]
+    输出: [1,3,12,0,0]
+>>>
+
+```ecmascript 6
+   var moveZeroes = function(nums) {
+     let i = 0
+     for (let j = 0; j < nums.length; j++) {
+       if (nums[j]) {
+         nums[i] = nums[j]
+         if (i !== j) {
+           nums[j] = 0
+         }
+         i++
+       }
+     }
+   };
+```
+
+[1037. 有效的回旋镖](https://leetcode-cn.com/problems/valid-boomerang/)
+
+>>>
+    回旋镖定义为一组三个点，这些点各不相同且不在一条直线上。
+    
+    给出平面上三个点组成的列表，判断这些点是否可以构成回旋镖。
+    
+     
+    
+    示例 1：
+    
+    输入：[[1,1],[2,3],[3,2]]
+    输出：true
+>>>
+
+```ecmascript 6
+   var isBoomerang = function(points) {
+       return (points[1][0] - points[0][0]) * (points[2][1] - points[1][1]) !== (points[1][1] - points[0][1]) * (points[2][0] - points[1][0])
+   };
+```
+
 [367. 有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/submissions/)
 
 >>>

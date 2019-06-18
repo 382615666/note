@@ -44,13 +44,17 @@
    b3.next = b4
    b4.next = b5
 
-   var isPerfectSquare = function(num) {
-     let i = num
-     while (i * i > num) {
-       i = (i + num / i) / 2
+   var reachNumber = function(target) {
+     if (target < 0) {
+       target = -target
      }
-     return i === (i | 0)
+     let n = 0
+     while (target > 0 || target % 2) {
+       n++
+       target -= n
+     }
+     return n
    };
-   console.log(isPerfectSquare(14))
+   console.log(reachNumber(3))
 </script>
 </html>
