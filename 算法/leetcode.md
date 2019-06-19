@@ -1,6 +1,77 @@
 # leetcode
 
 
+[1078. Bigram 分词](https://leetcode-cn.com/problems/occurrences-after-bigram/)
+
+>>>
+    给出第一个词 first 和第二个词 second，考虑在某些文本 text 中可能以 "first second third" 形式出现的情况，其中 second 紧随 first 出现，third 紧随 second 出现。
+    
+    对于每种这样的情况，将第三个词 "third" 添加到答案中，并返回答案。
+    
+     
+    
+    示例 1：
+    
+    输入：text = "alice is a good girl she is a good student", first = "a", second = "good"
+    输出：["girl","student"]
+    示例 2：
+    
+    输入：text = "we will we will rock you", first = "we", second = "will"
+    输出：["we","rock"]
+>>>
+
+```ecmascript 6
+   var findOcurrences = function(text, first, second) {
+     let result = []
+     let arr = text.split(' ')
+     for (let i = 2; i < arr.length; i++) {
+       if (arr[i - 2] === first && arr[i - 1] === second) {
+         result.push(arr[i])
+       }
+     }
+     return result
+   };
+```
+
+[350. 两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
+
+>>>
+    给定两个数组，编写一个函数来计算它们的交集。
+    
+    示例 1:
+    
+    输入: nums1 = [1,2,2,1], nums2 = [2,2]
+    输出: [2,2]
+    示例 2:
+    
+    输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+    输出: [4,9]
+>>>
+
+```ecmascript 6
+   var intersect = function(nums1, nums2) {
+    let temp = {}
+    nums1.forEach(item => {
+      if (item in temp) {
+        temp[item]++
+      } else {
+        temp[item] = 1
+      }
+    })
+     let result = []
+     nums2.forEach(item => {
+       if (item in temp) {
+         temp[item]--
+         if (!temp[item]) {
+           delete temp[item]
+         }
+         result.push(item)
+       }
+     })
+     return result
+   };
+```
+
 [884. 两句话中的不常见单词](https://leetcode-cn.com/problems/uncommon-words-from-two-sentences/)
 
 >>>

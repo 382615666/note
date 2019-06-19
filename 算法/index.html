@@ -44,23 +44,10 @@
    b3.next = b4
    b4.next = b5
 
-   var pivotIndex = function(nums) {
-     let sum = nums.reduce((total, item) => {
-       return total += item
-     }, 0)
-     let i = 1
-     for (; i < nums.length; i++) {
-       sum -= 2 * nums[i - 1]
-       if (!sum || !(sum + nums[i - 1])) {
-         return i - 1
-       }
-     }
-     return -1
+   var gcdOfStrings = function(str1, str2) {
+
    };
-   console.log(pivotIndex([1, 7, 3, 5, 6]))
-   console.log(pivotIndex([1, 7, 3, 6, 5, 6]))
-   console.log(pivotIndex([1, 2, 3]))
-   console.log(pivotIndex([-1,-1,-1,-1,-1,0]))
+   console.log(intersect([8,0,3],[0,0]))
    //  var a = /(\w+(\.\w+)+)/g
    // var b = "discuss.leetcode.com"
    //  console.log(a.test("discuss.leetcode.com"))
