@@ -45,9 +45,19 @@
    b4.next = b5
 
    var gcdOfStrings = function(str1, str2) {
-
+     if (str1.length % str2.length) {
+       return ''
+     }
+     let i = 0
+     while (i + str2.length <  str1.length) {
+       if (str1.substr(i, str2.length) !== str2) {
+         return ''
+       }
+       i += str2.length
+     }
+     return str2
    };
-   console.log(intersect([8,0,3],[0,0]))
+   console.log(gcdOfStrings("ABCABC", "ABC"))
    //  var a = /(\w+(\.\w+)+)/g
    // var b = "discuss.leetcode.com"
    //  console.log(a.test("discuss.leetcode.com"))
