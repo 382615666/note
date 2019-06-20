@@ -1,6 +1,104 @@
 # leetcode
 
 
+[796. 旋转字符串](https://leetcode-cn.com/problems/rotate-string/submissions/)
+
+>>>
+    给定两个字符串, A 和 B。
+    
+    A 的旋转操作就是将 A 最左边的字符移动到最右边。 例如, 若 A = 'abcde'，在移动一次之后结果就是'bcdea' 。如果在若干次旋转操作之后，A 能变成B，那么返回True。
+    
+    示例 1:
+    输入: A = 'abcde', B = 'cdeab'
+    输出: true
+    
+    示例 2:
+    输入: A = 'abcde', B = 'abced'
+    输出: false
+>>>
+
+```ecmascript 6
+   var rotateString = function(A, B) {
+     if (!A && !B) {
+       return true
+     }
+     if (!A || !B || A.length !== B.length) {
+       return false
+     }
+     A += A
+     return ~A.indexOf(B)
+   };
+```
+
+[788. 旋转数字](https://leetcode-cn.com/problems/rotated-digits/)
+
+>>>
+    我们称一个数 X 为好数, 如果它的每位数字逐个地被旋转 180 度后，我们仍可以得到一个有效的，且和 X 不同的数。要求每位数字都要被旋转。
+    
+    如果一个数的每位数字被旋转以后仍然还是一个数字， 则这个数是有效的。0, 1, 和 8 被旋转后仍然是它们自己；2 和 5 可以互相旋转成对方；6 和 9 同理，除了这些以外其他的数字旋转以后都不再是有效的数字。
+    
+    现在我们有一个正整数 N, 计算从 1 到 N 中有多少个数 X 是好数？
+    
+    示例:
+    输入: 10
+    输出: 4
+    解释: 
+    在[1, 10]中有四个好数： 2, 5, 6, 9。
+    注意 1 和 10 不是好数, 因为他们在旋转之后不变。
+>>>
+
+```ecmascript 6
+   var rotatedDigits = function(N) {
+     let result = 0
+     let arr = [-1, -1, 1, 0, 0, 1, 1, 0, -1, 1]
+     for (let i = 1; i <= N; i++) {
+       let j = i
+       let flag = false
+       while (j) {
+         let mod = j % 10
+         if (arr[mod] === 1) {
+           flag = true
+         } else if (arr[mod] === 0) {
+           flag = false
+           break
+         }
+         j = j / 10 | 0
+       }
+       if (flag) {
+         result++
+       }
+     }
+     return result
+   };
+```
+
+[203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/solution/php-by-rain-16/)
+
+>>>
+    删除链表中等于给定值 val 的所有节点。
+    
+    示例:
+    
+    输入: 1->2->6->3->4->5->6, val = 6
+    输出: 1->2->3->4->5
+>>>
+
+```ecmascript 6
+   var removeElements = function(head, val) {
+     let node = new ListNode()
+     node.next = head
+     let cur = node
+     while (cur && cur.next) {
+       if (cur.next.val === val) {
+         cur.next = cur.next.next
+       } else {
+         cur = cur.next
+       }
+     }
+     return node.next
+   };
+```
+
 [1078. Bigram 分词](https://leetcode-cn.com/problems/occurrences-after-bigram/)
 
 >>>

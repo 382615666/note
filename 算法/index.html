@@ -28,36 +28,70 @@
     <div class="c"></div>
 </body>
 <script>
-   function ListNode(val) {
-       this.val = val;
-     this.next = null;
+   function TreeNode(val) {
+     this.val = val;
+     this.left = this.right = null;
    }
 
-   let a1 = new ListNode(1)
-   let b1 = new ListNode(4)
-   let b2 = new ListNode(1)
-   let b3 = new ListNode(8)
-   let b4 = new ListNode(4)
-   let b5 = new ListNode(5)
-   b1.next = b2
-   b2.next = b3
-   b3.next = b4
-   b4.next = b5
+   let b1 = new TreeNode(6)
+   let b2 = new TreeNode(4)
+   let b3 = new TreeNode(10)
+   let b4 = new TreeNode(2)
+   let b5 = new TreeNode(5)
+   let b6 = new TreeNode(8)
+   let b7 = new TreeNode(11)
+   let b8 = new TreeNode(1)
+   let b9 = new TreeNode(3)
+   let b10 = new TreeNode(7)
+   let b11 = new TreeNode(9)
+   b1.left = b2
+   b1.right = b3
+   b2.left = b4
+   b2.right = b5
+   b3.left = b6
+   b3.right = b7
+   b4.left = b8
+   b4.right = b9
+   b6.left = b10
+   b6.right = b11
 
-   var gcdOfStrings = function(str1, str2) {
-     if (str1.length % str2.length) {
-       return ''
+   var findJudge = function(N, trust) {
+     // 信任分组
+     let trustTemp = {}
+     // 被信任分组
+     let beTrustTemp = {}
+     for (let i = 1; i <= N; i++) {
+       trustTemp[i] = []
+       beTrustTemp[i] = []
      }
-     let i = 0
-     while (i + str2.length <  str1.length) {
-       if (str1.substr(i, str2.length) !== str2) {
-         return ''
+     trust.forEach(item => {
+       trustTemp[item[0]].push(item[1])
+       beTrustTemp[item[1]].push(item[0])
+     })
+     for (let i = 1; i <= N; i++) {
+       if (!trustTemp[i].length && beTrustTemp[i].length === N - 1) {
+         return i
        }
-       i += str2.length
      }
-     return str2
+     return -1
    };
-   console.log(gcdOfStrings("ABCABC", "ABC"))
+   console.log(findJudge(2, [[1,2]]))
+   // console.log(removeElements(b1, 5))
+
+   // var gcdOfStrings = function(str1, str2) {
+   //   if (str1.length % str2.length) {
+   //     return ''
+   //   }
+   //   let i = 0
+   //   while (i + str2.length <  str1.length) {
+   //     if (str1.substr(i, str2.length) !== str2) {
+   //       return ''
+   //     }
+   //     i += str2.length
+   //   }
+   //   return str2
+   // };
+   // console.log(gcdOfStrings("ABCABC", "ABC"))
    //  var a = /(\w+(\.\w+)+)/g
    // var b = "discuss.leetcode.com"
    //  console.log(a.test("discuss.leetcode.com"))
