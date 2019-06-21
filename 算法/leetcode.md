@@ -1,6 +1,82 @@
 # leetcode
 
 
+[1051. 高度检查器](https://leetcode-cn.com/problems/height-checker/submissions/)
+
+>>>
+    学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。
+    
+    请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。
+    
+     
+    
+    示例：
+    
+    输入：[1,1,4,2,1,3]
+    输出：3
+    解释：
+    高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。
+>>>
+
+```ecmascript 6
+   var heightChecker = function (heights) {
+     let result = 0
+     const copy = [...heights]
+     copy.sort((a, b) => a - b)
+     for (let i = 0; i < copy.length; i++) {
+       if (copy[i] !== heights[i]) {
+         result++
+       }
+     }
+     return result
+   }
+```
+
+[997. 找到小镇的法官](https://leetcode-cn.com/problems/find-the-town-judge/submissions/)
+
+>>>
+    在一个小镇里，按从 1 到 N 标记了 N 个人。传言称，这些人中有一个是小镇上的秘密法官。
+    
+    如果小镇的法官真的存在，那么：
+    
+    小镇的法官不相信任何人。
+    每个人（除了小镇法官外）都信任小镇的法官。
+    只有一个人同时满足属性 1 和属性 2 。
+    给定数组 trust，该数组由信任对 trust[i] = [a, b] 组成，表示标记为 a 的人信任标记为 b 的人。
+    
+    如果小镇存在秘密法官并且可以确定他的身份，请返回该法官的标记。否则，返回 -1。
+    
+     
+    
+    示例 1：
+    
+    输入：N = 2, trust = [[1,2]]
+    输出：2
+    示例 2：
+    
+    输入：N = 3, trust = [[1,3],[2,3]]
+    输出：3
+>>>
+
+```ecmascript 6
+   var findJudge = function(N, trust) {
+     // 信任分组
+     let trustTemp = new Array(N + 1).fill(0)
+     // 被信任分组
+     let beTrustTemp = new Array(N + 1).fill(0)
+     trust.forEach(item => {
+       trustTemp[item[0]]++
+       beTrustTemp[item[1]]++
+     })
+     for (let i = 1; i <= N; i++) {
+       if (trustTemp[i] === 0 && beTrustTemp[i] + 1 === N) {
+         return i
+       }
+     }
+     return -1
+   };
+```
+
 [796. 旋转字符串](https://leetcode-cn.com/problems/rotate-string/submissions/)
 
 >>>

@@ -55,27 +55,22 @@
    b6.left = b10
    b6.right = b11
 
-   var findJudge = function(N, trust) {
-     // 信任分组
-     let trustTemp = {}
-     // 被信任分组
-     let beTrustTemp = {}
-     for (let i = 1; i <= N; i++) {
-       trustTemp[i] = []
-       beTrustTemp[i] = []
-     }
-     trust.forEach(item => {
-       trustTemp[item[0]].push(item[1])
-       beTrustTemp[item[1]].push(item[0])
-     })
-     for (let i = 1; i <= N; i++) {
-       if (!trustTemp[i].length && beTrustTemp[i].length === N - 1) {
-         return i
+   var wordPattern = function(pattern, str) {
+     let key = {}
+     let value = {}
+     let arr = str.split(' ')
+     for (let i = 0; i < arr.length; i++) {
+       if (pattern[i] in key ) {
+
+       } else {
+         key[pattern[i]] = arr[i]
+         value[arr[i]] = pattern[i]
        }
      }
-     return -1
+     return true
    };
-   console.log(findJudge(2, [[1,2]]))
+   console.log(wordPattern("abba", "dog cat cat fish"))
+   console.log(wordPattern("abba", "dog dog dog dog"))
    // console.log(removeElements(b1, 5))
 
    // var gcdOfStrings = function(str1, str2) {
