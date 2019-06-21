@@ -59,9 +59,12 @@
      let key = {}
      let value = {}
      let arr = str.split(' ')
+     if (pattern.length !== arr.length) {
+       return false
+     }
      for (let i = 0; i < arr.length; i++) {
-       if (pattern[i] in key ) {
-
+       if ((pattern[i] in key && key[pattern[i]] !== arr[i]) || (arr[i] in value && value[arr[i]] !== pattern[i])) {
+         return false
        } else {
          key[pattern[i]] = arr[i]
          value[arr[i]] = pattern[i]
@@ -69,8 +72,9 @@
      }
      return true
    };
-   console.log(wordPattern("abba", "dog cat cat fish"))
-   console.log(wordPattern("abba", "dog dog dog dog"))
+   // console.log(wordPattern("abba", "dog cat cat fish"))
+   // console.log(wordPattern("abba", "dog dog dog dog"))
+   console.log(wordPattern("jquery", "jquery"))
    // console.log(removeElements(b1, 5))
 
    // var gcdOfStrings = function(str1, str2) {
