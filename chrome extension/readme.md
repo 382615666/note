@@ -1,9 +1,15 @@
 # chrome extension
 
-[入门指导](https://developer.chrome.com/extensions)
-[api传送门](https://developer.chrome.com/extensions/api_index)
+[chrome 入门教程](https://developer.chrome.com/extensions)
+[百度浏览器开发者教程](https://chajian.baidu.com/developer/extensions/getstarted.html)
+[配置相关文章](https://mp.weixin.qq.com/s/a-mkhgWfyxKzUFdRPw6NzA)
+[chrome api传送门](https://developer.chrome.com/extensions/api_index)
+[百度api传送门](https://chajian.baidu.com/developer/extensions/api_index.html)
 
 * 浏览器icon不支持svg
 * browser_action、page_action不能共存
 * 通过js来调用的时候，不填可选参数的时候，也需要传空对象
 * default_popup 存在的时候，chrome.browserAction.onClicked 无效
+* chrome.alarms.create when delayInMinutes 不能同时存在
+
+* [chrome.accessibilityFeatures](https://chajian.baidu.com/developer/extensions/accessibilityFeatures.html)
