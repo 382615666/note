@@ -3,7 +3,7 @@
   "description" : "hello description2",
   "version": "1.0",
   "manifest_version": 2,
-  "permissions": ["declarativeContent","storage"],
+  "permissions": ["declarativeContent"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false

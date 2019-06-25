@@ -22,12 +22,9 @@ chrome.runtime.onInstalled.addListener(function() {
   })
   // chrome.browserAction.disable()
   // chrome.browserAction.enable()
-  chrome.browserAction.onClicked.addListener(function (tab) {
-    console.log(tab)
-  })
   chrome.alarms.create('alarms1', {
-    delayInMinutes: .2,
-    periodInMinutes: .2
+    delayInMinutes: 1,
+    periodInMinutes: 1
   })
   chrome.alarms.get('alarms1', function (alarms) {
     console.log('get alarms')
@@ -38,4 +35,30 @@ chrome.runtime.onInstalled.addListener(function() {
     console.log(alarms)
   })
   chrome.alarms.clearAll()
+  chrome.contentSettings.images.set({
+    primaryPattern: '*://*.baidu.com/*',
+    setting: 'allow'
+  })
+  chrome.contentSettings.javascript.set({
+    primaryPattern: '*://*.baidu.com/*',
+    setting: 'allow'
+  })
+  chrome.contentSettings.plugins.getResourceIdentifiers(function (resourceIdentifiers) {
+    console.log(resourceIdentifiers)
+    resourceIdentifiers.forEach(item => {
+      if (item.id === 'adobe-flash-player') {
+        chrome.contentSettings.plugins.set({
+          primaryPattern: '*://*.douyu.com/*',
+          resourceIdentifier: item,
+          setting: 'block'
+        },function (result) {
+          console.log(11111111, result)
+        })
+      }
+    })
+  })
 });
+
+chrome.browserAction.onClicked.addListener(function (tab) {
+  console.log(tab)
+})

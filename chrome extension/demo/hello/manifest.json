@@ -7,7 +7,7 @@
     "default_popup": "hello.html",
     "default_icon": "icon.png"
   },
-  "permissions": ["storage", "alarms"],
+  "permissions": ["storage", "alarms", "contentSettings"],
   "background": {
     "scripts": ["background.js"],
     "persistent": true
