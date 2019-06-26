@@ -1,0 +1,26 @@
+{
+  "name": "Hello extension5",
+  "description" : "hello description5",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": [
+    "management",
+    "notifications",
+    "tabs",
+    "sessions",
+    "storage",
+    "system.storage"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

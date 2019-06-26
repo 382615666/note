@@ -8,7 +8,7 @@
 
 [chrome api传送门](https://developer.chrome.com/extensions/api_index)
 
-[chrome api（非官方中文版）](http://www.kkh86.com/it/chrome-extension-doc/extensions/declarativeContent.html)
+[chrome api（非官方中文版）](http://www.kkh86.com/it/chrome-extension-doc/extensions/api_index.html)
 
 [百度api传送门](https://chajian.baidu.com/developer/extensions/api_index.html)
 
@@ -21,3 +21,5 @@
 * [chrome.accessibilityFeatures](https://chajian.baidu.com/developer/extensions/accessibilityFeatures.html)
 
 * [chrome.desktopCapture 录屏](https://www.jianshu.com/p/97ecb4a6e4ce)
+
+* [比较详细的demo](http://louiszhai.github.io/2017/11/14/iheader/)
