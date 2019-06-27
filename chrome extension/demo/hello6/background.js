@@ -31,16 +31,34 @@ chrome.runtime.onInstalled.addListener(function () {
   // }, function (id) {
   //   console.log(id)
   // })
-  chrome.notifications.create({
-    type: "basic",
-    title: "主要标题",
-    message: "要显示的主要消息",
-    iconUrl: "icon.png"
-  }, function (id) {
-    console.log(id)
-  })
+  // chrome.notifications.create({
+  //   type: "basic",
+  //   title: "主要标题",
+  //   message: "要显示的主要消息",
+  //   iconUrl: "icon.png"
+  // }, function (id) {
+  //   console.log(id)
+  // })
   chrome.management.getAll(function (extensions) {
     console.log(extensions)
+  })
+})
+chrome.browserAction.onClicked.addListener(function () {
+  chrome.tabs.query({
+    currentWindow: true,
+    active: true
+  }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      message: 'hello'
+    }, function (response) {
+      console.log('sendMessage response', response)
+    })
+  })
+})
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  console.log(request, sender, sendResponse)
+  sendResponse({
+    message: 'get click'
   })
 })
 chrome.tabs.onDetached.addListener(function (tabId ,tab) {
