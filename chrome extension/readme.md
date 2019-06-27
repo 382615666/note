@@ -18,6 +18,8 @@
 * default_popup 存在的时候，chrome.browserAction.onClicked 无效
 * chrome.alarms.create when delayInMinutes 不能同时存在
 
+* [通俗易懂的教程](https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html)
+
 * [manifest.json 配置传送门](https://blog.csdn.net/fyyyr/article/details/80949965)
 
 * [chrome.accessibilityFeatures](https://chajian.baidu.com/developer/extensions/accessibilityFeatures.html)
