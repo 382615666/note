@@ -1,6 +1,6 @@
 {
-  "name": "Hello extension5",
-  "description" : "hello description5",
+  "name": "Hello extension6",
+  "description" : "hello description6",
   "version": "1.0",
   "manifest_version": 2,
   "permissions": [
@@ -16,7 +16,8 @@
     "persistent": true
   },
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {

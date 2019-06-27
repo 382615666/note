@@ -16,3 +16,15 @@ document.body.addEventListener('click', function () {
     console.log(response)
   })
 })
+
+
+let port = chrome.runtime.connect({
+  name: 'long connect'
+})
+port.onMessage.addListener(function (message) {
+  if (message === 'my long message') {
+    console.log(message)
+    port.postMessage('send message end')
+  }
+})
+port.postMessage('send my message')

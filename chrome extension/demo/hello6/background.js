@@ -64,3 +64,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 chrome.tabs.onDetached.addListener(function (tabId ,tab) {
   console.log(tabId, tab)
 })
+
+chrome.runtime.onConnect.addListener(function (port) {
+  port.onMessage.addListener(function (message) {
+    console.log('get long message', message)
+    if (message === 'send my message') {
+      port.postMessage('my long message')
+    }
+  })
+})
