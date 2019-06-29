@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /*
+* 简单工厂和策略模式的组合
+*
+* 避免了策略模式客户端代码过多
+* 将逻辑处理放到了工厂方法中
+* 让客户端需要关注的信息更少
+*
+* 工厂模式是对象的抽象
+* 策略模式是行为的抽象
+*
+* */
+    class Transport {
+        go () {
+          throw new Error('must override method go')
+        }
+    }
+    class Car extends Transport{
+      go (destination) {
+        console.log(`to ${destination} by car`)
+      }
+    }
+    class Train extends Transport {
+      go (destination) {
+        console.log(`to ${destination} by train`)
+      }
+    }
+    class Company {
+      constructor () {
+        this.transport = null
+      }
+      getTransport (name) {
+        switch (name) {
+          case 'car':
+            this.transport = new Car()
+            break
+          case 'train':
+            this.transport = new Train()
+            break
+        }
+      }
+      go (destination) {
+        this.transport.go(destination)
+      }
+    }
+    const company = new Company()
+    company.getTransport('car')
+    company.go('usa')
+    company.getTransport('train')
+    company.go('usa')
+
+</script>
+</html>

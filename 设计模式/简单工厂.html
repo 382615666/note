@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    class Operation {
+      getResult (a, b) {
+        throw new Error('must be override getResult method')
+      }
+    }
+    class Jia extends Operation {
+      getResult(a, b) {
+        return a + b
+      }
+    }
+    class Jian extends Operation {
+      getResult(a, b) {
+        return a - b
+      }
+    }
+    class Factory {
+      static getOperation (type) {
+        switch (type) {
+          case 'jia':
+            return new Jia()
+          case 'jian':
+            return new Jian()
+        }
+      }
+    }
+    console.log(Factory.getOperation('jia').getResult(1, 2))
+    console.log(Factory.getOperation('jian').getResult(1, 2))
+</script>
+</html>
