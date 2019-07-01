@@ -35,10 +35,7 @@
       }
     }
     class Company {
-      constructor () {
-        this.transport = null
-      }
-      getTransport (name) {
+      constructor (name) {
         switch (name) {
           case 'car':
             this.transport = new Car()
@@ -52,11 +49,10 @@
         this.transport.go(destination)
       }
     }
-    const company = new Company()
-    company.getTransport('car')
-    company.go('usa')
-    company.getTransport('train')
-    company.go('usa')
+    const car = new Company('car')
+    car.go('usa')
+    const train = new Company('train')
+    train.go('usa')
 
 </script>
 </html>

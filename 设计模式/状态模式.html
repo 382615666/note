@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+责任链模式：对需求的外部的不同对象的抽象，在运行时确定责任链
+状态模式：对自身不同状态的表现的抽象，在编译时确定状态链
+</body>
+<script>
+  /*
+  * 状态模式
+  * 一个对象的行为取决于它自身的状态，并且能够在运行时的状态改变行为
+  * 状态可以枚举或者常量
+  * 对象依赖自身状态的变化，而不依赖于其他的改变
+  *
+  * */
+  class State {
+    render () {
+      console.log('u must be override the method')
+    }
+  }
+  class First extends State{
+    render (order) {
+      if (order.step == 'first') {
+        console.log('下单了')
+      } else {
+        order.setState(new Second())
+        order.work()
+      }
+    }
+  }
+  class Second extends State{
+    render (order) {
+      if (order.step == 'second') {
+        console.log('付款了')
+      } else {
+        order.setState(new Third())
+        order.work()
+      }
+    }
+  }
+  class Third extends State{
+    render (order) {
+      console.log('发货了，确认收货了，评价了，流程走完')
+    }
+  }
+  class Order {
+    constructor () {
+      this.step = 'first'
+      this.state = new First()
+    }
+    setState (state) {
+      this.state = state
+    }
+    setStep (step) {
+      this.step = step
+    }
+    work () {
+      this.state.render(this)
+    }
+  }
+  const order = new Order()
+  order.work()
+  order.setStep('second')
+  order.work()
+  order.setStep('third')
+  order.work()
+</script>
+</html>

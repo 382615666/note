@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 适用于共用部分信息
+    class Person {
+      constructor (name, age) {
+        this.name = name
+        this.age = age
+      }
+      setName (name) {
+        this.name = name
+      }
+      setAge (age) {
+        this.age = age
+      }
+      clone () {
+        return new Person(this.name, this.age)
+      }
+    }
+    const p1 = new Person('张三', 18)
+    const p2 = p1.clone()
+    p2.setName('李四')
+    p2.setAge(19)
+</script>
+</html>

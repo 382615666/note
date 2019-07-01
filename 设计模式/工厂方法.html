@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+工厂方法：将对象的建造过程放在工厂中
+建造者模式：创建更为复杂的对象，将创建过程独立出来，具体的创建过程交给指挥者，然后按照特定的规则组建产品，返回给客户端
+</body>
+<script>
+    class Factory {
+      static createOperation () {
+        throw new Error('must be override the method')
+      }
+    }
+    class JiaFactory extends Factory{
+      static createOperation() {
+        return new Jia()
+      }
+    }
+    class JianFactory extends Factory {
+      static createOperation() {
+        return new Jian()
+      }
+    }
+
+    class Operation {
+      getResult () {
+        throw new Error('must be override the method')
+      }
+    }
+    class Jian extends Operation{
+      getResult (a, b) {
+        return a - b
+      }
+    }
+    class Jia extends Operation {
+      getResult(a, b) {
+        return a + b
+      }
+    }
+
+    const jia = JiaFactory.createOperation()
+    console.log(jia.getResult(1, 2))
+    const jian = JianFactory.createOperation()
+    console.log(jian.getResult(1, 2))
+</script>
+</html>

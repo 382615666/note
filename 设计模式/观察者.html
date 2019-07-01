@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /*
+* 观察者模式
+* 当一个对象发生改版的时候，其他对象有相应的变化
+* 通知者不需要关注观察者的内部细节，只需要通知观察者改变
+* 当观察者的数量多到一定程度的时候，可能会有性能问题
+* */
+  /*
+  * 通知者
+  * */
+  class Notify {
+    constructor () {
+      this.oberservers = new Map()
+    }
+    attach (observer) {
+      this.oberservers.set(observer.name, observer)
+    }
+    detach (oberserve) {
+      this.oberservers.delete(oberserve.name)
+    }
+    notify () {
+      console.log('u must be override the method')
+    }
+  }
+  class Secretary extends Notify {
+    notify () {
+      console.log('boss is backing')
+      this.oberservers.forEach(o => o.update())
+    }
+  }
+  /*
+  * 观察者
+  * */
+  class Oberserve {
+    constructor (name) {
+      this.name = name
+    }
+    update () {
+      console.log('u must be override the method')
+    }
+  }
+  class Java extends Oberserve {
+    constructor (name) {
+      super(name)
+    }
+    update () {
+      console.log(this.name + '开始认真工作....')
+    }
+  }
+  let java1 = new Java('张三')
+  let java2 = new Java('李四')
+  let secretary = new Secretary()
+
+  secretary.attach(java1)
+  secretary.attach(java2)
+  secretary.notify()
+  secretary.detach(java1)
+  secretary.notify()
+</script>
+</html>

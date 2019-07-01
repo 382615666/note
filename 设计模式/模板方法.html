@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /*
+* 模板方法模式
+* 其实继承就是模板方法模式的一种体现
+* 尽量将公用的部分放到父类来实现，而不是在子类实现
+* */
+    class Template {
+      question1 () {
+        console.log('question1')
+      }
+      question2 () {
+        console.log('question2')
+      }
+      answer1 () {
+        throw new Error('must be override the method')
+      }
+      answer2 () {
+        throw new Error('must be override the method')
+      }
+    }
+    class StudentA extends Template {
+      question1() {
+        super.question1()
+        console.log(this.answer1())
+      }
+      answer1() {
+        return 'a'
+      }
+      question2() {
+        super.question2()
+        console.log(this.answer2())
+      }
+      answer2() {
+        return 'b'
+      }
+    }
+    class StudentB extends Template {
+      question1() {
+        super.question1()
+        console.log(this.answer1())
+      }
+      answer1() {
+        return 'c'
+      }
+      question2() {
+        super.question2()
+        console.log(this.answer2())
+      }
+      answer2() {
+        return 'd'
+      }
+    }
+    const studentA = new StudentA()
+    studentA.question1()
+    studentA.question2()
+    const studentB = new StudentB()
+    studentB.question1()
+    studentB.question2()
+</script>
+</html>

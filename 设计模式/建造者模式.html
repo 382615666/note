@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /*
+  * 建造者模式
+  * 封装了产品的内部细节，客户端不需要关注产品的构成
+  * builder是相互独立的，便于扩展
+  * 更容易控制细节风险，builder对产品的控制粒度更小
+  *
+  * */
+  /*
+* 被建造对象
+* */
+  class House {
+    setHead () {
+      console.log('u must be override the method')
+    }
+    setBody () {
+      console.log('u must be override the method')
+    }
+    setFoot () {
+      console.log('u must be override the method')
+    }
+  }
+  class BigHouse extends House{
+    setHead () {
+      console.log('big house head was finished')
+    }
+    setBody () {
+      console.log('big house body was finished')
+    }
+    setFoot () {
+      console.log('big house foot was finished')
+    }
+  }
+
+  class HouseBuilder {
+    buildHead () {
+      console.log('u must be override the method')
+    }
+    buildBody () {
+      console.log('u must be override the method')
+    }
+    buildFoot () {
+      console.log('u must be override the method')
+    }
+  }
+  class BigHouseBuilder extends HouseBuilder {
+    constructor () {
+      super()
+      this.house = new BigHouse()
+    }
+    buildHead () {
+      console.log('builder big house head')
+      this.house.setHead()
+    }
+    buildBody () {
+      console.log('builder big house body')
+      this.house.setBody()
+    }
+    buildFoot () {
+      console.log('builder big house foot')
+      this.house.setFoot()
+    }
+  }
+  /*
+  * 指挥者
+  * */
+  class Director {
+    static build (builder) {
+      builder.buildHead()
+      builder.buildBody()
+      builder.buildFoot()
+      return builder.house
+    }
+  }
+  let bigHouseBuilder = new BigHouseBuilder()
+  let house = Director.build(bigHouseBuilder)
+    console.log(house)
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    class Customer {
+      constructor (name) {
+        this.name = name
+      }
+    }
+    class Interface {
+      saleFlower () {
+        console.log('must be override the method')
+      }
+      saleCloth () {
+        console.log('must be override the method')
+      }
+    }
+    class Saler extends Interface{
+      constructor (customer) {
+        super()
+        this.customer = customer
+      }
+      saleFlower() {
+        console.log(`sale the flower to ${this.customer.name}`)
+      }
+      saleCloth() {
+        console.log(`sale the cloth to ${this.customer.name}`)
+      }
+    }
+    class Proxy extends Interface {
+      constructor(saler) {
+        super();
+        this.saler = saler
+      }
+      saleFlower() {
+        this.saler.saleFlower()
+      }
+      saleCloth() {
+        this.saler.saleCloth()
+      }
+    }
+    const customer = new Customer('张三')
+    const saler = new Saler(customer)
+    const proxy = new Proxy(saler)
+
+    proxy.saleFlower()
+    proxy.saleCloth()
+</script>
+</html>

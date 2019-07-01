@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+------------代理模式和装饰者模式的区别--------------------------
+虽然代理和装饰者都可以对对象进行扩展，但是还是尽量遵循下面的区别
+
+代理模式更注重于对对象的访问控制，具有真实对象的所有行为
+装饰者模式更注重对对象的动态扩展，包装了真实对象的行为
+
+代理模式向客户端隐藏了对象的具体实现，代理和真实对象的关系在  编译  的时候确定
+装饰者模式的包装过程对客户端是透明的，装饰者和真实对象的关系在  运行  的时候确定
+
+------------外观模式和装饰者模式的区别--------------------------
+外观模式：封装了许多对象，简化接口，是对接口的抽象
+装饰模式：封装了一个对象，动态生成对象的不同行为，得到的是新对象，对装饰  顺序  有要求
+</body>
+<script>
+  /*
+* 装饰者模式
+* 适用于对已有的对象进行扩展
+* 但是，整个的扩展过程对客户端是可见的
+* */
+    class Component {
+      show () {
+        throw new Error('must be override the method')
+      }
+    }
+    // 被装饰对象
+    class Person extends Component{
+      constructor (name) {
+        super()
+        this.name = name
+      }
+      show () {
+        console.log(`装扮的${this.name}`)
+      }
+    }
+    // 装饰对象
+    class Decroration extends Component {
+      constructor () {
+        super()
+        this.component = null
+      }
+      setComponent (component) {
+        this.component = component
+      }
+      show () {
+        this.component.show()
+      }
+    }
+    class Cloth extends Decroration {
+      show () {
+        console.log('穿西服')
+        super.show()
+      }
+    }
+    class Trouser extends Decroration {
+      show () {
+        console.log('穿西裤')
+        super.show()
+      }
+    }
+
+    const person = new Person('张三')
+    const cloth = new Cloth()
+    const trouser = new Trouser()
+
+    trouser.setComponent(person)
+    cloth.setComponent(trouser)
+
+    cloth.show()
+</script>
+</html>

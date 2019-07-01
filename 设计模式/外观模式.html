@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+外观模式：封装了许多对象，简化接口，是对接口的抽象
+装饰模式：封装了一个对象，动态生成对象的不同行为，得到的是新对象
+</body>
+<script>
+  /*
+  * 外观模式
+  * 使用场景：
+  * 在系统的设计初期，有意识的将两个不同的层进行分离，为复杂的子系统提供简单的接口
+  * 对于已经非常庞大而且难以维护的系统，需要使用其核心功能的时候，扩展可以使用外观模式
+  * 提供了子系统的可移植性
+  * */
+  class Power {
+    constructor () {
+      this.tv = new Tv()
+      this.computer = new Computer()
+      this.video = new Video()
+    }
+    turnOn () {
+      this.tv.turnOn()
+      this.computer.turnOn()
+      this.video.turnOn()
+    }
+    turnOff () {
+      this.tv.turnOff()
+      this.computer.turnOff()
+      this.video.turnOff()
+    }
+  }
+  class Tv {
+    turnOn () {
+      console.log('tv is turn on')
+    }
+    turnOff () {
+      console.log('tv is turn off')
+    }
+  }
+  class Computer {
+    turnOn () {
+      console.log('computer is turn on')
+    }
+    turnOff () {
+      console.log('computer is turn off')
+    }
+  }
+  class Video {
+    turnOn () {
+      console.log('video is turn on')
+    }
+    turnOff () {
+      console.log('video is turn off')
+    }
+  }
+
+  const power = new Power ()
+  power.turnOn()
+  power.turnOff()
+</script>
+</html>

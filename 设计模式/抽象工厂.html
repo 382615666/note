@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="../img/抽象工厂和工厂方法.jpg" alt="">
+</body>
+<script>
+  /*
+  * 抽象工厂方法
+  * 相比工厂方法，更抽象，更适合一个产品族群
+  * */
+  class Product {
+    work () {
+      throw new Error('u must be override the method')
+    }
+  }
+  /*
+  * 鼠标产品
+  * */
+  class Mouse extends Product {
+    move () {
+      throw new Error('u must be override the method')
+    }
+  }
+  class HpMouse extends Mouse {
+    work () {
+      console.log('Hp mouse is working')
+    }
+    move () {
+      console.log('Hp mouse is moving')
+    }
+  }
+  class DellMouse extends Mouse {
+    work () {
+      console.log('Dell mouse is working')
+    }
+    move () {
+      console.log('Dell mouse is moving')
+    }
+  }
+  /*
+  * 键盘产品
+  * */
+  class Keyboard extends Product {
+    click () {
+      throw new Error('u must be override the method')
+    }
+  }
+  class HpKeyboard extends Keyboard {
+    work () {
+      console.log('Hp keyboard is working')
+    }
+    click () {
+      console.log('Hp keyboard is clicking')
+    }
+  }
+  class DellKeyboard extends Keyboard {
+    work () {
+      console.log('Dell keyboard is working')
+    }
+    click () {
+      console.log('Dell keyboard is clicking')
+    }
+  }
+
+  /*
+  * 工厂
+  * */
+  class Factory {
+    productMouse () {
+      throw new Error('u must be override the method')
+    }
+    productKeyboad () {
+      throw new Error('u must be override the method')
+    }
+  }
+  class HpFactory {
+    productMouse () {
+      return new HpMouse()
+    }
+    productKeyboard () {
+      return new HpKeyboard()
+    }
+  }
+  class DellFactory {
+    productMouse () {
+      return new DellMouse()
+    }
+    productKeyboard () {
+      return new DellKeyboard()
+    }
+  }
+
+  /*
+  * 客户端代码
+  * */
+  let Hpf = new HpFactory()
+  let hpm = Hpf.productMouse()
+  let hpk = Hpf.productKeyboard()
+  hpm.work()
+  hpm.move()
+  hpk.work()
+  hpk.click()
+  let Dellf = new DellFactory()
+  let dellm = Dellf.productMouse()
+  let dellk = Dellf.productKeyboard()
+  dellm.work()
+  dellm.move()
+  dellk.work()
+  dellk.click()
+</script>
+</html>
