@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+适配器模式：主要是转换接口，为满足客户端需求，在项目后期维护或者扩展使用
+外观模式：主要是简化接口
+</body>
+<script>
+  /*
+  * 适配器模式
+  * 转换接口
+  * 项目后期的维护和扩展
+  * */
+  class Player {
+    attack () {
+      console.log('u must be override the method')
+    }
+    defense () {
+      console.log('u must be override the method')
+    }
+  }
+  class Forwards extends Player{
+    attack () {
+      console.log('Forwards 进攻')
+    }
+    defense () {
+      console.log('Forwards 防守')
+    }
+  }
+  class Center extends Player{
+    attack () {
+      console.log('Center 进攻')
+    }
+    defense () {
+      console.log('Center 防守')
+    }
+  }
+  class Guards extends Player{
+    attack () {
+      console.log('Guards 进攻')
+    }
+    defense () {
+      console.log('Guards 防守')
+    }
+  }
+  class Foreign {
+    attack () {
+      console.log('Foreign 进攻')
+    }
+    defense () {
+      console.log('Foreign 防守')
+    }
+  }
+  class Adapter extends Player {
+    constructor () {
+      super()
+      this.player = new Foreign()
+    }
+    attack () {
+      this.player.attack()
+    }
+    defense () {
+      this.player.defense()
+    }
+  }
+  let f = new Forwards()
+  let c = new Center()
+  let g = new Guards()
+  let a = new Adapter()
+  f.attack()
+  c.attack()
+  g.defense()
+  a.defense()
+</script>
+</html>

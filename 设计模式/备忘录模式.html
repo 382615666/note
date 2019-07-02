@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*
+    * 备忘录模式
+    * 发起人可能无法预测下面的决定是否正确，能够保存当前状态
+    * 状态错误，可以还原
+    * 现实需要很多是多状态和多备份，对资源的消耗可能会比较严重
+    * */
+    class Player {
+        save () {
+            return new WareHouse(this.state)
+        }
+        restore (wareHouse) {
+            this.state = wareHouse.state
+        }
+        setState (state) {
+            this.state = state
+        }
+        getState() {
+            return this.state
+        }
+    }
+    class WareHouse {
+        constructor (state) {
+            this.state = state
+        }
+    }
+    class Manager {
+        setWareHouse (wareHouse) {
+            this.wareHouse = wareHouse
+        }
+        getWareHouse () {
+            return this.wareHouse
+        }
+    }
+    /*
+    * 初始状态
+    * */
+    let p = new Player()
+    p.setState('change')
+    console.log(p.getState())
+    /*
+    * 保存状态
+    * */
+    let w = p.save()
+    let m = new Manager()
+    m.setWareHouse(w)
+    /*
+    * 改变状态
+    * */
+    p.setState('')
+    console.log(p.getState())
+    /*
+    * 恢复状态
+    * */
+    p.restore(m.getWareHouse())
+    console.log(p.getState())
+
+</script>
+</html>

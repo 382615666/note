@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+责任链模式：对需求的外部的不同对象的抽象，在运行时确定责任链
+状态模式：对自身不同状态的表现的抽象，在编译时确定状态链
+</body>
+<script>
+    /*
+    * 责任链模式
+    * 客户端不需要关心请求会由谁处理，能够动态编辑责任链
+    * 发起者和接收者之间的紧耦合
+    *
+    * */
+    class Parent {
+        handle () {
+            console.log('u must be override the method')
+        }
+    }
+    class Leader extends Parent{
+        handle (rank) {
+            if (rank < 10) {
+                console.log('组长批准了')
+                return
+            }
+            return this.superior.handle(rank)
+        }
+        setSuperior (superior) {
+            this.superior = superior
+        }
+    }
+    class Manager extends Parent {
+        handle (rank) {
+            if (rank < 20) {
+                console.log('经理同意了')
+                return
+            }
+            return this.superior.handle(rank)
+        }
+        setSuperior (superior) {
+            this.superior = superior
+        }
+    }
+    class CEO extends Parent {
+        handle (rank) {
+            console.log('CEO同意了')
+            return
+        }
+    }
+
+    let l = new Leader()
+    let m = new Manager()
+    let c = new CEO()
+    l.setSuperior(m)
+    m.setSuperior(c)
+
+    l.handle(1)
+    console.log('-----------')
+    l.handle(11)
+    console.log('-----------')
+    l.handle(21)
+</script>
+</html>

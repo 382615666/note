@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*
+    * 访问者模式
+    * 大多数情况适用于重构
+    * 被访问者是固定的，访问者可以不确定
+    * 所以改变被访问者很难，改变访问者很容易
+    *
+    * 例如：账单只有收入账单和支出账单，访问的人有老板和会计、老板娘，甚至更多.....
+    * */
+    class Person {
+        constructor (name) {
+            this.name = name
+        }
+        showState () {
+            console.log('u must be override the method')
+        }
+    }
+    class Man extends Person{
+        constructor (name) {
+            super(name)
+        }
+        showState (state) {
+            state.showManState(this)
+        }
+    }
+    class Woman extends Person {
+        constructor (name) {
+            super(name)
+        }
+        showState (state) {
+            state.showManState(this)
+        }
+    }
+
+    class State {
+        showManState () {
+            console.log('u must be override the method')
+        }
+        showWomanState () {
+            console.log('u must be override the method')
+        }
+    }
+    class Grow extends State{
+        showManState (man) {
+            console.log(man.name + '长大了')
+        }
+        showWomanState (woman) {
+            console.log(woman.name + '长大了')
+        }
+    }
+    class Marry extends State{
+        showManState (man) {
+            console.log(man.name + '结婚了')
+        }
+        showWomanState (woman) {
+            console.log(woman.name +'结婚了')
+        }
+    }
+
+    class Context {
+        constructor () {
+            this.persons = new Map()
+        }
+        add (person) {
+            this.persons.set(person.name, person)
+        }
+        remove (person) {
+            this.persons.delete(person.name)
+        }
+        show (state) {
+            this.persons.forEach(p => {
+                p.showState(state)
+            })
+        }
+    }
+    let w = new Woman('小姑娘')
+    let z = new Woman('张三')
+
+    let g= new Grow()
+    let m= new Marry()
+
+    let c = new Context()
+
+    c.add(w)
+    c.add(z)
+
+    c.show(g)
+    console.log('-----------------------')
+    c.show(m)
+
+
+</script>
+</html>

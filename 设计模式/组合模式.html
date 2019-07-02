@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*
+    * 组合模式
+    * 体现对象与整体的结构
+    * 统一使用组合结构中的对象
+    * */
+    class Component {
+        add () {
+            console.log('u must be override the method')
+        }
+        remove () {
+            console.log('u must be override the method')
+        }
+        show () {
+            console.log('u must be override the method')
+        }
+    }
+    class Leaf extends Component {
+        constructor (name) {
+            super()
+            this.name = name
+        }
+        add () {
+            console.log('can not add to a leaf')
+        }
+        remove () {
+            console.log('can not remove from a leaf')
+        }
+        show () {
+            console.log(this.name)
+        }
+    }
+    class Composite extends Component {
+        constructor (name) {
+            super()
+            this.name = name
+            this.children = new Set()
+        }
+        add (composite) {
+            this.children.add(composite)
+        }
+        remove (composite) {
+            this.children.delete(composite)
+        }
+        show () {
+            console.log(this.name)
+            this.children.forEach(c => c.show())
+        }
+    }
+
+    let root = new Composite('root')
+    let l1 = new Leaf('l1')
+    let l11 = new Leaf('l11')
+    root.add(l1)
+    root.add(l11)
+    let node1 = new Composite('node1')
+    root.add(node1)
+
+    let l21 = new Leaf('l21')
+    let l22 = new Leaf('l22')
+    node1.add(l21)
+    node1.add(l22)
+
+    root.show()
+    console.log('今天刮风了......')
+    node1.remove(l22)
+    console.log('l22被刮走了......')
+    root.show()
+
+</script>
+</html>

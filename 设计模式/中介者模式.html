@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*
+    * 中介者模式
+    * 适用于复杂的网状结构关系
+    * 减少对象之间的耦合
+    * 将交互的复杂转换为中介者的复杂
+    * */
+    class Friend {
+        constructor (media) {
+            this.media = media
+        }
+        send (message) {
+            this.media.chat(this, message)
+        }
+        notify () {
+            console.log('u must be override the method')
+        }
+    }
+    class BoyFriend extends Friend{
+        constructor (media) {
+            super(media)
+        }
+        notify (message) {
+            console.log('BF得到消息：' + message)
+        }
+    }
+    class GirlFriend extends Friend {
+        constructor (media) {
+            super(media)
+        }
+        notify (message) {
+            console.log('GF得到消息：' + message)
+        }
+    }
+    class Media {
+        setGirlFriend (girlFriend) {
+            this.girlFriend = girlFriend
+        }
+        setBoyFriend (boyFriend) {
+            this.boyFriend = boyFriend
+        }
+        chat (obj, message) {
+            if (obj === this.boyFriend) {
+                this.girlFriend.notify(message)
+            } else {
+                this.boyFriend.notify(message)
+            }
+        }
+    }
+
+    let m = new Media()
+    let b = new BoyFriend(m)
+    let g = new GirlFriend(m)
+    m.setBoyFriend(b)
+    m.setGirlFriend(g)
+
+    b.send('hi girl')
+    g.send('hello boy')
+
+</script>
+</html>

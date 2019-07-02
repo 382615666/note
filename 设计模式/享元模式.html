@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*
+    * 享元模式
+    * 提升性能的模式
+    * 多对一的访问情况
+    *
+    * */
+    class User {
+        constructor (name) {
+            this.name = name
+        }
+    }
+    class Website {
+        constructor (name) {
+            this.name = name
+        }
+        use (user) {
+            console.log(user. name + '正在访问' + this.name + '网站')
+        }
+    }
+    class Blog extends Website {
+        constructor (name) {
+            super(name)
+        }
+    }
+    class WebsiteFactory {
+        constructor () {
+            this.website = new Map()
+        }
+        getWebsite (key) {
+            if (!this.website.get(key)) {
+                this.website.set(key, new Blog(key))
+            }
+            return this.website.get(key)
+        }Cloth
+    }
+    let f = new WebsiteFactory()
+
+    let b = f.getWebsite('博客')
+    b.use(new User('张三'))
+    b.use(new User('李四'))
+
+</script>
+</html>

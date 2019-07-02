@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    class Single {
+        static getInstance () {
+            return this.instance ? this.instance : this.instance = new Single()
+        }
+    }
+    console.log(Single.getInstance() === Single.getInstance())
+</script>
+</html>

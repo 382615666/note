@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*
+    * 命令模式
+    * 封装了接收者的细节
+    * 可以记录日志
+    *
+    * */
+    class Executor {
+        action () {
+            console.log('do something')
+        }
+    }
+    class Command {
+        constructor (executor) {
+            this.executor = executor
+        }
+        exe () {
+            console.log('u must be override the method')
+        }
+    }
+    class Run extends Command {
+        constructor (executor) {
+            super(executor)
+        }
+        exe () {
+            this.executor.action()
+            console.log('start run')
+        }
+    }
+    class Sit extends Command {
+        constructor (executor) {
+            super(executor)
+        }
+        exe () {
+            this.executor.action()
+            console.log('start Sit')
+        }
+    }
+    class Transmit {
+        constructor () {
+            this.commands = new Map()
+        }
+        addCommand (key, command) {
+            this.commands.set(key,command)
+        }
+        removeCommand (key) {
+            this.commands.delete(key)
+        }
+        exeCommand () {
+            this.commands.forEach(c => c.exe())
+        }
+    }
+    let e = new Executor()
+    let s = new Sit(e)
+    let r = new Run(e)
+    let t = new Transmit()
+
+    t.addCommand('sit',s)
+    t.addCommand('run',r)
+
+    t.exeCommand()
+    console.log('--------------------')
+    t.removeCommand('sit')
+    t.exeCommand()
+</script>
+</html>

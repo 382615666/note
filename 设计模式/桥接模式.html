@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*
+    * 桥接模式
+    * 抽象部分和他的现实部分分离，都可以独立变化
+    * 某个类具有多个维度的变化，或者说受多个维度的因素影响
+    * 简单点说，多对多
+    * */
+    class Game {
+        play () {
+            console.log('u must be override the method')
+        }
+    }
+    class LOL extends Game {
+        play () {
+            console.log('play LOL')
+        }
+    }
+    class Dota extends Game {
+        play () {
+            console.log('play dota')
+        }
+    }
+    class Device {
+        play () {
+            console.log('u must be override the method')
+        }
+        setGame (game) {
+            this.game = game
+        }
+    }
+    class PC extends Device {
+        play () {
+            this.game.play()
+            console.log('on PC')
+        }
+    }
+    class Mobile extends Device {
+        play () {
+            this.game.play()
+            console.log('on Mobile')
+        }
+    }
+    let p = new PC()
+    let m = new Mobile()
+    let l = new LOL()
+    let d = new Dota()
+
+    // p.setGame(l)
+    // m.setGame(l)
+    p.game = l
+    m.game = l
+
+    p.play()
+    m.play()
+    console.log('--------')
+    p.setGame(d)
+    m.setGame(d)
+
+    p.play()
+    m.play()
+
+</script>
+</html>
