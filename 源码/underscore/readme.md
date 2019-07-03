@@ -18,17 +18,20 @@
    }
 ```
 
+* call比apply运行更快
+* apply需要对参数进行类型检查，深拷贝等操作
+
 * 运行时绑定上下文对象
 ```ecmascript 6
-   function pack(func, context) {
-     return function(item, index, object) {
-       return func.call(context, item, index, object)
+   function package(func, context) {
+     return function(item, index, collection) {
+       return func.call(context, item, index, collection)
      }
    }
-   function each(object, func, context) {
-     const pa = pack(func, context)
-     for (let i = 0; i < object.length; i++) {
-       pa(object[i], i, object)
+   function each(collection, func, context) {
+     const pack = package(func, context)
+     for (let i = 0; i < collection.length; i++) {
+       pack(collection[i], i, collection)
      }
    }
    each([1, 2, 3], function(item, value) {
