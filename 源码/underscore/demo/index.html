@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="./underscore.js"></script>
+<script>
+
+  function pack(func, context) {
+    return function(item, index, object) {
+      return func.call(context, item, index)
+    }
+  }
+  function each(object, func, context) {
+    const pa = pack(func, context)
+    for (let i = 0; i < object.length; i++) {
+      pa(object[i], i, object)
+    }
+  }
+  each([1, 2, 3], function(item, value) {
+    console.log(item, value)
+  }, this)
+</script>
+</html>
