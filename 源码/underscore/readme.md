@@ -22,7 +22,7 @@
 ```ecmascript 6
    function pack(func, context) {
      return function(item, index, object) {
-       return func.call(context, item, index)
+       return func.call(context, item, index, object)
      }
    }
    function each(object, func, context) {
