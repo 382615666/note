@@ -2533,13 +2533,6 @@
     return this;
   };
 
-  // Keep the identity function around for default iteratees.
-  // 返回传入的参数，看起来好像没什么卵用
-  // 其实 _.identity 在 undescore 内大量作为迭代函数出现
-  // 能简化很多迭代函数的书写
-  _.identity = function(value) {
-    return value;
-  };
 
   // Predicate-generating functions. Often useful outside of Underscore.
   _.constant = function(value) {
