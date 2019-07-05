@@ -223,13 +223,6 @@
     return result;
   };
 
-  // 闭包
-  var property = function(key) {
-    return function(obj) {
-      return obj == null ? void 0 : obj[key];
-    };
-  };
-
   // Helper for collection methods to determine whether a collection
   // should be iterated as an array or as an object
   // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
@@ -237,11 +230,6 @@
 
   // Math.pow(2, 53) - 1 是 JavaScript 中能精确表示的最大数字
   var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
-
-  // getLength 函数
-  // 该函数传入一个参数，返回参数的 length 属性值
-  // 用来获取 array 以及 arrayLike 元素的 length 属性值
-  var getLength = property('length');
 
   // 判断是否是 ArrayLike Object
   // 类数组，即拥有 length 属性并且 length 属性值为 Number 类型的元素
@@ -2442,21 +2430,6 @@
     return !!(obj && obj.nodeType === 1);
   };
 
-  // Is a given value an array?
-  // Delegates to ECMA5's native Array.isArray
-  // 判断是否为数组
-  _.isArray = nativeIsArray || function(obj) {
-    return toString.call(obj) === '[object Array]';
-  };
-
-  // Is a given variable an object?
-  // 判断是否为对象
-  // 这里的对象包括 function 和 object
-  _.isObject = function(obj) {
-    var type = typeof obj;
-    return type === 'function' || type === 'object' && !!obj;
-  };
-
   // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
   // 其他类型判断
   _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
@@ -2577,22 +2550,6 @@
 
   _.noop = function(){};
 
-  // 传送门
-  /*
-  var property = function(key) {
-    return function(obj) {
-      return obj == null ? void 0 : obj[key];
-    };
-  };
-  */
-  _.property = property;
-
-  // Generates a function for a given object that returns a given property.
-  _.propertyOf = function(obj) {
-    return obj == null ? function(){} : function(key) {
-      return obj[key];
-    };
-  };
 
   // Returns a predicate for checking whether an object has a given set of
   // `key:value` pairs.
@@ -2614,23 +2571,6 @@
     return accum;
   };
 
-  // Return a random integer between min and max (inclusive).
-  // 返回一个 [min, max] 范围内的任意整数
-  _.random = function(min, max) {
-    if (max == null) {
-      max = min;
-      min = 0;
-    }
-    return min + Math.floor(Math.random() * (max - min + 1));
-  };
-
-  // A (possibly faster) way to get the current timestamp as an integer.
-  // 返回当前时间的 "时间戳"（单位 ms）
-  // 其实并不是时间戳，时间戳还要除以 1000（单位 s）
-  // +new Date 类似
-  _.now = Date.now || function() {
-    return new Date().getTime();
-  };
 
   // List of HTML entities for escaping.
   // HTML 实体编码

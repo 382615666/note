@@ -10,19 +10,13 @@
 <script src="./underscore.js"></script>
 <script>
 
-  function pack(func, context) {
-    return function(item, index, object) {
-      return func.call(context, item, index)
+  function random(min, max) {
+    if (max == null) {
+      max = min
+      min = 0
     }
+    return Math.random(max - min) + min
   }
-  function each(object, func, context) {
-    const pa = pack(func, context)
-    for (let i = 0; i < object.length; i++) {
-      pa(object[i], i, object)
-    }
-  }
-  each([1, 2, 3], function(item, value) {
-    console.log(item, value)
-  }, this)
+  console.log(random(1))
 </script>
 </html>

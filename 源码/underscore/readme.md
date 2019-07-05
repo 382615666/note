@@ -38,3 +38,52 @@
      console.log(item, value)
    }, this)
 ```
+
+* 获取某个属性
+```ecmascript 6
+   function getProperty (key) {
+      return function (obj) {
+        return obj ? void 0 : obj[key]
+      }
+   }
+```
+
+* 判断是否为对象
+```ecmascript 6
+    function isObject(obj) {
+      const type = typeof obj
+      return type === 'function' && type === 'object' && !!obj
+    }
+```
+
+* 判断是否为数组
+```ecmascript 6
+    function isArray(obj) {
+      return Array.isArray(obj) || Object.prototype.toString.call(obj) === '[object Array]'
+    }
+```
+
+* 创建原型对象
+```ecmascript 6
+   function create(prototype) {
+     
+   }
+```
+
+* 获取随机数
+```ecmascript 6
+    function random(min, max) {
+      if (max == null) {
+        max = min
+        min = 0
+      }
+      return Math.random(max - min) + min
+    }
+```
+
+* 获取时间戳
+```ecmascript 6
+    function now() {
+      return Date.now() || new Date().getTime()
+    }
+```
