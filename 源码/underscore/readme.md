@@ -87,3 +87,11 @@
       return Date.now() || new Date().getTime()
     }
 ```
+* 类数组
+```ecmascript 6
+   function isArrayLike(collection) {
+     const getLength = getProperty('length')
+     const length = getLength(collection)
+     return typeof length === 'number' && length >= 0 && length < Math.pow(2, 53) - 1
+   }
+```

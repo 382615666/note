@@ -17,6 +17,20 @@
     }
     return Math.random(max - min) + min
   }
+<<<<<<< HEAD
   console.log(random(1))
+=======
+  function each(object, func, context) {
+    const pa = pack(func, context)
+    for (let i = 0; i < object.length; i++) {
+      pa(object[i], i, object)
+    }
+  }
+  each([1, 2, 3], function(item, value) {
+    console.log(item, value)
+  }, this)
+
+
+>>>>>>> 647139cf97feabdf77d58855f7bce095797fa8c5
 </script>
 </html>
