@@ -154,7 +154,70 @@
 ```
 * values
 ```ecmascript 6
-    
+    value: (obj) => {
+      const keys = keys(obj)
+      return Array(keys.length).map((item, index) => obj[keys[index]])
+    }
+```
+
+* collectNonEnumProps
+```ecmascript 6
+    collectNonEnumProps: (obj, keys) => {
+      const nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
+                'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString']
+      const proto = isFunction(obj.prototype) && obj.prototype || Object.prototype
+      if (has(obj, 'constructor') && !contains(keys, 'constructor')) {
+        keys.push('constructor')
+      }
+      for (let i = 0; i < nonEnumerableProps.length; i++) {
+        const prop = nonEnumerableProps[i]
+        if (prop in obj && obj[prop] !== proto[prop] && !contains(keys, prop)) {
+          keys.push(prop)
+        }
+      }
+    }
+```
+
+* keys
+> IE < 9，{toString: null}.propertyIsEnumerable('toString') 返回 false
+> hasEnumBug = !{toString: null}.propertyIsEnumerable('toString')
+> 排除继承于原型链上的属性
+```ecmascript 6
+    keys: obj => {
+      if (!isObject(obj)) {
+        return []
+      }
+      // 不包括原型链上的属性
+      if (Object.keys) {
+        return Object.keys(obj)
+      }
+      let keys = []
+      for (let key in obj) {
+        keys.push(key)
+      }
+      if (hasEnumBug) {
+        collectNonEnumProps(obj, keys)
+      }
+      return keys
+    }
+```
+
+* allKeys
+> 包括原型链上的属性
+```ecmascript 6
+    allKeys: obj => {
+      if (!isObject(obj)) {
+        return []
+      }
+      let keys = []
+      for (let key in obj) {
+        keys.push(key)
+      }
+      if (hasEnumBug) {
+        collectNonEnumProps(obj, keys)
+      }
+      return keys
+    }
 ```
 
 * isEmpty

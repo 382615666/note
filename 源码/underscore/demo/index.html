@@ -12,13 +12,21 @@
     var a = {
       a: 1
     }
+    Object.defineProperties(a, {
+      c: {
+        value: 3,
+        enumerable: falseb
+      }
+    })
     var b = Object.create(a, {
       b: {
         value: 2,
-        enumerable: true,
+        enumerable: false,
       }
     })
-    console.log(b)
-    console.log(_.keys(b))
+    for (let key in b) {
+      console.log(key)
+    }
+    console.log('b' in b)
 </script>
 </html>
