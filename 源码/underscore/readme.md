@@ -9,10 +9,10 @@
 * 强制类型检查和转换
 ```ecmascript 6
    var _ = function(obj) {
-     if (_ instanceof obj) {
+     if (obj instanceof _) {
        return obj
      }
-     if (!(this instanceof obj)) {
+     if (!(this instanceof _)) {
        return new _(obj)
      }
    }
@@ -41,11 +41,7 @@
 
 * 获取某个属性
 ```ecmascript 6
-   function getProperty (key) {
-      return function (obj) {
-        return obj ? void 0 : obj[key]
-      }
-   }
+    getProperty: key => obj => obj ? void 0 : obj[key] 
 ```
 
 * 判断是否为对象
@@ -58,16 +54,7 @@
 
 * 判断是否为数组
 ```ecmascript 6
-    function isArray(obj) {
-      return Array.isArray(obj) || Object.prototype.toString.call(obj) === '[object Array]'
-    }
-```
-
-* 创建原型对象
-```ecmascript 6
-   function create(prototype) {
-     
-   }
+    isArray: obj => Array.isArray(obj) || Object.prototype.toString.call(obj) === '[object Array]'
 ```
 
 * 获取随机数
@@ -83,10 +70,9 @@
 
 * 获取时间戳
 ```ecmascript 6
-    function now() {
-      return Date.now() || new Date().getTime()
-    }
+    now: () => Date.now() || new Date().getTime()
 ```
+
 * 类数组
 ```ecmascript 6
    function isArrayLike(collection) {
@@ -94,4 +80,89 @@
      const length = getLength(collection)
      return typeof length === 'number' && length >= 0 && length < Math.pow(2, 53) - 1
    }
+```
+
+* 定义常量
+> 实际上还是利用闭包
+```ecmascript 6
+    constant: value => () => value
+```
+
+* has
+```ecmascript 6
+    has: (obj, key) => obj && Object.prototype.hasOwnProperty.call(obj, key)
+```
+
+* undefined
+```ecmascript 6
+    isUndefined: obj === void 0
+```
+
+* null
+```ecmascript 6
+    isNull: obj => obj === null
+```
+
+* isBoolean
+```ecmascript 6
+    isBoolean: obj => obj === true || obj === false || Object.prototype.toString.call(obj) === '[object Boolean]'
+```
+
+* range
+```ecmascript 6
+    range: (start = 0, stop = 0, step = 1) => {
+      if (!stop) {
+        return [0]
+      }
+      const length = Math.max(Math.ceil((stop - start) / step), 0)
+      let result = []
+      for (let i = 0; i < length; i++) {
+        result.push(start)
+        start += step
+      }
+      return result
+    }
+```
+
+* chain
+```ecmascript 6
+    chain: obj => {
+      const instance = _(obj)
+      instance._chain = true
+      return instance
+    }
+```
+
+* result
+```ecmascript 6
+    result: (instance, obj) => instance._chain ? _(obj).chain() : obj
+```
+
+* baseCreate
+```ecmascript 6
+    baseCreate: prototype => {
+      if (!isObject(prototype)) {
+        return {}
+      }
+      if (Object.create) {
+        return Object.create(prototype)
+      }
+      const F = function() {}
+      F.prototype = prototype
+      return new F()
+    }
+```
+* values
+```ecmascript 6
+    
+```
+
+* isEmpty
+```ecmascript 6
+    isEmpty: obj => {
+      if (!obj) {
+        return true
+      }
+      
+    }
 ```

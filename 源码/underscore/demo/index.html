@@ -9,28 +9,16 @@
 </body>
 <script src="./underscore.js"></script>
 <script>
-
-  function random(min, max) {
-    if (max == null) {
-      max = min
-      min = 0
+    var a = {
+      a: 1
     }
-    return Math.random(max - min) + min
-  }
-<<<<<<< HEAD
-  console.log(random(1))
-=======
-  function each(object, func, context) {
-    const pa = pack(func, context)
-    for (let i = 0; i < object.length; i++) {
-      pa(object[i], i, object)
-    }
-  }
-  each([1, 2, 3], function(item, value) {
-    console.log(item, value)
-  }, this)
-
-
->>>>>>> 647139cf97feabdf77d58855f7bce095797fa8c5
+    var b = Object.create(a, {
+      b: {
+        value: 2,
+        enumerable: true,
+      }
+    })
+    console.log(b)
+    console.log(_.keys(b))
 </script>
 </html>

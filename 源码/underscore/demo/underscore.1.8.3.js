@@ -208,21 +208,6 @@
     };
   };
 
-  // An internal function for creating a new object that inherits from another.
-  // use in `_.create`
-  var baseCreate = function(prototype) {
-    // 如果 prototype 参数不是对象
-    if (!_.isObject(prototype)) return {};
-
-    // 如果浏览器支持 ES5 Object.create
-    if (nativeCreate) return nativeCreate(prototype);
-
-    Ctor.prototype = prototype;
-    var result = new Ctor;
-    Ctor.prototype = null;
-    return result;
-  };
-
   // Helper for collection methods to determine whether a collection
   // should be iterated as an array or as an object
   // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
@@ -1296,32 +1281,6 @@
   // _.lastIndexOf(array, value, [fromIndex])
   // [fromIndex] 参数表示从倒数第几个开始往前找
   _.lastIndexOf = createIndexFinder(-1, _.findLastIndex);
-
-  // Generate an integer Array containing an arithmetic progression. A port of
-  // the native Python `range()` function. See
-  // [the Python documentation](http://docs.python.org/library/functions.html#range).
-  // 返回某一个范围内的数组成的数组
-  _.range = function(start, stop, step) {
-    if (stop == null) {
-      stop = start || 0;
-      start = 0;
-    }
-
-    step = step || 1;
-
-    // 返回数组的长度
-    var length = Math.max(Math.ceil((stop - start) / step), 0);
-
-    // 返回的数组
-    var range = Array(length);
-
-    for (var idx = 0; idx < length; idx++, start += step) {
-      range[idx] = start;
-    }
-
-    return range;
-  };
-
 
   // Function (ahem) Functions
   // 函数的扩展方法
@@ -2469,42 +2428,6 @@
     return _.isNumber(obj) && obj !== +obj;
   };
 
-  // Is a given value a boolean?
-  // 判断是否是布尔值
-  // 基础类型（true、 false）
-  // 以及 new Boolean() 两个方向判断
-  // 有点多余了吧？
-  // 个人觉得直接用 toString.call(obj) 来判断就可以了
-  _.isBoolean = function(obj) {
-    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
-  };
-
-  // Is a given value equal to null?
-  // 判断是否是 null
-  _.isNull = function(obj) {
-    return obj === null;
-  };
-
-  // Is a given variable undefined?
-  // 判断是否是 undefined
-  // undefined 能被改写 （IE < 9）
-  // undefined 只是全局对象的一个属性
-  // 在局部环境能被重新定义
-  // 但是「void 0」始终是 undefined
-  _.isUndefined = function(obj) {
-    return obj === void 0;
-  };
-
-  // Shortcut function for checking if an object has a given property directly
-  // on itself (in other words, not on a prototype).
-  // 判断对象中是否有指定 key
-  // own properties, not on a prototype
-  _.has = function(obj, key) {
-    // obj 不能为 null 或者 undefined
-    return obj != null && hasOwnProperty.call(obj, key);
-  };
-
-
   // Utility Functions
   // 工具类方法
   // 共 14 个扩展方法
@@ -2521,17 +2444,6 @@
     root._ = previousUnderscore;
     return this;
   };
-
-
-  // Predicate-generating functions. Often useful outside of Underscore.
-  _.constant = function(value) {
-    return function() {
-      return value;
-    };
-  };
-
-  _.noop = function(){};
-
 
   // Returns a predicate for checking whether an object has a given set of
   // `key:value` pairs.
@@ -2809,54 +2721,6 @@
     return template;
   };
 
-  // Add a "chain" function. Start chaining a wrapped Underscore object.
-  // 使支持链式调用
-  /**
-   // 非 OOP 调用 chain
-   _.chain([1, 2, 3])
-   .map(function(a) { return a * 2; })
-   .reverse().value(); // [6, 4, 2]
-
-   // OOP 调用 chain
-   _([1, 2, 3])
-   .chain()
-   .map(function(a){ return a * 2; })
-   .first()
-   .value(); // 2
-   **/
-  _.chain = function(obj) {
-    // 无论是否 OOP 调用，都会转为 OOP 形式
-    // 并且给新的构造对象添加了一个 _chain 属性
-    var instance = _(obj);
-
-    // 标记是否使用链式操作
-    instance._chain = true;
-
-    // 返回 OOP 对象
-    // 可以看到该 instance 对象除了多了个 _chain 属性
-    // 其他的和直接 _(obj) 的结果一样
-    return instance;
-  };
-
-  // OOP
-  // ---------------
-  // If Underscore is called as a function, it returns a wrapped object that
-  // can be used OO-style. This wrapper holds altered versions of all the
-  // underscore functions. Wrapped objects may be chained.
-
-  // OOP
-  // 如果 `_` 被当做方法（构造函数）调用, 则返回一个被包装过的对象
-  // 该对象能使用 underscore 的所有方法
-  // 并且支持链式调用
-
-  // Helper function to continue chaining intermediate results.
-  // 一个帮助方法（Helper function）
-  var result = function(instance, obj) {
-    // 如果需要链式操作，则对 obj 运行 _.chain 方法，使得可以继续后续的链式操作
-    // 如果不需要，直接返回 obj
-    return instance._chain ? _(obj).chain() : obj;
-  };
-
   // Add your own custom functions to the Underscore object.
   // 可向 underscore 函数库扩展自己的方法
   // obj 参数必须是一个对象（JavaScript 中一切皆对象）
@@ -2918,21 +2782,11 @@
     };
   });
 
-  // Extracts the result from a wrapped and chained object.
-  // 一个包装过(OOP)并且链式调用的对象
-  // 用 value 方法获取结果
-  // _(obj).value === obj?
-  _.prototype.value = function() {
-    return this._wrapped;
-  };
 
   // Provide unwrapping proxy for some methods used in engine operations
   // such as arithmetic and JSON stringification.
   _.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
 
-  _.prototype.toString = function() {
-    return '' + this._wrapped;
-  };
 
   // AMD registration happens at the end for compatibility with AMD loaders
   // that may not enforce next-turn semantics on modules. Even though general
