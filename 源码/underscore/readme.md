@@ -191,6 +191,7 @@
       if (Object.keys) {
         return Object.keys(obj)
       }
+      // 可枚举的属性
       let keys = []
       for (let key in obj) {
         keys.push(key)
@@ -209,6 +210,7 @@
       if (!isObject(obj)) {
         return []
       }
+      // 可枚举的属性
       let keys = []
       for (let key in obj) {
         keys.push(key)
@@ -219,6 +221,100 @@
       return keys
     }
 ```
+
+* size
+```ecmascript 6
+    size: obj => {
+      if (!obj) {
+        return 0
+      } 
+      return isArrayLike(obj) ? obj.length : keys(obj).length
+    }
+```
+
+* each && forEach
+```ecmascript 6
+    each: (collection, func, context) => {
+      const f = optimizeCb(func, context)
+      if (isArrayLike(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+          f(collection[i], i, collection)
+        }
+      } else {
+        for (let key in collection) {
+          f(collection[key], key, collection)
+        }
+      }
+      return collection
+    }
+```
+
+* toArray
+```ecmascript 6
+    toArray: obj => {
+      if (!obj) {
+        return []
+      }
+      if (isArray(obj)) {
+        return obj
+      }
+      if (isArrayLike(obj)) {
+        return Array.prototype.slice.call(obj)
+      }
+      return values(obj)
+    }
+```
+
+* toObject
+```ecmascript 6
+    object: (list, values) => {
+      let result = {}
+      for (let i = 0; i < list.length; i++) {
+        if (values) {
+          result[list[i]] = values[i]
+        } else {
+          result[list[i][0]] = list[i][1]
+        }
+      }
+      return result
+    }
+```
+
+* pairs
+```ecmascript 6
+    pairs: obj => {
+      if (!obj) {
+        return []
+      }
+      let result = []
+      for (let key in obj) {
+        result.push([key, obj[key]])
+      }
+      return result
+    }
+```
+
+* invert
+```ecmascript 6
+    invert: obj => {
+      if (!obj) {
+        return []
+      }
+      let result = {}
+      for (let key in obj) {
+        result[obj[key]] = key
+      }
+      return result
+    }
+```
+
+* isElement
+```ecmascript 6
+    isElement: obj => {
+      return !!(obj && obj.nodeType === 1)
+    }
+```
+
 
 * isEmpty
 ```ecmascript 6
