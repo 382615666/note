@@ -717,15 +717,7 @@
     return _.initial(array, array.length - n);
   };
 
-  // Returns everything but the last entry of the array. Especially useful on
-  // the arguments object. Passing **n** will return all the values in
-  // the array, excluding the last N.
-  // 传入一个数组
-  // 返回剔除最后一个元素之后的数组副本
-  // 如果传入参数 n，则剔除最后 n 个元素
-  _.initial = function(array, n, guard) {
-    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
-  };
+
 
   // Get the last element of an array. Passing **n** will return the last N
   // values in the array.

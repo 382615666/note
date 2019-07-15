@@ -315,6 +315,25 @@
     }
 ```
 
+* initial
+```ecmascript 6
+    initial: (array, n, guard) => {
+      return Array.prototype.slice.call(array, 0, array.length - (n || guard ? 1 : n))
+    }
+```
+
+* first
+```ecmascript 6
+    first: (array, n, guard) => {
+      if (!array) {
+        return void 0
+      }
+      if (!n || guard) {
+        return array[0]
+      }
+      return initial(array, array.length - n)
+    }
+```
 
 * isEmpty
 ```ecmascript 6
