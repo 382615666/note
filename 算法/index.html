@@ -95,5 +95,24 @@
    // var b = "discuss.leetcode.com"
    //  console.log(a.test("discuss.leetcode.com"))
     // console.log("discuss.leetcode.com".match(a))
+
+
+   var longestPalindrome = function(s) {
+     let temp = {}
+     let result = 0
+     for (let i = 0; i < s.length; i++) {
+       if (s[i] in temp) {
+         delete temp[s[i]]
+         result += 2
+       } else [
+         temp[s[i]] = 1
+       ]
+     }
+     if (Object.keys(temp).length) {
+       result++
+     }
+     return result
+   };
+   console.log(longestPalindrome("abccccdd"))
 </script>
 </html>
