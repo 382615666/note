@@ -9,24 +9,119 @@
 </body>
 <script src="./underscore.js"></script>
 <script>
-    var a = {
-      a: 1
-    }
-    Object.defineProperties(a, {
-      c: {
-        value: 3,
-        enumerable: false
+    const a = [
+      {
+        path: '/',
+        children: [
+          {
+            path: 'b',
+            name: 'b',
+            meta: {
+              icon: 'aa',
+              title: 'bbbb',
+              name: 'cccc'
+            },
+            component: 'comp',
+            children: [
+              {
+                path: 'c'
+              }
+            ]
+          },
+          {
+            path: 'd'
+          }
+        ]
+      },
+      {
+        path: '/e'
       }
-    })
-    var b = Object.create(a, {
-      b: {
-        value: 2,
-        enumerable: false,
+    ]
+    const b = [
+      {
+        path: '/',
+        children: [
+          {
+            path: 'b',
+            name: 'bb',
+            title: 'bbb',
+            children: [
+              {
+                path: 'c'
+              },
+              {
+                path: 'cc'
+              }
+            ]
+          },
+          {
+            path: 'f'
+          }
+        ]
+      },
+      {
+        path: 'g'
       }
-    })
-    for (let key in b) {
-      console.log(key)
+    ]
+    function test(source = [], target = []) {
+      let result = []
+      let stack = {}
+      source.forEach(item => stack[item.path] = item)
+      target.forEach(item => {
+        if (item.path in stack) {
+          let temp = {...stack[item.path], ...item}
+          const sourceChildren = stack[item.path].children
+          const targetChildren = item.children
+          if (sourceChildren && sourceChildren.length && targetChildren && targetChildren.length) {
+            temp.children = test(sourceChildren, targetChildren)
+          }
+          result.push(temp)
+          delete stack[item.path]
+        } else {
+          result.push(item)
+        }
+      })
+
+      for (let key in stack) {
+        result.push(stack[key])
+      }
+      return result
     }
-    console.log('b' in b)
+    // console.log(test(a, b))
+    function f(array) {
+      let i = 0
+      let result = []
+      while (array.length > 1) {
+        if (i === array.length - 1) {
+          array.push(0)
+        }
+        result[i / 2] = array[i] + array[i + 1]
+        i += 2
+        if (i >= array.length) {
+          array = result
+          i = 0
+          result = []
+        }
+      }
+      console.log(array)
+    }
+    // console.log(f([1]))
+    // console.log(f([1, 2]))
+    // console.log(f([1, 2, 3]))
+    function f1(array, parentPath) {
+      return array.map(item => {
+        const meta = item.meta || {}
+        let temp = {
+          ...meta,
+          component: item.component,
+          path: `${parentPath}/${item.path}`.replace(/\/\//g, '/')
+        }
+        if (item.children && item.children.length) {
+          temp.children = f1(item.children, temp.path)
+        }
+        return temp
+      })
+    }
+    // console.log(f1(a, ''))
 </script>
 </html>
