@@ -106,11 +106,8 @@
         i += 2
         if (i === array.length - 1) {
           result.push(array.pop())
-          i = 0
-          array = result
-          result = []
         }
-        if (i == array.length) {
+        if (i >= array.length - 1) {
           i = 0
           array = result
           result = []
