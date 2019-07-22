@@ -92,14 +92,27 @@
       let i = 0
       let result = []
       while (array.length > 1) {
-        if (i === array.length - 1) {
-          array.push(0)
-        }
+        // if (i === array.length - 1) {
+        //   array.push(0)
+        // }
+        // result[i / 2] = array[i] + array[i + 1]
+        // i += 2
+        // if (i >= array.length) {
+        //   array = result
+        //   i = 0
+        //   result = []
+        // }
         result[i / 2] = array[i] + array[i + 1]
         i += 2
-        if (i >= array.length) {
-          array = result
+        if (i === array.length - 1) {
+          result.push(array.pop())
           i = 0
+          array = result
+          result = []
+        }
+        if (i == array.length) {
+          i = 0
+          array = result
           result = []
         }
       }
@@ -107,7 +120,7 @@
     }
     // console.log(f([1]))
     // console.log(f([1, 2]))
-    // console.log(f([1, 2, 3]))
+    console.log(f([1, 2, 3]))
     function f1(array, parentPath) {
       return array.map(item => {
         const meta = item.meta || {}
