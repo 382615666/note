@@ -55,19 +55,12 @@
    b6.left = b10
    b6.right = b11
 
-
+   const gcd = (a, b) => !b ? a : gcd(b, a % b)
    var gcdOfStrings = function(str1, str2) {
-     if (str1.length % str2.length) {
+     if (`${str1}${str2}` !== `${str2}${str1}`) {
        return ''
      }
-     let i = 0
-     while (i + str2.length <  str1.length) {
-       if (str1.substr(i, str2.length) !== str2) {
-         return ''
-       }
-       i += str2.length
-     }
-     return str2
+     return str1.substring(0, gcd(str1.length, str2.length))
    };
    console.log(gcdOfStrings("ABCABC", "ABC"))
    //  var a = /(\w+(\.\w+)+)/g
