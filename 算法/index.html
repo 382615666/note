@@ -55,64 +55,44 @@
    b6.left = b10
    b6.right = b11
 
-   var wordPattern = function(pattern, str) {
-     let key = {}
-     let value = {}
-     let arr = str.split(' ')
-     if (pattern.length !== arr.length) {
-       return false
-     }
-     for (let i = 0; i < arr.length; i++) {
-       if ((pattern[i] in key && key[pattern[i]] !== arr[i]) || (arr[i] in value && value[arr[i]] !== pattern[i])) {
-         return false
-       } else {
-         key[pattern[i]] = arr[i]
-         value[arr[i]] = pattern[i]
-       }
-     }
-     return true
-   };
-   // console.log(wordPattern("abba", "dog cat cat fish"))
-   // console.log(wordPattern("abba", "dog dog dog dog"))
-   console.log(wordPattern("jquery", "jquery"))
-   // console.log(removeElements(b1, 5))
 
-   // var gcdOfStrings = function(str1, str2) {
-   //   if (str1.length % str2.length) {
-   //     return ''
-   //   }
-   //   let i = 0
-   //   while (i + str2.length <  str1.length) {
-   //     if (str1.substr(i, str2.length) !== str2) {
-   //       return ''
-   //     }
-   //     i += str2.length
-   //   }
-   //   return str2
-   // };
-   // console.log(gcdOfStrings("ABCABC", "ABC"))
+   var gcdOfStrings = function(str1, str2) {
+     if (str1.length % str2.length) {
+       return ''
+     }
+     let i = 0
+     while (i + str2.length <  str1.length) {
+       if (str1.substr(i, str2.length) !== str2) {
+         return ''
+       }
+       i += str2.length
+     }
+     return str2
+   };
+   console.log(gcdOfStrings("ABCABC", "ABC"))
    //  var a = /(\w+(\.\w+)+)/g
    // var b = "discuss.leetcode.com"
    //  console.log(a.test("discuss.leetcode.com"))
-    // console.log("discuss.leetcode.com".match(a))
+   //  console.log("discuss.leetcode.com".match(a))
 
 
-   var longestPalindrome = function(s) {
-     let temp = {}
-     let result = 0
-     for (let i = 0; i < s.length; i++) {
-       if (s[i] in temp) {
-         delete temp[s[i]]
-         result += 2
-       } else [
-         temp[s[i]] = 1
-       ]
-     }
-     if (Object.keys(temp).length) {
-       result++
-     }
-     return result
-   };
-   console.log(longestPalindrome("abccccdd"))
+   // var longestPalindrome = function(s) {
+   //   let temp = {}
+   //   let result = 0
+   //   for (let i = 0; i < s.length; i++) {
+   //     if (s[i] in temp) {
+   //       delete temp[s[i]]
+   //       result += 2
+   //     } else [
+   //       temp[s[i]] = 1
+   //     ]
+   //   }
+   //   if (Object.keys(temp).length) {
+   //     result++
+   //   }
+   //   return result
+   // };
+   // console.log(longestPalindrome("abccccdd"))
+
 </script>
 </html>
