@@ -55,34 +55,35 @@
    b6.left = b10
    b6.right = b11
 
-   var findNthDigit = function(n) {
-     if (n < 9) {
-       return n
-     }
-     // 当前区间内  拥有多少数字
-     let nums = 9
-     // 当前数字位数
-     let len = 1
-     // 当前区间数字总长度
-     let total = 9
-     // 最终区间的基数
-     let result = 0
-     while (n > total) {
-       n -= total
-       result += nums
-       len++
-       nums *= 10
-       total = nums * len
-     }
-     let position = n % len
-     if (!position) {
-       position = len
-     }
-     position--
-     return (result + Math.ceil(n / len)).toString()[position]
+   var findShortestSubArray = function(nums) {
+     // 记录次数，起始位置和当前位置的差
+     // 比较大小
+     let temp = {}
+     let max = 0
+     let min = nums.length
+     nums.forEach((item, index) => {
+       if (item in temp) {
+         temp[item].length = index - temp[item].start
+         temp[item].count++
+       } else {
+         temp[item] = {
+           start: index - 1,
+           length: 1,
+           count: 1
+         }
+       }
+       if (temp[item].count === max) {
+         min = Math.min(min, temp[item].length)
+       } else if (temp[item].count > max) {
+         min = temp[item].length
+         max = temp[item].count
+       }
+     })
+     return min
    };
-   console.log(findNthDigit(10000))
-   // console.log(findNthDigit(11))
+
+   console.log(findShortestSubArray([1, 2, 2, 3, 1]))
+   console.log(findShortestSubArray([1,2,2,3,1,4,2]))
 
 </script>
 </html>

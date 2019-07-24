@@ -1,6 +1,53 @@
 # leetcode
 
 
+[697. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/)
+
+>>>
+    给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。
+    
+    你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。
+    
+    示例 1:
+    
+    输入: [1, 2, 2, 3, 1]
+    输出: 2
+    解释: 
+    输入数组的度是2，因为元素1和2的出现频数最大，均为2.
+    连续子数组里面拥有相同度的有如下所示:
+    [1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
+    最短连续子数组[2, 2]的长度为2，所以返回2.
+>>>
+
+```ecmascript 6
+   var findShortestSubArray = function(nums) {
+     // 记录次数，起始位置和当前位置的差
+     // 比较大小
+     let temp = {}
+     let max = 0
+     let min = nums.length
+     nums.forEach((item, index) => {
+       if (item in temp) {
+         temp[item].length = index - temp[item].start
+         temp[item].count++
+       } else {
+         temp[item] = {
+           start: index - 1,
+           length: 1,
+           count: 1
+         }
+       }
+       if (temp[item].count === max) {
+         min = Math.min(min, temp[item].length)
+       } else if (temp[item].count > max) {
+         min = temp[item].length
+         max = temp[item].count
+       }
+     })
+     return min
+   };
+```
+
 [400. 第N个数字](https://leetcode-cn.com/problems/nth-digit/)
 
 >>>
