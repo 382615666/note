@@ -55,37 +55,34 @@
    b6.left = b10
    b6.right = b11
 
-   const gcd = (a, b) => !b ? a : gcd(b, a % b)
-   var gcdOfStrings = function(str1, str2) {
-     if (`${str1}${str2}` !== `${str2}${str1}`) {
-       return ''
+   var findNthDigit = function(n) {
+     if (n < 9) {
+       return n
      }
-     return str1.substring(0, gcd(str1.length, str2.length))
+     // 当前区间内  拥有多少数字
+     let nums = 9
+     // 当前数字位数
+     let len = 1
+     // 当前区间数字总长度
+     let total = 9
+     // 最终区间的基数
+     let result = 0
+     while (n > total) {
+       n -= total
+       result += nums
+       len++
+       nums *= 10
+       total = nums * len
+     }
+     let position = n % len
+     if (!position) {
+       position = len
+     }
+     position--
+     return (result + Math.ceil(n / len)).toString()[position]
    };
-   console.log(gcdOfStrings("ABCABC", "ABC"))
-   //  var a = /(\w+(\.\w+)+)/g
-   // var b = "discuss.leetcode.com"
-   //  console.log(a.test("discuss.leetcode.com"))
-   //  console.log("discuss.leetcode.com".match(a))
-
-
-   // var longestPalindrome = function(s) {
-   //   let temp = {}
-   //   let result = 0
-   //   for (let i = 0; i < s.length; i++) {
-   //     if (s[i] in temp) {
-   //       delete temp[s[i]]
-   //       result += 2
-   //     } else [
-   //       temp[s[i]] = 1
-   //     ]
-   //   }
-   //   if (Object.keys(temp).length) {
-   //     result++
-   //   }
-   //   return result
-   // };
-   // console.log(longestPalindrome("abccccdd"))
+   console.log(findNthDigit(10000))
+   // console.log(findNthDigit(11))
 
 </script>
 </html>
