@@ -55,35 +55,19 @@
    b6.left = b10
    b6.right = b11
 
-   var findShortestSubArray = function(nums) {
-     // 记录次数，起始位置和当前位置的差
-     // 比较大小
-     let temp = {}
-     let max = 0
-     let min = nums.length
-     nums.forEach((item, index) => {
-       if (item in temp) {
-         temp[item].length = index - temp[item].start
-         temp[item].count++
-       } else {
-         temp[item] = {
-           start: index - 1,
-           length: 1,
-           count: 1
+   var minDeletionSize = function(A) {
+     let result = 0
+     for (let i = 0; i < A[0].length; i++) {
+       for (let j = 0; j < A.length - 1; j++) {
+         if (A[j][i] > A[j + 1][i]) {
+           result++
+           break
          }
        }
-       if (temp[item].count === max) {
-         min = Math.min(min, temp[item].length)
-       } else if (temp[item].count > max) {
-         min = temp[item].length
-         max = temp[item].count
-       }
-     })
-     return min
+     }
+     return result
    };
-
-   console.log(findShortestSubArray([1, 2, 2, 3, 1]))
-   console.log(findShortestSubArray([1,2,2,3,1,4,2]))
+   console.log(minDeletionSize(["rrjk","furt","guzm"]))
 
 </script>
 </html>

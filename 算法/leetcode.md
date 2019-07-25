@@ -1,6 +1,31 @@
 # leetcode
 
 
+[944. 删列造序](https://leetcode-cn.com/problems/delete-columns-to-make-sorted/)
+
+>>>
+    删除 操作的定义是：选出一组要删掉的列，删去 A 中对应列中的所有字符，形式上，第 n 列为 [A[0][n], A[1][n], ..., A[A.length-1][n]]）。
+    
+    比如，有 A = ["abcdef", "uvwxyz"]，
+    
+    要删掉的列为 {0, 2, 3}，删除后 A 为["bef", "vyz"]， A 的列分别为["b","v"], ["e","y"], ["f","z"]。
+>>>
+
+```ecmascript 6
+   var minDeletionSize = function(A) {
+     let result = 0
+     for (let i = 0; i < A[0].length; i++) {
+       for (let j = 0; j < A.length - 1; j++) {
+         if (A[j][i] > A[j + 1][i]) {
+           result++
+           break
+         }
+       }
+     }
+     return result
+   };
+```
+
 [697. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/)
 
 >>>
