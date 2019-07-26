@@ -55,19 +55,10 @@
    b6.left = b10
    b6.right = b11
 
-   var minDeletionSize = function(A) {
-     let result = 0
-     for (let i = 0; i < A[0].length; i++) {
-       for (let j = 0; j < A.length - 1; j++) {
-         if (A[j][i] > A[j + 1][i]) {
-           result++
-           break
-         }
-       }
-     }
-     return result
+   var smallestRangeI = function(A, K) {
+     return Math.max(Math.max.apply(null, A) - Math.min.apply(null, A) - 2 * K, 0)
    };
-   console.log(minDeletionSize(["rrjk","furt","guzm"]))
+   console.log(smallestRangeI(["rrjk","furt","guzm"]))
 
 </script>
 </html>

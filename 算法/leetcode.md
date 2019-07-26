@@ -1,6 +1,37 @@
 # leetcode
 
 
+[908. 最小差值 I](https://leetcode-cn.com/problems/smallest-range-i/)
+
+>>>
+    给定一个整数数组 A，对于每个整数 A[i]，我们可以选择任意 x 满足 -K <= x <= K，并将 x 加到 A[i] 中。
+    
+    在此过程之后，我们得到一些数组 B。
+    
+    返回 B 的最大值和 B 的最小值之间可能存在的最小差值。
+    
+     
+    
+    示例 1：
+    
+    输入：A = [1], K = 0
+    输出：0
+    解释：B = [1]
+    示例 2：
+    
+    输入：A = [0,10], K = 2
+    输出：6
+    解释：B = [2,8]
+    示例 3：
+>>>
+
+```ecmascript 6
+   // 该题目的意思是：  将数组A中的每个值与区间[-K, K]内的每一个值相加，求最小值
+   var smallestRangeI = function(A, K) {
+     return Math.max(Math.max.apply(null, A) - Math.min.apply(null, A) - 2 * K, 0)
+   };
+```
+
 [944. 删列造序](https://leetcode-cn.com/problems/delete-columns-to-make-sorted/)
 
 >>>
