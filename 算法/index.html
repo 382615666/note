@@ -55,10 +55,20 @@
    b6.left = b10
    b6.right = b11
 
-   var smallestRangeI = function(A, K) {
-     return Math.max(Math.max.apply(null, A) - Math.min.apply(null, A) - 2 * K, 0)
+   var findDisappearedNumbers = function(nums) {
+     nums.forEach(item => {
+       item = Math.abs(item)
+       nums[item - 1] = -Math.abs(nums[item - 1])
+     })
+     let result = []
+     nums.forEach((item, index) => {
+       if (item > 0) {
+         result.push(index + 1)
+       }
+     })
+     return result
    };
-   console.log(smallestRangeI(["rrjk","furt","guzm"]))
+   console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]))
 
 </script>
 </html>

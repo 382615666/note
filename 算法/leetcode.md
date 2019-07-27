@@ -1,6 +1,93 @@
 # leetcode
 
 
+[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)
+
+>>>
+    给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的 整型数组，数组中的元素一些出现了两次，另一些只出现一次。
+    
+    找到所有在 [1, n] 范围之间没有出现在数组中的数字。
+    
+    您能在不使用额外空间且时间复杂度为O(n)的情况下完成这个任务吗? 你可以假定返回的数组不算在额外空间内。
+    
+    示例:
+    
+    输入:
+    [4,3,2,7,8,2,3,1]
+    
+    输出:
+    [5,6]
+>>>
+
+```ecmascript 6
+   var findDisappearedNumbers = function(nums) {
+     nums.forEach(item => {
+       item = Math.abs(item)
+       nums[item - 1] = -Math.abs(nums[item - 1])
+     })
+     let result = []
+     nums.forEach((item, index) => {
+       if (item > 0) {
+         result.push(index + 1)
+       }
+     })
+     return result
+   };
+```
+
+[434. 字符串中的单词数](https://leetcode-cn.com/problems/number-of-segments-in-a-string/)
+
+>>>
+    统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
+    
+    请注意，你可以假定字符串里不包括任何不可打印的字符。
+    
+    示例:
+    
+    输入: "Hello, my name is John"
+    输出: 5
+>>>
+
+```ecmascript 6
+   var countSegments = function(s) {
+     let result = 0
+     s += ' '
+     for (let i = 1; i < s.length; i++) {
+       if (s[i - 1] !== ' ' && s[i] === ' ') {
+         result++
+       }
+     }
+     return result
+   };
+```
+
+[441. 排列硬币](https://leetcode-cn.com/problems/arranging-coins/)
+
+>>>
+    你总共有 n 枚硬币，你需要将它们摆成一个阶梯形状，第 k 行就必须正好有 k 枚硬币。
+    
+    给定一个数字 n，找出可形成完整阶梯行的总行数。
+    
+    n 是一个非负整数，并且在32位有符号整型的范围内。
+    
+    示例 1:
+    
+    n = 5
+    
+    硬币可排列成以下几行:
+    ¤
+    ¤ ¤
+    ¤ ¤
+    
+    因为第三行不完整，所以返回2.
+>>>
+
+```ecmascript 6
+   var arrangeCoins = function(n) {
+    return (Math.sqrt(2 * n + .25) + .5 | 0) - 1
+   };
+```
+
 [908. 最小差值 I](https://leetcode-cn.com/problems/smallest-range-i/)
 
 >>>
