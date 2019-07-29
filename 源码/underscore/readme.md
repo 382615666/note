@@ -318,7 +318,7 @@
 * initial
 ```ecmascript 6
     initial: (array, n, guard) => {
-      return Array.prototype.slice.call(array, 0, array.length - (n || guard ? 1 : n))
+      return Array.prototype.slic*____*e.call(array, 0, array.length - (n || guard ? 1 : n))
     }
 ```
 

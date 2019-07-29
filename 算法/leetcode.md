@@ -1,6 +1,93 @@
 # leetcode
 
 
+[443. 压缩字符串](https://leetcode-cn.com/problems/string-compression/)
+
+>>>
+    给定一组字符，使用原地算法将其压缩。
+    
+    压缩后的长度必须始终小于或等于原数组长度。
+    
+    数组的每个元素应该是长度为1 的字符（不是 int 整数类型）。
+    
+    在完成原地修改输入数组后，返回数组的新长度。
+    
+     
+    
+    进阶：
+    你能否仅使用O(1) 空间解决问题？
+    
+     
+    
+    示例 1：
+    
+    输入：
+    ["a","a","b","b","c","c","c"]
+    
+    输出：
+    返回6，输入数组的前6个字符应该是：["a","2","b","2","c","3"]
+    
+    说明：
+    "aa"被"a2"替代。"bb"被"b2"替代。"ccc"被"c3"替代。
+>>>
+
+```ecmascript 6
+   var compress = function(chars) {
+     let j = 0
+     let count = 1
+     for (let i = 0; i < chars.length; i++) {
+       if (chars[i] === chars[i + 1]) {
+         count++
+       } else {
+         j++
+         if (count > 1) {
+           count = count.toString()
+           for (let k = 0; k < count.length; k++) {
+             chars[j] = count[k]
+             j++
+           }
+         }
+         if (i < chars.length - 1) {
+           chars[j] = chars[i + 1]
+         }
+         count = 1
+       }
+     }
+     chars.length = j
+   };
+```
+
+[453. 最小移动次数使数组元素相等](https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/submissions/)
+
+>>>
+    给定一个长度为 n 的非空整数数组，找到让数组所有元素相等的最小移动次数。每次移动可以使 n - 1 个元素增加 1。
+    
+    示例:
+    
+    输入:
+    [1,2,3]
+    
+    输出:
+    3
+    
+    解释:
+    只需要3次移动（注意每次移动会增加两个元素的值）：
+    
+    [1,2,3]  =>  [2,3,3]  =>  [3,4,3]  =>  [4,4,4]
+>>>
+
+```ecmascript 6
+   var minMoves = function(nums) {
+     let min = nums[0]
+     let result = 0
+     nums.forEach(item => {
+       min = Math.min(min, item)
+       result += item
+     })
+     return result - min * nums.length
+   };
+```
+
 [448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)
 
 >>>
