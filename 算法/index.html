@@ -55,30 +55,16 @@
    b6.left = b10
    b6.right = b11
 
-   var compress = function(chars) {
-     let j = 0
-     let count = 1
-     for (let i = 0; i < chars.length; i++) {
-       if (chars[i] === chars[i + 1]) {
-         count++
-       } else {
-         j++
-         if (count > 1) {
-           count = count.toString()
-           for (let k = 0; k < count.length; k++) {
-             chars[j] = count[k]
-             j++
-           }
-         }
-         if (i < chars.length - 1) {
-           chars[j] = chars[i + 1]
-         }
-         count = 1
+   var duplicateZeros = function(arr) {
+     for (let i = arr.length - count; i >= 0; i--) {
+       arr[i + count] = arr[i]
+       if (!arr[i] && count > 1) {
+         arr[i + count - 1] = 0
+         count--
        }
      }
-     chars.length = j
    };
-   console.log(compress(["a","b","b","b","b","b","b","b","b","b","b","b","b"]))
+   console.log(duplicateZeros([8,4,5,0,0,0,0,0]))
 
 </script>
 </html>
