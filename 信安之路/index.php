@@ -6,8 +6,8 @@
 </head>
 <body>
     <?php
-        $txt = 'world'
-        echo 'hello $txt'
+        $txt = 'world';
+        echo "hello $txt";
     ?>
 </body>
 </html>
