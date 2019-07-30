@@ -56,14 +56,23 @@
    b6.right = b11
 
    var duplicateZeros = function(arr) {
-     for (let i = arr.length - count; i >= 0; i--) {
-       arr[i + count] = arr[i]
-       if (!arr[i] && count > 1) {
+     let count = 0
+     for (let i = 0; i + count < arr.length; i++) {
+       if (!arr[i]) {
+         count++
+       }
+     }
+     for (let i = arr.length - 1 - count; i >= 0; i--) {
+       if (i + count < arr.length - 1) {
+         arr[i + count] = arr[i]
+       }
+       if (!arr[i]) {
          arr[i + count - 1] = 0
          count--
        }
      }
    };
+   // console.log(duplicateZeros([1,0,2,3,0,4,5,0]))
    console.log(duplicateZeros([8,4,5,0,0,0,0,0]))
 
 </script>
