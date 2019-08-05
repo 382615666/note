@@ -472,34 +472,6 @@
     return _.find(obj, _.matcher(attrs));
   };
 
-  // Return the minimum element (or element-based computation).
-  // 寻找最小的元素
-  // 类似 _.max
-  // _.min(list, [iteratee], [context])
-  _.min = function(obj, iteratee, context) {
-    var result = Infinity, lastComputed = Infinity,
-      value, computed;
-    if (iteratee == null && obj != null) {
-      obj = isArrayLike(obj) ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value < result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed < lastComputed || computed === Infinity && result === Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
   // Shuffle a collection, using the modern version of the
   // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
   // 将数组乱序
