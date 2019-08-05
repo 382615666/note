@@ -353,6 +353,64 @@
     }
 ```
 
+* is类型判断
+```ecmascript 6
+    is: (obj = ['Arguments', 'String', ...[]]) => {
+      each(obj, function(item) {
+          const obj = {}
+          obj[`is${item}`] = function(obj) {
+            return toString.call(obj) === `[object ${item}]`
+          }
+      })
+    }
+```
+
+* isNaN
+```ecmascript 6
+    isNaN: (number) => {
+      return isNumber(obj) && obj !== +obj
+    }
+```
+
+* max
+```ecmascript 6
+    max: (obj, func, context) => {
+      let max = -Infinity
+      if (func) {
+        obj = isArrayLike (obj) ? obj : values(obj)
+        for (let i = 0; i < obj.length; i++) {
+          if (max > obj[i]) {
+            max = obj[i]
+          }
+        }
+      } else {
+        const o = opt(func, context)
+        each(obj, function(value, index, list) {
+          max = Math.max(o(value, index, list), max)
+        })
+      }
+      return max
+    }
+```
+
+* min
+```ecmascript 6
+    min: (obj, func, context) => {
+      let min = Infinity
+      if (func) {
+        obj = isArrayLike(obj) ? obj : values(obj)
+        for (let i = 0; i < obj.length; i++) {
+          min = Math.min(obj[i], min)
+        }
+      } else {
+        const o = opt(func, context)
+        each(obj, function (value, index, list) {
+          min = Math.min(o(value, index, list), min)
+        })
+      }
+    }
+```
+
 * isEmpty
 ```ecmascript 6
     isEmpty: obj => {
