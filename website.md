@@ -100,3 +100,6 @@ https://www.bilibili.com/video/av27708518?from=search&seid=11088005923371968758
 
 个人网站  https://www.kancloud.cn/kingend/js-work/373066
 
+mysql推荐书籍网站 https://blog.csdn.net/hw478983/article/details/78813938
+mysql推荐书籍网站 https://zhidao.baidu.com/question/649743001400367845.html
+
