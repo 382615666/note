@@ -9,129 +9,19 @@
 </body>
 <script src="./underscore.js"></script>
 <script>
-    const a = [
-      {
-        path: '/',
-        children: [
-          {
-            path: 'b',
-            name: 'b',
-            meta: {
-              icon: 'aa',
-              title: 'bbbb',
-              name: 'cccc'
-            },
-            component: 'comp',
-            children: [
-              {
-                path: 'c'
-              }
-            ]
-          },
-          {
-            path: 'd'
-          }
-        ]
-      },
-      {
-        path: '/e'
+    const op = function (func, context) {
+      return function (item, index, collection) {
+        return func.call(context, item, index, collection)
       }
-    ]
-    const b = [
-      {
-        path: '/',
-        children: [
-          {
-            path: 'b',
-            name: 'bb',
-            title: 'bbb',
-            children: [
-              {
-                path: 'c'
-              },
-              {
-                path: 'cc'
-              }
-            ]
-          },
-          {
-            path: 'f'
-          }
-        ]
-      },
-      {
-        path: 'g'
-      }
-    ]
-    function test(source = [], target = []) {
-      let result = []
-      let stack = {}
-      source.forEach(item => stack[item.path] = item)
-      target.forEach(item => {
-        if (item.path in stack) {
-          let temp = {...stack[item.path], ...item}
-          const sourceChildren = stack[item.path].children
-          const targetChildren = item.children
-          if (sourceChildren && sourceChildren.length && targetChildren && targetChildren.length) {
-            temp.children = test(sourceChildren, targetChildren)
-          }
-          result.push(temp)
-          delete stack[item.path]
-        } else {
-          result.push(item)
-        }
-      })
-
-      for (let key in stack) {
-        result.push(stack[key])
-      }
-      return result
     }
-    // console.log(test(a, b))
-    function f(array) {
-      let i = 0
-      let result = []
-      while (array.length > 1) {
-        // if (i === array.length - 1) {
-        //   array.push(0)
-        // }
-        // result[i / 2] = array[i] + array[i + 1]
-        // i += 2
-        // if (i >= array.length) {
-        //   array = result
-        //   i = 0
-        //   result = []
-        // }
-        result[i / 2] = array[i] + array[i + 1]
-        i += 2
-        if (i === array.length - 1) {
-          result.push(array.pop())
-        }
-        if (i >= array.length - 1) {
-          i = 0
-          array = result
-          result = []
-        }
+    const each = function (collection, func, context) {
+      const o = op(func, context)
+      for (let i = 0; i < collection.length; i++) {
+        o(collection[i], i, collection)
       }
-      console.log(array)
     }
-    console.log(f([1]))
-    console.log(f([1, 2]))
-    console.log(f([1, 2, 3]))
-    function f1(array, parentPath) {
-      return array.map(item => {
-        const meta = item.meta || {}
-        let temp = {
-          ...meta,
-          component: item.component,
-          path: `${parentPath}/${item.path}`.replace(/\/\//g, '/')
-        }
-        if (item.children && item.children.length) {
-          temp.children = f1(item.children, temp.path)
-        }
-        return temp
-      })
-    }
-    // console.log(f1(a, ''))
+    console.log(each([1, 2, 3], function (item, index, collection) {
+      console.log(item, index, collection)
+    }))
 </script>
 </html>

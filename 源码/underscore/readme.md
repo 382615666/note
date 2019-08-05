@@ -335,6 +335,24 @@
     }
 ```
 
+* findKey
+```ecmascript 6
+    findKey: (obj, func, context) => {
+      const opt = function(func, context) {
+        return function(key, collection) {
+          return func.call(context, key, collection)
+        }
+      }
+      const o = opt(func, context)
+      let keys = Object.keys(obj)
+      for (let i = 0; i < keys.length; i++) {
+        if (o(keys[i], obj)) {
+          return keys[i]
+        }
+      }
+    }
+```
+
 * isEmpty
 ```ecmascript 6
     isEmpty: obj => {

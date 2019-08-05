@@ -1750,20 +1750,6 @@
   // 参数个数 >= 1
   _.extendOwn = _.assign = createAssigner(_.keys);
 
-  // Returns the first key on an object that passes a predicate test
-  // 跟数组方法的 _.findIndex 类似
-  // 找到对象的键值对中第一个满足条件的键值对
-  // 并返回该键值对 key 值
-  _.findKey = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = _.keys(obj), key;
-    // 遍历键值对
-    for (var i = 0, length = keys.length; i < length; i++) {
-      key = keys[i];
-      // 符合条件，直接返回 key 值
-      if (predicate(obj[key], key, obj)) return key;
-    }
-  };
 
   // Return a copy of the object only containing the whitelisted properties.
   // 根据一定的需求（key 值，或者通过 predicate 函数返回真假）
