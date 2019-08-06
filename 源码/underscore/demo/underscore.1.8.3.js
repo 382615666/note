@@ -472,75 +472,6 @@
     return _.find(obj, _.matcher(attrs));
   };
 
-  // Return the maximum element (or element-based computation).
-  // 寻找数组中的最大元素
-  // 或者对象中的最大 value 值
-  // 如果有 iteratee 参数，则求每个元素经过该函数迭代后的最值
-  // _.max(list, [iteratee], [context])
-  _.max = function(obj, iteratee, context) {
-    var result = -Infinity, lastComputed = -Infinity,
-      value, computed;
-
-    // 单纯地寻找最值
-    if (iteratee == null && obj != null) {
-      // 如果是数组，则寻找数组中最大元素
-      // 如果是对象，则寻找最大 value 值
-      obj = isArrayLike(obj) ? obj : _.values(obj);
-
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value > result) {
-          result = value;
-        }
-      }
-    } else {  // 寻找元素经过迭代后的最值
-      iteratee = cb(iteratee, context);
-
-      // result 保存结果元素
-      // lastComputed 保存计算过程中出现的最值
-      // 遍历元素
-      _.each(obj, function(value, index, list) {
-        // 经过迭代函数后的值
-        computed = iteratee(value, index, list);
-        // && 的优先级高于 ||
-        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-
-    return result;
-  };
-
-  // Return the minimum element (or element-based computation).
-  // 寻找最小的元素
-  // 类似 _.max
-  // _.min(list, [iteratee], [context])
-  _.min = function(obj, iteratee, context) {
-    var result = Infinity, lastComputed = Infinity,
-      value, computed;
-    if (iteratee == null && obj != null) {
-      obj = isArrayLike(obj) ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value < result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed < lastComputed || computed === Infinity && result === Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
   // Shuffle a collection, using the modern version of the
   // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
   // 将数组乱序
@@ -1750,20 +1681,6 @@
   // 参数个数 >= 1
   _.extendOwn = _.assign = createAssigner(_.keys);
 
-  // Returns the first key on an object that passes a predicate test
-  // 跟数组方法的 _.findIndex 类似
-  // 找到对象的键值对中第一个满足条件的键值对
-  // 并返回该键值对 key 值
-  _.findKey = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = _.keys(obj), key;
-    // 遍历键值对
-    for (var i = 0, length = keys.length; i < length; i++) {
-      key = keys[i];
-      // 符合条件，直接返回 key 值
-      if (predicate(obj[key], key, obj)) return key;
-    }
-  };
 
   // Return a copy of the object only containing the whitelisted properties.
   // 根据一定的需求（key 值，或者通过 predicate 函数返回真假）
@@ -2142,14 +2059,6 @@
     return _.keys(obj).length === 0;
   };
 
-  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
-  // 其他类型判断
-  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
-    _['is' + name] = function(obj) {
-      return toString.call(obj) === '[object ' + name + ']';
-    };
-  });
-
   // Define a fallback version of the method in browsers (ahem, IE < 9), where
   // there isn't any inspectable "Arguments" type.
   // _.isArguments 方法在 IE < 9 下的兼容
@@ -2179,17 +2088,6 @@
   // 判断是否是有限的数字
   _.isFinite = function(obj) {
     return isFinite(obj) && !isNaN(parseFloat(obj));
-  };
-
-  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
-  // 判断是否是 NaN
-  // NaN 是唯一的一个 `自己不等于自己` 的 number 类型
-  // 这样写有 BUG
-  // _.isNaN(new Number(0)) => true
-  // 详见 https://github.com/hanzichi/underscore-analysis/issues/13
-  // 最新版本（edge 版）已经修复该 BUG
-  _.isNaN = function(obj) {
-    return _.isNumber(obj) && obj !== +obj;
   };
 
   // Utility Functions
