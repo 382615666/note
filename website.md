@@ -104,3 +104,6 @@ mysql推荐书籍网站 https://blog.csdn.net/hw478983/article/details/78813938
 mysql推荐书籍网站 https://zhidao.baidu.com/question/649743001400367845.html
 
 mysql注入技巧 https://www.cnblogs.com/v1vvwv/p/SQL-Injection-Summary.html
+
+
+乌云镜像 https://wooyun.wtfsec.org/bugs.php
