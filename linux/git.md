@@ -19,4 +19,11 @@ git remote set-url orgin xxx
 ```shell
 git config --global http.postBuffer 1048576000
 git config --global https.postBuffer 1048576000
+
+// .gitconfig
+[http]
+        postBuffer = 1048576000
+
+[https]
+        postBuffer = 1048576000
 ```
