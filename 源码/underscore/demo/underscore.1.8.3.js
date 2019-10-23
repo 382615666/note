@@ -153,60 +153,12 @@
     return _.property(value);
   };
 
-  _.iteratee = function(value, context) {
-    return cb(value, context, Infinity);
-  };
-
   // An internal function for creating assigner functions.
   // 有三个方法用到了这个内部函数
   // _.extend & _.extendOwn & _.defaults
   // _.extend = createAssigner(_.allKeys);
   // _.extendOwn = _.assign = createAssigner(_.keys);
   // _.defaults = createAssigner(_.allKeys, true);
-  var createAssigner = function(keysFunc, undefinedOnly) {
-    // 返回函数
-    // 经典闭包（undefinedOnly 参数在返回的函数中被引用）
-    // 返回的函数参数个数 >= 1
-    // 将第二个开始的对象参数的键值对 "继承" 给第一个参数
-    return function(obj) {
-      var length = arguments.length;
-      // 只传入了一个参数（或者 0 个？）
-      // 或者传入的第一个参数是 null
-      if (length < 2 || obj == null) return obj;
-
-      // 枚举第一个参数除外的对象参数
-      // 即 arguments[1], arguments[2] ...
-      for (var index = 1; index < length; index++) {
-        // source 即为对象参数
-        var source = arguments[index],
-          // 提取对象参数的 keys 值
-          // keysFunc 参数表示 _.keys
-          // 或者 _.allKeys
-          keys = keysFunc(source),
-          l = keys.length;
-
-        // 遍历该对象的键值对
-        for (var i = 0; i < l; i++) {
-          var key = keys[i];
-          // _.extend 和 _.extendOwn 方法
-          // 没有传入 undefinedOnly 参数，即 !undefinedOnly 为 true
-          // 即肯定会执行 obj[key] = source[key]
-          // 后面对象的键值对直接覆盖 obj
-          // ==========================================
-          // _.defaults 方法，undefinedOnly 参数为 true
-          // 即 !undefinedOnly 为 false
-          // 那么当且仅当 obj[key] 为 undefined 时才覆盖
-          // 即如果有相同的 key 值，取最早出现的 value 值
-          // *defaults 中有相同 key 的也是一样取首次出现的
-          if (!undefinedOnly || obj[key] === void 0)
-            obj[key] = source[key];
-        }
-      }
-
-      // 返回已经继承后面对象参数属性的第一个参数对象
-      return obj;
-    };
-  };
 
   // Helper for collection methods to determine whether a collection
   // should be iterated as an array or as an object
@@ -228,69 +180,10 @@
   // 遍历数组（每个元素）或者对象的每个元素（value）
   // 对每个元素执行 iteratee 迭代方法
   // 将结果保存到新的数组中，并返回
-  _.map = _.collect = function(obj, iteratee, context) {
-    // 根据 context 确定不同的迭代函数
-    iteratee = cb(iteratee, context);
-
-    // 如果传参是对象，则获取它的 keys 值数组（短路表达式）
-    var keys = !isArrayLike(obj) && _.keys(obj),
-      // 如果 obj 为对象，则 length 为 key.length
-      // 如果 obj 为数组，则 length 为 obj.length
-      length = (keys || obj).length,
-      results = Array(length); // 结果数组
-
-    // 遍历
-    for (var index = 0; index < length; index++) {
-      // 如果 obj 为对象，则 currentKey 为对象键值 key
-      // 如果 obj 为数组，则 currentKey 为 index 值
-      var currentKey = keys ? keys[index] : index;
-      results[index] = iteratee(obj[currentKey], currentKey, obj);
-    }
-
-    // 返回新的结果数组
-    return results;
-  };
 
   // Create a reducing function iterating left or right.
   // dir === 1 -> _.reduce
   // dir === -1 -> _.reduceRight
-  function createReduce(dir) {
-    // Optimized iterator function as using arguments.length
-    // in the main function will deoptimize the, see #1991.
-    function iterator(obj, iteratee, memo, keys, index, length) {
-      for (; index >= 0 && index < length; index += dir) {
-        var currentKey = keys ? keys[index] : index;
-        // 迭代，返回值供下次迭代调用
-        memo = iteratee(memo, obj[currentKey], currentKey, obj);
-      }
-      // 每次迭代返回值，供下次迭代调用
-      return memo;
-    }
-
-    // _.reduce（_.reduceRight）可传入的 4 个参数
-    // obj 数组或者对象
-    // iteratee 迭代方法，对数组或者对象每个元素执行该方法
-    // memo 初始值，如果有，则从 obj 第一个元素开始迭代
-    // 如果没有，则从 obj 第二个元素开始迭代，将第一个元素作为初始值
-    // context 为迭代函数中的 this 指向
-    return function(obj, iteratee, memo, context) {
-      iteratee = optimizeCb(iteratee, context, 4);
-      var keys = !isArrayLike(obj) && _.keys(obj),
-        length = (keys || obj).length,
-        index = dir > 0 ? 0 : length - 1;
-
-      // Determine the initial value if none is provided.
-      // 如果没有指定初始值
-      // 则把第一个元素指定为初始值
-      if (arguments.length < 3) {
-        memo = obj[keys ? keys[index] : index];
-        // 根据 dir 确定是向左还是向右遍历
-        index += dir;
-      }
-
-      return iterator(obj, iteratee, memo, keys, index, length);
-    };
-  }
 
   // **Reduce** builds up a single result from a list of values, aka `inject`,
   // or `foldl`.
@@ -299,30 +192,14 @@
   // _.reduce 方法最多可传入 4 个参数
   // memo 为初始值，可选
   // context 为指定 iteratee 中 this 指向，可选
-  _.reduce = _.foldl = _.inject = createReduce(1);
 
   // The right-associative version of reduce, also known as `foldr`.
   // 与 ES5 中 Array.prototype.reduceRight 使用方法类似
-  _.reduceRight = _.foldr = createReduce(-1);
 
   // Return the first value which passes a truth test. Aliased as `detect`.
   // 寻找数组或者对象中第一个满足条件（predicate 函数返回 true）的元素
   // 并返回该元素值
   // _.find(list, predicate, [context])
-  _.find = _.detect = function(obj, predicate, context) {
-    var key;
-    // 如果 obj 是数组，key 为满足条件的下标
-    if (isArrayLike(obj)) {
-      key = _.findIndex(obj, predicate, context);
-    } else {
-      // 如果 obj 是对象，key 为满足条件的元素的 key 值
-      key = _.findKey(obj, predicate, context);
-    }
-
-    // 如果该元素存在，则返回该元素
-    // 如果不存在，则默认返回 undefined（函数没有返回，即返回 undefined）
-    if (key !== void 0 && key !== -1) return obj[key];
-  };
 
   // Return all the elements that pass a truth test.
   // Aliased as `select`.
@@ -350,9 +227,6 @@
   // 寻找数组或者对象中所有不满足条件的元素
   // 并以数组方式返回
   // 所得结果是 _.filter 方法的补集
-  _.reject = function(obj, predicate, context) {
-    return _.filter(obj, _.negate(cb(predicate)), context);
-  };
 
   // Determine whether all of the elements match a truth test.
   // Aliased as `all`.
@@ -360,23 +234,6 @@
   // 判断数组中的每个元素或者对象中每个 value 值是否都满足 predicate 函数中的判断条件
   // 如果是，则返回 ture；否则返回 false（有一个不满足就返回 false）
   // _.every(list, [predicate], [context])
-  _.every = _.all = function(obj, predicate, context) {
-    // 根据 this 指向，返回相应 predicate 函数
-    predicate = cb(predicate, context);
-
-    var keys = !isArrayLike(obj) && _.keys(obj),
-      length = (keys || obj).length;
-
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      // 如果有一个不能满足 predicate 中的条件
-      // 则返回 false
-      if (!predicate(obj[currentKey], currentKey, obj))
-        return false;
-    }
-
-    return true;
-  };
 
   // Determine if at least one element in the object matches a truth test.
   // Aliased as `any`.
@@ -384,19 +241,6 @@
   // 判断数组或者对象中是否有一个元素（value 值 for object）满足 predicate 函数中的条件
   // 如果是则返回 true；否则返回 false
   // _.some(list, [predicate], [context])
-  _.some = _.any = function(obj, predicate, context) {
-    // 根据 context 返回 predicate 函数
-    predicate = cb(predicate, context);
-    // 如果传参是对象，则返回该对象的 keys 数组
-    var keys = !isArrayLike(obj) && _.keys(obj),
-      length = (keys || obj).length;
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      // 如果有一个元素满足条件，则返回 true
-      if (predicate(obj[currentKey], currentKey, obj)) return true;
-    }
-    return false;
-  };
 
   // Determine if the array or object contains a given item (using `===`).
   // Aliased as `includes` and `include`.
@@ -404,18 +248,6 @@
   // 如果是 object，则忽略 key 值，只需要查找 value 值即可
   // 即该 obj 中是否有指定的 value 值
   // 返回布尔值
-  _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
-    // 如果是对象，返回 values 组成的数组
-    if (!isArrayLike(obj)) obj = _.values(obj);
-
-    // fromIndex 表示查询起始位置
-    // 如果没有指定该参数，则默认从头找起
-    if (typeof fromIndex != 'number' || guard) fromIndex = 0;
-
-    // _.indexOf 是数组的扩展方法（Array Functions）
-    // 数组中寻找某一元素
-    return _.indexOf(obj, item, fromIndex) >= 0;
-  };
 
   // Invoke a method (with arguments) on every item in a collection.
   // Calls the method named by methodName on each value in the list.

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function f(func, context) {
+      return function (item, index, collection) {
+        return func.call(context, item, index, collection)
+      }
+    }
+    function each(arr, callback, context) {
+      const f1 = f(callback, context)
+      for (let i = 0; i < arr.length; i++) {
+        f1(arr[i], i, arr)
+        callback.call(context, arr[i], i, arr)
+      }
+    }
+    each([1,2], (item, i, arr) => {
+      console.log(item, i, arr)
+    })
+</script>
+</html>

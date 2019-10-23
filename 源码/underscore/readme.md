@@ -411,6 +411,7 @@
     }
 ```
 
+
 * isEmpty
 ```ecmascript 6
     isEmpty: obj => {
