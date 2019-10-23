@@ -332,75 +332,6 @@
     return shuffled;
   };
 
-  // Sample **n** random values from a collection.
-  // If **n** is not specified, returns a single random element.
-  // The internal `guard` argument allows it to work with `map`.
-  // 随机返回数组或者对象中的一个元素
-  // 如果指定了参数 `n`，则随机返回 n 个元素组成的数组
-  // 如果参数是对象，则数组由 values 组成
-  _.sample = function(obj, n, guard) {
-    // 随机返回一个元素
-    if (n == null || guard) {
-      if (!isArrayLike(obj)) obj = _.values(obj);
-      return obj[_.random(obj.length - 1)];
-    }
-
-    // 随机返回 n 个
-    return _.shuffle(obj).slice(0, Math.max(0, n));
-  };
-
-  // Sort the object's values by a criterion produced by an iteratee.
-  // 排序
-  // _.sortBy(list, iteratee, [context])
-  _.sortBy = function(obj, iteratee, context) {
-    iteratee = cb(iteratee, context);
-
-    // 根据指定的 key 返回 values 数组
-    // _.pluck([{}, {}, {}], 'value')
-    return _.pluck(
-      // _.map(obj, function(){}).sort()
-      // _.map 后的结果 [{}, {}..]
-      // sort 后的结果 [{}, {}..]
-      _.map(obj, function(value, index, list) {
-        return {
-          value: value,
-          index: index,
-          // 元素经过迭代函数迭代后的值
-          criteria: iteratee(value, index, list)
-        };
-      }).sort(function(left, right) {
-        var a = left.criteria;
-        var b = right.criteria;
-        if (a !== b) {
-          if (a > b || a === void 0) return 1;
-          if (a < b || b === void 0) return -1;
-        }
-        return left.index - right.index;
-      }), 'value');
-
-  };
-
-  // An internal function used for aggregate "group by" operations.
-  // behavior 是一个函数参数
-  // _.groupBy, _.indexBy 以及 _.countBy 其实都是对数组元素进行分类
-  // 分类规则就是 behavior 函数
-  var group = function(behavior) {
-    return function(obj, iteratee, context) {
-      // 返回结果是一个对象
-      var result = {};
-      iteratee = cb(iteratee, context);
-      // 遍历元素
-      _.each(obj, function(value, index) {
-        // 经过迭代，获取结果值，存为 key
-        var key = iteratee(value, index, obj);
-        // 按照不同的规则进行分组操作
-        // 将变量 result 当做参数传入，能在 behavior 中改变该值
-        behavior(result, value, key);
-      });
-      // 返回结果对象
-      return result;
-    };
-  };
 
   // Groups the object's values by a criterion. Pass either a string attribute
   // to group by, or a function that returns the criterion.
@@ -419,41 +350,6 @@
       result[key].push(value);
     else result[key] = [value];
   });
-
-  // Indexes the object's values by a criterion, similar to `groupBy`, but for
-  // when you know that your index values will be unique.
-  _.indexBy = group(function(result, value, key) {
-    // key 值必须是独一无二的
-    // 不然后面的会覆盖前面的
-    // 其他和 _.groupBy 类似
-    result[key] = value;
-  });
-
-  // Counts instances of an object that group by a certain criterion. Pass
-  // either a string attribute to count by, or a function that returns the
-  // criterion.
-  _.countBy = group(function(result, value, key) {
-    // 不同 key 值元素数量
-    if (_.has(result, key))
-      result[key]++;
-    else result[key] = 1;
-  });
-
-
-  // Split a collection into two arrays: one whose elements all satisfy the given
-  // predicate, and one whose elements all do not satisfy the predicate.
-  // 将数组或者对象中符合条件（predicate）的元素
-  // 和不符合条件的元素（数组为元素，对象为 value 值）
-  // 分别放入两个数组中
-  // 返回一个数组，数组元素为以上两个数组（[[pass array], [fail array]]）
-  _.partition = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var pass = [], fail = [];
-    _.each(obj, function(value, key, obj) {
-      (predicate(value, key, obj) ? pass : fail).push(value);
-    });
-    return [pass, fail];
-  };
 
 
   // Array Functions
