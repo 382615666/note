@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .test-box{
+            width: 500px;
+            margin: 0 auto;
+            padding-left: 200px;
+            position: relative;
+            color: #fff;
+        }
+        .test{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .test3{
+            width: 200px;
+            height: 200px;
+            background: pink;
+        }
+        .test1{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <div class="test">1</div>
+        <div class="test1">2</div>
+    </div>
+    <div class="test-box" style="background: #000;height: 200px;">
+        <div class="test3" draggable="true" id="test3">3</div>
+    </div>
+    <div class="test-box" style="background: aquamarine; height: 200px;" id="test-box4">
+
+    </div>
+</body>
+<script>
+    // 使用css3进行位置变化的时候，元素的offsetLeft,offsetTop不会发生变化
+  {
+    const drag = document.querySelector('.test')
+    const position = {
+      startX: 0,
+      startY: 0,
+      endX: 0,
+      endY: 0
+    }
+    function mousemove(e) {
+      const x = e.clientX - position.startX + position.endX
+      const y = e.clientY - position.startY + position.endY
+      drag.style.transform = `translate(${x}px, ${y}px)`
+      console.log(e.target.offsetLeft, e.target.offsetTop)
+    }
+    function mouseup(e) {
+      position.endX = e.clientX - position.startX + position.endX
+      position.endY = e.clientY - position.startY + position.endY
+      document.removeEventListener('mousemove', mousemove)
+      document.removeEventListener('mouseup', mouseup)
+    }
+    drag.addEventListener('mousedown', function (e) {
+      position.startX = e.clientX
+      position.startY = e.clientY
+      document.addEventListener('mousemove', mousemove)
+      document.addEventListener('mouseup', mouseup)
+    })
+  }
+    // 使用absolute进行位置变化的时候，元素的offsetLeft,offsetTop会发生变化
+  {
+    const drag = document.querySelector('.test1')
+    const position = {
+      startX: 0,
+      startY: 0,
+      endX: 0,
+      endY: 0
+    }
+    function mousemove(e) {
+      const x = e.clientX - position.startX + position.endX
+      const y = e.clientY - position.startY + position.endY
+      drag.style.left = `${x}px`
+      drag.style.top = `${y}px`
+      console.log(e.target.offsetLeft, e.target.offsetTop)
+    }
+    function mouseup(e) {
+      position.endX = e.target.offsetLeft
+      position.endY = e.target.offsetTop
+      document.removeEventListener('mousemove', mousemove)
+      document.removeEventListener('mouseup', mouseup)
+    }
+    drag.addEventListener('mousedown', function (e) {
+      position.startX = e.clientX
+      position.startY = e.clientY
+      document.addEventListener('mousemove', mousemove)
+      document.addEventListener('mouseup', mouseup)
+    })
+  }
+
+  {
+    const drag = document.querySelector('#test3')
+    drag.addEventListener('dragstart', function (e) {
+      e.dataTransfer.setData('id', e.target.id)
+      console.log(e.dataTransfer)
+      console.log('dragstart')
+    })
+    drag.addEventListener('dragenter', function (e) {
+      document.querySelector('#test-box4').style.border = '1px dashed #37a1d3'
+      console.log('dragenter')
+    })
+    // 必须阻止默认行为，不然影响drop事件
+    document.querySelector('#test-box4').addEventListener('dragover', function (e) {
+      e.preventDefault()
+      console.log('dragover')
+    })
+    document.querySelector('#test-box4').addEventListener('dragleave', function (e) {
+      console.log('dragleave')
+    })
+    document.querySelector('#test-box4').addEventListener('dragend', function (e) {
+      console.log('dragend')
+    })
+    document.querySelector('#test-box4').addEventListener('drop', function (e) {
+      console.log(e.dataTransfer)
+      const id = e.dataTransfer.getData('id')
+      this.appendChild(drag)
+      this.style.border = 'none'
+      console.log('drop')
+    })
+  }
+
+</script>
+</html>
