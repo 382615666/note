@@ -103,34 +103,51 @@
   }
 
   {
+    const fr = new FileReader()
+    fr.onload = function () {
+      console.log(fr.result)
+    }
+    // 拖动对象
     const drag = document.querySelector('#test3')
     drag.addEventListener('dragstart', function (e) {
-      e.dataTransfer.setData('id', e.target.id)
-      console.log(e.dataTransfer)
       console.log('dragstart')
+      e.dataTransfer.setData('id', e.target.id)
+      // e.dataTransfer.effectAllowed="copy"
     })
-    drag.addEventListener('dragenter', function (e) {
-      document.querySelector('#test-box4').style.border = '1px dashed #37a1d3'
-      console.log('dragenter')
-    })
-    // 必须阻止默认行为，不然影响drop事件
-    document.querySelector('#test-box4').addEventListener('dragover', function (e) {
-      e.preventDefault()
-      console.log('dragover')
-    })
-    document.querySelector('#test-box4').addEventListener('dragleave', function (e) {
-      console.log('dragleave')
-    })
-    document.querySelector('#test-box4').addEventListener('dragend', function (e) {
+    drag.addEventListener('dragend', function (e) {
       console.log('dragend')
+      drop.style.border = 'none'
     })
-    document.querySelector('#test-box4').addEventListener('drop', function (e) {
-      console.log(e.dataTransfer)
+
+    // 容器对象
+    const drop = document.querySelector('#test-box4')
+    drop.addEventListener('dragenter', function (e) {
+      console.log('dragenter')
+      e.preventDefault()
+      this.style.border = '1px dashed #37a1d3'
+    })
+    // 浏览器默认是不允许drop的，需要阻止默认事件启用drop事件
+    drop.addEventListener('dragover', function (e) {
+      console.log('dragover')
+      e.preventDefault()
+      e.dataTransfer.dropEffect="copy";
+    })
+    drop.addEventListener('dragleave', function (e) {
+      console.log('dragleave')
+      this.style.border = 'none'
+    })
+    drop.addEventListener('drop', function (e) {
+      e.preventDefault()
+      console.log('drop')
+      // e.dataTransfer.dropEffect = 'copy'
+      // console.log(e.dataTransfer)
       const id = e.dataTransfer.getData('id')
       this.appendChild(drag)
-      this.style.border = 'none'
-      console.log('drop')
+      if (e.dataTransfer.files.length) {
+        fr.readAsText(e.dataTransfer.files[0])
+      }
     })
+
   }
 
 </script>
