@@ -82,6 +82,7 @@ i春秋
 https://www.bilibili.com/video/av27708518?from=search&seid=11088005923371968758
 
 
+
 面试 https://juejin.im/post/5c7a4952f265da2ddd4a7813?utm_source=gold_browser_extension
 
 大神的书籍目录 https://book.douban.com/people/raphealguo/collect
@@ -107,3 +108,10 @@ mysql注入技巧 https://www.cnblogs.com/v1vvwv/p/SQL-Injection-Summary.html
 
 
 乌云镜像 https://wooyun.wtfsec.org/bugs.php
+
+
+nginx核心知识100讲
+
+three.js 教程
+
+http://www.myjscode.com/page/articleThree.html
