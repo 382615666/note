@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        #cesiumContainer{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+</body>
+<script type="module">
+    import Cesium from '../node_modules/cesium/Source/Cesium.js'
+    var viewer = new Cesium.Viewer('cesiumContainer');
+</script>
+</html>
