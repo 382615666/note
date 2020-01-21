@@ -104,6 +104,7 @@
   }
 
   {
+
     const fr = new FileReader()
     fr.onload = function () {
       console.log(fr.result)
@@ -113,8 +114,10 @@
     drag.addEventListener('dragstart', function (e) {
       console.log('dragstart')
       e.dataTransfer.setData('id', e.target.id)
-      // e.dataTransfer.effectAllowed="copy"
+      // e.dataTransfer.setData('text/assffdd', 'aaa')
+      e.dataTransfer.effectAllowed = "copy"
     })
+
     drag.addEventListener('dragend', function (e) {
       console.log('dragend')
       drop.style.border = 'none'
@@ -143,11 +146,13 @@
       // e.dataTransfer.dropEffect = 'copy'
       // console.log(e.dataTransfer)
       const id = e.dataTransfer.getData('id')
-      this.appendChild(drag)
+      const _drag = document.querySelector(`#${id}`)
+      console.log(id)
+      this.appendChild(_drag)
       if (e.dataTransfer.files.length) {
         fr.readAsText(e.dataTransfer.files[0])
       }
-    })
+    })ff
 
   }
 
