@@ -20,6 +20,16 @@
 </body>
 <script src="./Build/Cesium/Cesium.js"></script>
 <script>
-    const viewer = new Cesium.Viewer('cesium')
+    const viewer = new Cesium.Viewer('cesium', {
+      animation:false,
+      geocoder:false,
+      sceneModePicker:false,
+      homeButton:false,
+      timeline:false,
+      baseLayerPicker:false,
+      navigationHelpButton:false,
+      fullscreenButton:false
+    })
+
 </script>
 </html>
