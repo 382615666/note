@@ -28,8 +28,69 @@
       timeline:false,
       baseLayerPicker:false,
       navigationHelpButton:false,
-      fullscreenButton:false
+      fullscreenButton:false,
+      terrainExaggeration: 1,
+      terrainProvider: Cesium.createWorldTerrain()
     })
+    const tileset = new Cesium.Cesium3DTileset({
+      url: Cesium.IonResource.fromAssetId(40866)
+    })
+    viewer.scene.primitives.add(tileset)
+    // const entity = viewer.entities.add({
+    //   label: {
+    //     show: false,
+    //     showBackground: true,
+    //     font : '14px monospace',
+    //     horizontalOrigin : Cesium.HorizontalOrigin.LEFT,
+    //     verticalOrigin : Cesium.VerticalOrigin.TOP,
+    //     pixelOffset : new Cesium.Cartesian2(50, 0)
+    //   }
+    // })
+    // const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    // handler.setInputAction(movement => {
+    //   console.log(movement)
+    // }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+    // viewer.camera.setView({
+    //   destination : new Cesium.Cartesian3(-2696570.092794883, -4276051.411224011, 3887257.288168422),
+    //   orientation : {
+    //     heading : 5.193128432412409,
+    //     pitch : -0.3996479673257727
+    //   }
+    // })
 
+    // var target = new Cesium.Cartesian3(-2708814.85583248, -4254159.450845907, 3891403.9457429945);
+    // var offset = new Cesium.Cartesian3(70642.66030209465, -31661.517948317807, 35505.179997143336);
+    // viewer.camera.lookAt(target, offset);
+    // viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+    //
+    // const target = new Cesium.Cartesian3(-2708814.85583248, -4254159.450845907, 3891403.9457429945)
+    // const offset = new Cesium.Cartesian3(70642.66030209465, -31661.517948317807, 35505.179997143336)
+    // viewer.camera.lookAt(target, offset)
+    // viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+
+    // viewer.entities.add({
+    //   position: Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883),
+    //   point: {
+    //     pixelSize: 10,
+    //     color: Cesium.Color.SKYBLUE,
+    //     outlineColor : Cesium.Color.YELLOW, // default: BLACK
+    //     outlineWidth : 3 // default: 0
+    //   }
+    // })
+    // viewer.entities.add({
+    //   position: Cesium.Cartesian3.fromDegrees(-80.12, 25.46),
+    //   point : {
+    //     color : Cesium.Color.LIME,
+    //     pixelSize : 32
+    //   },
+    //   scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5)
+    // })
+    // viewer.entities.add({
+    //   position : Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883),
+    //   point : {
+    //     pixelSize : 20,
+    //     translucencyByDistance : new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e7, 0.2)
+    //   }
+    // });
 </script>
 </html>
