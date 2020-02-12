@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/382615666/note#readme",
   "dependencies": {
+    "cesium": "^1.65.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.2"
   }
