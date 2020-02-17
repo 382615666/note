@@ -9,5 +9,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(8888, () => {
-  console.log(`listen to 8888`)
+  console.log(`listen to http://127.0.0.1:8888`)
 })
