@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-    <body></body>
+    <body>
+        <div id="app"></div>
+    </body>
+    <script src="https://cdn.bootcss.com/vue/2.3.0/vue.js"></script>
     <script>
-        function express () {
-            const arr = []
-            const app = function (req, res) {
-                let i = 0
-                const next = function () {
-                    const f = arr[i++]
-                    if (f) {
-                        f(req, res, next)
-                    }
-                }
-                next()
-            }
-
-            app.use = function (f) {
-                arr.push(f)
-            }
-
-            return app
-        }
-        const app = express()
-        app.use(function (req, res, next) {
-            console.log(111)
-            next()
+        Vue.component('test', {
+          render (h) {
+            return h('div', [
+              this.$scopedSlots.default({
+                text: '233'
+              })
+            ])
+          }
         })
-        app.use(function (req, res, next) {
-            console.log(222)
-            next()
-        })
-        app()
+        new Vue({
+          render: h => {
+            return h('test', {
+                scopedSlots: {
+                  default: props => {
+                    console.log('props', props)
+                    return h('h1', props.text)
+                  }
+                }
+              })
+          }
+        }).$mount('#app')
     </script>
 </html>
