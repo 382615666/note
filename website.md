@@ -89,8 +89,6 @@ https://www.bilibili.com/video/av27708518?from=search&seid=11088005923371968758
 
 正则表达式练习网站 https://alf.nu/RegexGolf#accesstoken=SFhd/4OqJVxP8l1ijjC+
 
-正则表达式练习网站 https://regexcrossword.com/playerpuzzles
-
 
 正则分析网站 https://regexper.com/#%2F%5Cw%28%5Cd%29%2F
 
@@ -123,3 +121,6 @@ https://astexplorer.net/
 https://segmentfault.com/a/1190000011858383#item-1
 
 git 学习网站 https://learngitbranching.js.org
+
+
+xss练习 http://escape.alf.nu/
