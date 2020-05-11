@@ -90,7 +90,7 @@ https://www.bilibili.com/video/av27708518?from=search&seid=11088005923371968758
 正则表达式练习网站 https://alf.nu/RegexGolf#accesstoken=SFhd/4OqJVxP8l1ijjC+
 
 
-正则分析网站 https://regexper.com/#%2F%5Cw%28%5Cd%29%2F
+正则分析网站 https://regexper.com
 
 推荐的js源码 https://www.cnblogs.com/think90/p/5737069.html
 
