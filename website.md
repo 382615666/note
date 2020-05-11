@@ -126,3 +126,6 @@ git 学习网站 https://learngitbranching.js.org
 xss练习 http://escape.alf.nu/
 
 
+unicode 字符查询网站 https://unicode-table.com
+
+
