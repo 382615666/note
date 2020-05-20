@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    
+</body>
+<script>
+    function _new () {
+        const obj = {}
+        const [constructor, ...args] = [...arguments]
+        obj.__proto__ = constructor.prototype
+        const result = constructor.apply(obj, args)
+        if (typeof result === 'object' || typeof result === 'function') {
+            return result
+        }
+        return obj
+    }
+
+    function Person (name) {
+        this.name = name
+    }
+    const temp = _new(Person, '张三')
+    console.log(temp.name)
+</script>
+</html>

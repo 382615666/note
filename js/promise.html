@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+</body>
+<script>
+    function promise (fn) {
+        this.status = 0
+        this.value = ''
+        this.successCallback = []
+        this.failCallback = []
+        const resolve = value => {
+            if (this.status === 0) {
+                this.status = 1
+                this.value = value
+            }
+        }
+        const reject = value => {
+            if (this.status === 0) {
+                this.status = -1
+                this.value = value
+            }
+        }
+        try {
+            fn(resolve, reject)
+        } catch (e) {
+            reject(e)
+        }
+    }
+    promise.prototype.then = function (success, fail) {
+        if (this.status === 0) {
+            this.successCallback.push(success)
+            this.failCallback.push(fail)
+        }
+        if (this.status === 1) {
+            success(this.value)
+        }
+        if (this.status === -1) {
+            fail(this.value)
+        }
+        return new promise(() => {
+            
+        })
+    }
+</script>
+</html>
