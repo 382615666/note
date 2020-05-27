@@ -23,7 +23,6 @@
       if (!isFunction(handle)) {
         throw new Error('MyPromise must accept a function as a parameter')
       }
-      debugger
       // 添加状态
       this._status = PENDING
       // 添加状态
@@ -213,9 +212,9 @@
   }
 new MyPromise((resolve, reject) => {
         resolve('111')
-    }).then(data => {
-        console.log(data)
-        return '222'
+    // }).then(data => {
+    //     console.log(data)
+    //     return '222'
     // }).then(data => {
     //     console.log(data)
     //     return '333'
@@ -224,6 +223,8 @@ new MyPromise((resolve, reject) => {
     //     return '444'
     }).then(data => {
         console.log(data)
+    }).finally(value => {
+      console.log('finally', value)
     })
 </script>
 </html>

@@ -11,7 +11,6 @@
 </body>
 <script>
     function promise (fn) {
-        debugger
         this.status = 0
         this.value = ''
         this.successCallback = []
@@ -107,37 +106,8 @@
         })
     }
 
-    new promise((resolve, reject) => {
-        resolve('111')
-    }).then(data => {
-        console.log(data)
-        return '222'
-    }).then(data => {
-        console.log(data)
-        return '333'
-    }).then(data => {
-        console.log(data)
-        return '444'
-    }).then(data => {
-        console.log(data)
-    })
-
     promise.prototype.catch = function (reject) {
         return this.then(undefined, reject)
-    }
-
-    promise.prototype.finally = function (callback) {
-        return this.then(value => {
-            return promise.resolve(cb()).then(() => value)
-        }, err => {
-            return promise.resolve(cb()).then(() => {
-                throw err
-            })
-        })
-    }
-
-    promise.reject = function (value) {
-        return new promise((resolve, reject) => reject(value))
     }
 
     promise.resolve = function (value) {
@@ -146,6 +116,27 @@
         }
         return new promise(resolve => resolve(value))
     }
+    promise.prototype.finally = function (callback) {
+        return this.then(value => {
+            return promise.resolve(callback()).then(() => value)
+        }, err => {
+            return promise.resolve(callback()).then(() => {
+                throw err
+            })
+        })
+    }
+
+    let p = new promise((resolve, reject) => {
+        resolve('111')
+    }).finally(value => {
+        console.log('finally', value)
+    })
+
+    promise.reject = function (value) {
+        return new promise((resolve, reject) => reject(value))
+    }
+
+
 
     promise.all = function (promises) {
         return new promise((resolve, reject) => {
