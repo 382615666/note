@@ -8,15 +8,4 @@ jquery.fn = jquery.prototype = {
   length: 0
 }
 
-
-jquery.fn.ready = function (fn) {
-  console.log(111)
-  return this
-}
-
-jquery.fn.init.prototype = jquery.fn
-
-
-window.jquery = window.$ = jquery
-
 export default jquery
