@@ -132,3 +132,5 @@ unicode 字符查询网站 https://unicode-table.com
 数据结构课程 http://www.icourse163.org/learn/ZJU-93001?tid=120001#/learn/content
 
 算法演示网站 https://visualgo.net/en/sorting
+
+google页面优化 https://docs.google.com/spreadsheets/d/1up5rxd4EMCoMaxH8cppcK1x76n6HLx0e7jxb0e0FXvc/edit#gid=0
