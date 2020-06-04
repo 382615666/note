@@ -229,6 +229,89 @@ jquery.extend({
   support: {}
 })
 
+jquery.each({
+  parent (elem) {
+    const parent = elem.parentNode
+    return parent && parent.nodeType !== 11 ? parent : null
+  },
+  parents (elem) {
+    return dir(elem, 'parentNode')
+  },
+  parentsUntil (elem, i, until) {
+    return dir(elem, 'parentNode', until)
+  },
+	next: function( elem ) {
+		return sibling( elem, "nextSibling" );
+	},
+	prev: function( elem ) {
+		return sibling( elem, "previousSibling" );
+	},
+	nextAll: function( elem ) {
+		return dir( elem, "nextSibling" );
+	},
+	prevAll: function( elem ) {
+		return dir( elem, "previousSibling" );
+	},
+	nextUntil: function( elem, _i, until ) {
+		return dir( elem, "nextSibling", until );
+	},
+	prevUntil: function( elem, _i, until ) {
+		return dir( elem, "previousSibling", until );
+	},
+	siblings: function( elem ) {
+		return siblings( ( elem.parentNode || {} ).firstChild, elem );
+	},
+	children: function( elem ) {
+		return siblings( elem.firstChild );
+	},
+	contents: function( elem ) {
+		if ( elem.contentDocument != null &&
+
+			// Support: IE 11+
+			// <object> elements with no `data` attribute has an object
+			// `contentDocument` with a `null` prototype.
+			getProto( elem.contentDocument ) ) {
+
+			return elem.contentDocument;
+		}
+
+		// Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
+		// Treat the template element as a regular one in browsers that
+		// don't support it.
+		if ( nodeName( elem, "template" ) ) {
+			elem = elem.content || elem;
+		}
+
+		return jQuery.merge( [], elem.childNodes );
+	}
+}, function (name, fn) {
+  const guaranteedUnique = {
+		children: true,
+		contents: true,
+		next: true,
+		prev: true
+  }
+  const rparentsprev = /^(?:parents|prev(?:Until|All))/
+  jquery.fn[name] = function (until, selector) {
+    let result = jquery.map(this, fn, until)
+    if (name.slice(-5) !== 'Until') {
+      selector = until
+    }
+    if (selector && typeof selector === 'string') {
+      result = jquery.filter(selector, result)
+    }
+    if (this.length > 1) {
+      if (!guaranteedUnique[name]) {
+        jquery.uniqueSort(result)
+      }
+      if (rparentsprev.test(name)) {
+        result.reverse()
+      }
+    }
+    return this.pushStack(result)
+  }
+})
+
 if (typeof Symbol === 'function') {
   jquery.fn[Symbol.iterator] = [][Symbol.iterator]
 }
@@ -236,6 +319,36 @@ if (typeof Symbol === 'function') {
 jquery.each('Boolean Number String Function Array Date RegExp Object Error Symbol'.split(' '), function (index, name) {
   class2type[`[object ${name}]`] = name.toLowerCase()
 })
+
+function sibling (cur, dir) {
+  while((cur = cur[dir]) && cur.nodeType !== 1) {}
+  return cur
+}
+
+function siblings (n, elem) {
+  const result = []
+  for (;n; n = n.nextSibling) {
+    if (n.nodeType === 1 && n !== elem) {
+      result.push(n)
+    }
+  }
+  return result
+}
+
+function dir (elem, dir, until) {
+  const matched = []
+  const truncate = until !== undefined
+
+  while((elem = elem[dir]) && elem.nodeType !== 9) {
+    if (elem.nodeType === 1) {
+      if (truncate && jquery(elem).is(until)) {
+        break
+      }
+      matched.push(elem)
+    }
+  }
+  return matched
+}
 
 function flat (array) {
   return [].flat ? [].flat.call(array) : [].concat.apply([], array)
@@ -272,7 +385,41 @@ jquery.fn.extend({
         }
       }
     })
-  }
+  },
+  
+  index: function( elem ) {
+
+		// No argument, return index in parent
+		if ( !elem ) {
+			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
+		}
+
+		// Index in selector
+		if ( typeof elem === "string" ) {
+			return indexOf.call( jQuery( elem ), this[ 0 ] );
+		}
+
+		// Locate the position of the desired element
+		return indexOf.call( this,
+
+			// If it receives a jQuery object, the first element is used
+			elem.jquery ? elem[ 0 ] : elem
+		);
+	},
+
+	add: function( selector, context ) {
+		return this.pushStack(
+			jQuery.uniqueSort(
+				jQuery.merge( this.get(), jQuery( selector, context ) )
+			)
+		);
+	},
+
+	addBack: function( selector ) {
+		return this.add( selector == null ?
+			this.prevObject : this.prevObject.filter( selector )
+		);
+	}
 })
 
 function isWindow (obj) {
