@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>width</title>
+    <style>
+        .div{
+            width: 300px;
+            border: 1px solid #000;
+        }
+        .div1{
+            width: max-content;
+            border: 1px solid red;
+        }
+        .div2{
+            width: 300px;
+            border: 1px solid red;
+        }
+        .div5{
+            width: 500px;
+            border: 1px solid red;
+        }
+        .div3{
+            border: 1px solid blue;
+            width: min-content;
+        }
+        .div4{
+            border: 1px solid blue;
+            margin: 0 auto;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    IE全线阵亡
+    <div class="div">
+        <div class="div1">
+            <p class="p1">max-content测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字</p>
+        </div>
+    </div>
+    <div class="div3">
+        <div class="div5">min-content测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字</div>
+        <div class="div2">min-content测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字</div>
+    </div>
+    <div class="div4">fit-content测试文字测试文字</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    [name=a]:checked + .span{
+        color: red;
+    }
+    [name=b]:checked ~ .span{
+        color: red;
+    }
+</style>
+<div>
+    <input type="radio" name="a">
+    <span class="span">111</span>
+    <input type="radio" name="a">
+    <span class="span">222</span>
+    <input type="radio" name="a">
+    <span class="span">333</span>
+
+    <div>
+        <input type="checkbox" name="b">
+        <span class="span">bbbbb</span>
+        <span class="span">bbbbb</span>
+        <span class="span">bbbbb</span>
+        <span class="span">bbbbb</span>
+    </div>
+</div>
+</body>
+</html>

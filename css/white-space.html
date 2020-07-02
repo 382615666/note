@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>white-space</title>
+    <style>
+        :root{
+         --border-color: 1px solid #000;
+        }
+        div{
+            width: 200px;
+            border: var(--border-color);
+        }
+        .div1 {
+            white-space: pre;
+        }
+        .div2 {
+            white-space: pre-wrap;
+        }
+        .div3 {
+            white-space: pre-line;
+        }
+        .div4 {
+            white-space: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">pre     文字测试文字测试    空格    文字测
+
+
+        换行符测试</div>
+    <div class="div2">pre-wrap文字测试文字测试    空格    文字测
+
+
+        换行符测试</div>
+    <div class="div3">pre-line文字测试文字测试    空格    文字测
+
+
+        换行符测试</div>
+    <div class="div4">normal  文字测试文字测试    空格    文字测
+
+
+        换行符测试</div>
+</body>
+</html>

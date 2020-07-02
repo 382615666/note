@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    a:link{color: blue}
+    a:visited{color: red}
+    a:hover{color: yellow}
+    a:active{color: white}
+</style>
+这几个超链接的伪类，类似于集合的包涵关系    link>visited>hover>active
+只有当超链接的url值发生改变，刷新页面超链接的颜色才会回到最初状态，不然都会认为已经访问过
+<a href="12323123" class="c">sina</a>
+</body>
+</html>

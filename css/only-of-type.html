@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    .div :only-of-type{
+        background: red;
+    }
+</style>
+    <div class="div">
+        <div>啊啊啊啊啊啊啊啊啊啊</div>
+        <div>啊啊啊啊啊啊啊啊啊啊</div>
+    </div>
+    <div class="div">
+        <div>啊啊啊啊啊啊啊啊啊啊</div>
+    </div>
+    <div class="div">
+        <div style="background: yellow">啊啊啊啊啊
+            <div>span生效</div>
+            啊啊啊啊啊
+        </div>
+    </div>
+    <div class="div">
+        <div>啊啊啊啊啊
+            <span>span不生效</span>
+            <span>span不生效</span>
+            啊啊啊啊啊
+        </div>
+    </div>
+    <div>父元素只有一种类型的子元素，且只有一个</div>
+</body>
+</html>

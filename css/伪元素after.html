@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    .span{
+        color: red;
+        position: relative;
+    }
+    .span::after{
+        content: attr(desc);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 100px;
+        display: none;
+        background: #fff;
+    }
+    .span:hover::after{
+        display: block;
+    }
+    .div::after{
+        content: '查看更多';
+        color: #ccc;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
+    文字文字文字 <span class="span" desc="提示文字">提示</span>啊啊啊啊啊啊
+</body>
+
+<div class="div">
+    啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+</div>
+
+</html>

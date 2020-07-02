@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    div{
+        display: inline-block;
+        vertical-align: top;
+    }
+    .div{
+        width: 300px;
+        height: 300px;
+        padding: 1em;
+        border: 16px solid transparent;
+        border-image: 16 repeating-linear-gradient(-45deg,
+        red 0, red 1em,
+        transparent 1em, transparent 2em,
+        #58a 2em, #58a 3em,
+        transparent 3em, transparent 4em);
+    }
+    .div1{
+        width: 300px;
+        height:300px;
+        background: linear-gradient(-45deg, transparent 15px, red 15px);
+        vertical-align: middle;
+    }
+</style>
+    <div class="div"></div>
+    <div class="div1">啊啊啊啊啊</div>
+</body>
+</html>

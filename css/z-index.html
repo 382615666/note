@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>z-index</title>
+    <style>
+        .div1{
+            background: yellow;
+            height: 100px;
+            position: relative;
+            z-index: auto;
+        }
+        .div3{
+            height: 100%;
+            width: 300px;
+            background: gold;
+            position: relative;
+            z-index: 1;
+        }
+        .div2{
+            height: 100px;
+            background: blue;
+            margin-top: -30px;
+            margin-left: 30px;
+            position: relative;
+            z-index: auto;
+        }
+        .div4{
+            height: 100%;
+            width: 300px;
+            background: tomato;
+            position: relative;
+            z-index: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <div class="div3">aaaaaaaaa</div>
+    </div>
+    <div class="div2">
+        <div class="div4">bbbbbbbbbb</div>
+    </div>
+</body>
+</html>

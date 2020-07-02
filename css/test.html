@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        svg{
+            width: 300px;
+            height: 150px;
+        }
+        path {
+            fill: #4682B4;
+        }
+        text {
+            stroke: #fff;
+            stroke-width: 1;
+            font-size: 20px;
+
+            text-anchor: middle;  /* 文本水平居中 */
+            dominant-baseline: middle; /* 文本垂直居中 */
+        }
+    </style>
+</head>
+<body>
+<!--<svg width="440" height="440">-->
+    <!--<circle style="cx: 50%;cy: 50%;" r="170" stroke-width="50" stroke="#D1D3D7" fill="none"></circle>-->
+    <!--<circle cx="220" cy="220" r="170" stroke-width="50" stroke="#00A5E0" fill="none" transform="matrix(0,-1,1,0,0,440)" stroke-dasharray="100    1069"></circle>-->
+<!--</svg>-->
+
+<svg>
+    <path d="M150 0 L75 200 L225 200 Z" />
+    <text x='150' y='75'>1</text>
+</svg>
+<svg>
+    // dominant-baseline设置文本垂直对齐方式，text-before-edge设置文本在边缘，恰好完全显示
+    <text dominant-baseline=text-before-edge>你好</text>
+</svg>
+</body>
+<script>
+    var a = {
+        name: 'a',
+        children: [
+            {
+                name: 'b',
+                children: [
+                    {
+                        name: 'c'
+                    },
+                    {
+                        name: 'd'
+                    }
+                ]
+            },
+            {
+                name: 'e',
+            },
+            {
+                name: 'f',
+                children: [
+                    {
+                        name: 'g'
+                    }
+                ]
+            },
+        ]
+    }
+    function deep (node) {
+        var temparr = []
+        temparr.push(node)
+        while (temparr.length) {
+            var temp = temparr.shift()
+            if (temp.children) {
+                temparr = [...temp.children, ...temparr]
+            }
+        }
+    }
+    function deep2(node) {
+        console.log(node.name)
+        if (node.children) {
+            node.children.forEach(item => {
+                arguments.callee(item)
+            })
+        }
+    }
+//    deep2(a)
+//    deep(a)
+    function horizion(node) {
+        var temparr = []
+        temparr.push(node)
+        while (temparr.length) {
+            var temp = temparr.shift()
+            console.log(temp.name)
+            if (temp.children) {
+                temparr = [...temparr, ... temp.children]
+            }
+        }
+    }
+    function horizion2(node) {
+        var temparr = []
+        node.forEach(function (item) {
+            console.log(item.name)
+            if (item.children) {
+                temparr = [...temparr, ...item.children]
+            }
+        })
+        if (temparr.length) {
+            horizion2(temparr)
+        }
+    }
+    horizion2([a])
+//    horizion(a)
+</script>
+</html>

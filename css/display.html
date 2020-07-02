@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    .div{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 5px;
+        height: 300px;
+    }
+    .div1{
+        background: #ff0000;
+    }
+</style>
+    <div class="div">
+        <div class="div1" style="grid-column: 1 / 4;">aa</div>
+        <div class="div1" style="grid-row: 2 / 4;">aa</div>
+        <div class="div1">aa</div>
+        <div class="div1">aa</div>
+        <div class="div1">aa</div>
+        <div class="div1">aa</div>
+        <div class="div1">aa</div>
+        <div class="div1">aa</div>
+        <div class="div1">aa</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>--</title>
+    <style>
+        :root {
+            --border: 1px solid #000;
+            --border-test1: 1px solid red;
+        }
+        .border {
+            border: var(--border);
+        }
+        .border-test {
+            border: var(--border-test1)
+        }
+    </style>
+</head>
+<body>
+    <div class="border">所有的IE版本全部阵亡</div>
+    <div class="border-test">所有的IE版本全部阵亡</div>
+</body>
+</html>

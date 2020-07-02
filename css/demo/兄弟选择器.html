@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    .div{
+        width:100px;
+    }
+    .span{
+        width: 40px;
+        display: inline-block;
+    }
+    .span + .span{
+        color: red;
+    }
+</style>
+    <div class="div">
+        <span class="span">
+            aaa
+        </span>
+        <span class="span">
+            aaa
+        </span>
+        <span class="span">
+            aaa
+        </span>
+    </div>
+
+</body>
+</html>

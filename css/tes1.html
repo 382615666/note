@@ -1,0 +1,50 @@
+<html>
+<meta charset="utf-8">
+</html>
+<script>
+    let a = [{"id":1,"name":"唐诗","subjectId":1,"status":0,"creatorId":1,"creator":"biao.chen","createTime":1545382164000,"updateTime":1545382269000,"level":1,"parentId":0,"levelPath":"/0/1","parentPath":"/0","remark":"唐诗知识点，哈哈哈2222","schoolId":null},{"id":2,"name":"宋词","subjectId":1,"status":0,"creatorId":1,"creator":"biao.chen","createTime":1545385065000,"updateTime":1546422516000,"level":1,"parentId":0,"levelPath":"/0/2","parentPath":"/0","remark":"反反复复方法","schoolId":null},{"id":3,"name":"孟浩然","subjectId":1,"status":0,"creatorId":1,"creator":"biao.chen","createTime":1545385500000,"updateTime":1545388831000,"level":2,"parentId":1,"levelPath":"/0/1/3","parentPath":"/0/1","remark":"反反复复分44444","schoolId":null},{"id":4,"name":"春晓","subjectId":1,"status":0,"creatorId":1,"creator":"biao.chen","createTime":1545386713000,"updateTime":null,"level":3,"parentId":3,"levelPath":"/0/1/3/4","parentPath":"/0/1/3","remark":"是发生短发萨短发","schoolId":null},{"id":5,"name":"aaa","subjectId":1,"status":0,"creatorId":1,"creator":"biao.chen","createTime":1545387273000,"updateTime":null,"level":4,"parentId":4,"levelPath":"/0/1/3/4/5","parentPath":"/0/1/3/4","remark":"sdfasdfasdf","schoolId":null},{"id":6,"name":"bbbb","subjectId":1,"status":0,"creatorId":1,"creator":"biao.chen","createTime":1545387293000,"updateTime":null,"level":5,"parentId":5,"levelPath":"/0/1/3/4/5/6","parentPath":"/0/1/3/4/5","remark":"fsdfasdfa","schoolId":null},{"id":7,"name":"cccc","subjectId":1,"status":0,"creatorId":1,"creator":"biao.chen","createTime":1545387492000,"updateTime":null,"level":6,"parentId":6,"levelPath":"/0/1/3/4/5/6/7","parentPath":"/0/1/3/4/5/6","remark":"sdfasdfas","schoolId":null}]
+
+    function toTree(data, parent_id) {
+      var tree = [];
+      var temp;
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].parentId == parent_id) {
+          var obj = data[i];
+          temp = toTree(data, data[i].id);
+          if (temp.length > 0) {
+            obj.children = temp;
+          }
+          tree.push(obj);
+        }
+      }
+      return tree;
+    }
+    console.log(toTree(a, 0))
+    function test(st, et) {
+      et = et || Date.now()
+
+      const dayexp = 1000 * 60 * 60 * 24
+      const hourexp = 1000 * 60 * 60
+      const minuteexp = 1000 * 60
+      const secondexp = 1000
+
+      let calcTime = et - st
+
+      let day = Math.floor(calcTime / dayexp)
+      calcTime = calcTime % dayexp
+
+      let hour = Math.floor(calcTime / hourexp)
+      calcTime = calcTime % hourexp
+
+      let minute = Math.floor(calcTime / minuteexp)
+      calcTime = calcTime % minuteexp
+
+      let second = Math.floor(calcTime / secondexp)
+      calcTime = calcTime % secondexp
+
+      console.log(day + '天'+ hour + '时' + minute + '分' + second + '秒')
+    }
+//    setInterval(function () {
+//      test(new Date('2019-01-23 10:30:00').getTime())
+//    }, 1000)
+</script>

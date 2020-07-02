@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    @font-face {
+        font-family: 'test';  /* project id 705848 */
+        src: url('//at.alicdn.com/t/font_705848_3asl55ztia8.eot');
+        src: url('//at.alicdn.com/t/font_705848_3asl55ztia8.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_705848_3asl55ztia8.woff') format('woff'),
+        url('//at.alicdn.com/t/font_705848_3asl55ztia8.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_705848_3asl55ztia8.svg#cms-icon') format('svg');
+        unicode-range: U+e60c;;
+    }
+    .div{
+        font-family: test;
+    }
+    .icon:before{
+        content: '\e60c';
+    }
+    .icon1:before{
+        content: '\e600';
+    }
+</style>
+    <div>
+        &#x5b89;
+    </div>
+    <div>
+        &#b101101110001001;
+    </div>
+    <div>
+        &#23433;
+        &#10052;
+        &#65;
+    </div>
+    <div class="div">&#xe60c;</div>
+    <div class="div">&#xe600;</div>
+    <div class="div icon"></div>
+    <div class="div icon1"></div>
+</body>
+<script>
+    const code10 = '安'.charCodeAt()
+    const code2 = code10.toString(2)
+    const code16 = code10.toString(16)
+    console.log(code10, code2, code16)
+    console.log(code10, parseInt(code2, 2), parseInt(code16, 16))
+    console.log(String.fromCharCode(code10), String.fromCharCode('0b' + code2), String.fromCharCode('0x' + code16))
+    console.log(decodeURI('\u2744'))
+</script>
+</html>

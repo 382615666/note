@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    .p{
+        /*text-indent: 2em;*/
+    }
+    .p:first-letter{
+        color: red;
+    }
+    .p1:before{
+        content: "aabb";
+    }
+    .p2:before{
+        content: "???aabb";
+        margin-left: 2em;
+        /*等同于text-indent: 2em;*/
+    }
+    .p > span {
+        display: flex;
+    }
+</style>
+<p class="p">啊啊啊啊啊</p>
+<p class="p p1">啊啊啊啊啊</p>
+<p class="p p2">啊啊啊啊啊</p>
+<div class="p">
+    <div style="color: blue!important;">啊啊啊啊啊啊啊</div>
+    啊啊啊啊啊啊
+</div>
+-------------------------
+<div class="p">
+    <span>啊啊啊啊啊啊啊</span>
+    啊啊啊啊啊啊
+</div>
+<div class="p">
+    ￥30.00
+</div>
+</body>
+</html>

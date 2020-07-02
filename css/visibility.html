@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    .div{
+        visibility: hidden;
+    }
+    .div1{
+        visibility: visible;
+    }
+    .div2{
+        visibility: collapse;
+    }
+</style>
+<p>hidden:隐藏占用空间</p>
+<p>父元素hidden隐藏，子元素visible依然会显示</p>
+<p>collapse可以用于控制表格的显示和隐藏，兼容性好像有待验证</p>
+    <div class="div">
+        <div>a</div>
+        <div class="div1">bbb</div>
+    </div>
+    <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr class="div2">
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td class="div2">5</td>
+            <td>6</td>
+        </tr>
+    </table>
+</body>
+</html>

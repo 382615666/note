@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动条</title>
+    <style>
+        .div1{
+            width: 600px;
+            height: 600px;
+            overflow: scroll;
+        }
+        p{
+            width: 500px;
+        }
+        ::-webkit-scrollbar
+        {
+            width: 50px;
+            height: 16px;
+            background-color: lime;
+        }
+
+        /*定义滚动条轨道 内阴影+圆角*/
+        ::-webkit-scrollbar-track
+        {
+            box-shadow: inset 0 0 6px rgba(0,0,0,1);
+            border-radius: 20px;
+            background-color: #0095ff;
+        }
+
+        /*定义滑块 内阴影+圆角*/
+        ::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            box-shadow: inset 0 0 6px rgba(255,255,255,1);
+            background-color: #f00;
+        }z`
+        ::-webkit-scrollbar-track-piece:start {
+            /*滚动条上半边或左半边*/
+            background: #fff;
+        }
+        ::-webkit-scrollbar-thumb:window-inactive {
+            /*当焦点不在当前区域滑块的状态*/
+            background: #000;
+        }
+        ::-webkit-scrollbar-corner {
+            background: #f0f;
+        }
+        ::-webkit-scrollbar-button{
+            background: #da8a27;
+        }
+        ::-webkit-scrollbar-button:decrement:hover {
+            /*当鼠标在水平滚动条下面的按钮上的状态*/
+            background: #0095ff;
+        }
+        ::-webkit-scrollbar-button:increment:hover {
+            /*当鼠标在水平滚动条下面的按钮上的状态*/
+            background: #000;
+        }
+        ::-webkit-scrollbar-track-piece{
+            background: #5d2b2b;
+            border-radius: 55px;
+        }
+		
+		::-webkit-resizer {
+			border: 1px solid #000;
+			border: none;
+			box-shadow: outset 0 0 6px rgba(0,0,0,1);
+		}
+
+
+        .div1{
+            /*三角箭头的颜色*/
+            scrollbar-arrow-color: rgba(0, 217, 255, 1);
+            /*滚动条滑块按钮的颜色*/
+            scrollbar-face-color: rgba(255, 102, 0, 1);
+            /*滚动条阴影*/
+            scrollbar-shadow-color: rgba(15, 247, 255, 1);
+            /*滚动条轨道颜色*/
+            scrollbar-track-color: rgba(160, 44, 44, 1);
+
+            /*以下属性看不到效果*/
+            /*滚动条整体颜色*/
+            scrollbar-highlight-color: rgba(5, 255, 34, 1);
+            scrollbar-3dlight-color: #666; /**//*立体滚动条亮边的颜色*/
+            scrollbar-darkshadow-color: #666; /**//*立体滚动条强阴影的颜色*/
+            scrollbar-base-color:#f8f8f8; /**//*滚动条的基本颜色*/
+        }
+    </style>
+</head>
+<body>
+    <h3>chrome</h3>
+    <div class="div1">
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+        <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+    </div>
+    <p>火狐无法更改样式</p>
+    <div>
+        以下伪类不知道有什么用途：
+        <div></div>
+        :double-button  该伪类以用于按钮和内层轨道。用于判断一个按钮是不是放在滚动条同一端的一对按钮中的一个。对于内层轨道来说，它表示内层轨道是否紧靠一对按钮。
+        <div></div>
+
+        :single-button 类似于double-button伪类。对按钮来说，它用于判断一个按钮是否自己独立的在滚动条的一段。对内层轨道来说，它表示内层轨道是否紧靠一个single-button。
+        <div></div>
+
+        :no-button 用于内层轨道，表示内层轨道是否要滚动到滚动条的终端，比如，滚动条两端没有按钮的时候。
+        <div></div>
+
+        :corner-present  用于所有滚动条轨道，指示滚动条圆角是否显示。
+    </div>
+	<textarea style='height: 100px;width: 200px;'></textarea>
+</body>
+</html>
