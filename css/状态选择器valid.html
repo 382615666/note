@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body style{
+            display: block;
+            white-space: pre;
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<style contenteditable>
+    .input:valid{
+        background: green;
+    }
+    .input:invalid{
+        background: red;
+    }
+</style>
+    <input type="number" required class="input">
+    <input type="number" required class="input" value="1">
+</body>
+</html>

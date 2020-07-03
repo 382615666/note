@@ -5,19 +5,27 @@
     <title>--</title>
     <style>
         :root {
-            --border: 1px solid #000;
-            --border-test1: 1px solid red;
+            --border: #000;
+            --border-test1: red;
         }
         .border {
-            border: var(--border);
+            color: var(--border);
         }
         .border-test {
-            border: var(--border-test1)
+            color: var(--border-test1)
+        }
+        .border-test1 {
+            color: var(--border-test2, blue)
+        }
+        .border-test2 {
+            color: var(--border-test2, --border-test1, blue)
         }
     </style>
 </head>
 <body>
     <div class="border">所有的IE版本全部阵亡</div>
     <div class="border-test">所有的IE版本全部阵亡</div>
+    <div class="border-test1">预备值</div>
+    <div class="border-test2">不支持多个预备值</div>
 </body>
 </html>

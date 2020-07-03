@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 1px solid green;
+            margin: 20px;
+        }
+
+        p {
+            border: 1px solid red;
+        }
+
+        .bar p {
+            border-color: unset;
+        }
+    </style>
+</head>
+<body>
+    <p>This text has a red border.</p>
+    <p style="border-color: unset;">This text has a red border.</p>
+    <div>
+      <p>This text has a red border.</p>
+    </div>
+    <div class="bar">
+      <p>This text has has a black border (initial default, not inherited).</p>
+    </div>
+    <div class="bar" style="color: green;">
+      <p>This text has has a black border (initial default, not inherited).</p>
+    </div>
+</body>
+</html>

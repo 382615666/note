@@ -127,10 +127,14 @@
     }
 
     let p = new promise((resolve, reject) => {
-        resolve('111')
+        console.log(1)
+        resolve()
+    }).then(() => {
+        console.log(2)
     }).finally(value => {
         console.log('finally', value)
     })
+    console.log(3)
 
     promise.reject = function (value) {
         return new promise((resolve, reject) => reject(value))
