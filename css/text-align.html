@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div{
+            text-align: justify;
+            text-align-last: justify;
+            /* font-size: 0; */
+            /* ie专属 */
+            /* text-justify: inter-ideograph;  */
+        }
+        .div::after{
+            content: '';
+            display: inline-block;
+            width: 100%;
+        }
+        .item{
+            width: 300px;
+            display: inline-block;
+            border: 1px solid;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="div">
+        <span class="item">标签必须换行</span>
+        <span class="item">ie 不能font-size: 0; 会去除空格</span>
+        <span class="item">aa</span>
+        <span class="item">aa</span>
+        <span class="item">aa</span>
+        <span class="item">aa</span>
+        <span class="item">aa</span>
+        <span class="item">aa</span>
+        <span class="item">aa</span>
+        <span class="item">aa</span>
+    </div>
+</body>
+</html>
