@@ -6,72 +6,83 @@
     <title>Document</title>
     <style>
         .div{
-            height: 700px;
+            height: 800px;
         }
     </style>
 </head>
 <body>
+    <div style="text-align: center;">
+        1<input type="range" min="1" max="30" id="range" value="10" step="1">30
+    </div>
     <div class="div"></div>
     <script crossorigin="anonymous" integrity="sha384-et+fqdf7kslHL5Ip8rXSJPUPODLa7eMfpFTBaCfnlMzrcAz/wxI5Xm/mNTZwd+7H" src="https://lib.baomitu.com/echarts/4.7.0/echarts.min.js"></script>
     <script src="./fenxi.js"></script>
     <script>
-        const xAxis = Object.keys(sharesDatas).sort()
-        xAxis.length = Math.min(xAxis.length, 10)
-
-        let series = {}
-        xAxis.forEach(item => {
-            for(key in sharesDatas[item]) {
-                series[key] = sharesTypes[key]
-                if (!sharesTypes[key]) {
-                    console.error(`无此类型：${[key]}`)
-                }
-            }
+        const echart = echarts.init(document.querySelector('.div'))
+        document.querySelector('#range').addEventListener('change', e => {
+            setOptions(e.target.value)
         })
-        series = Object.keys(series)
+        function setOptions (range = 10) {
+            const xAxis = Object.keys(sharesDatas).sort()
+            xAxis.length = Math.min(xAxis.length, range)
 
-        let legend = series.map(item => `${sharesTypes[item]}`)
-
-        series = series.map(it => {
-            const data = []
+            let series = {}
             xAxis.forEach(item => {
-                data.push(sharesDatas[item][it] && sharesDatas[item][it].money || 0)
+                for(key in sharesDatas[item]) {
+                    series[key] = sharesTypes[key]
+                    if (!sharesTypes[key]) {
+                        console.error(`无此类型：${[key]}`)
+                    }
+                }
+            })
+            series = Object.keys(series)
+
+            let legend = series.map(item => `${item} ${sharesTypes[item]}`)
+
+            series = series.map(it => {
+                const data = []
+                xAxis.forEach(item => {
+                    data.push(sharesDatas[item][it] && sharesDatas[item][it].money ||0)
+                })
+
+                return {
+                    data,
+                    name: `${it} ${sharesTypes[it]}`,
+                    smooth: true,
+                    label: {
+                        show: true
+                    },
+                    type: 'line'
+                }
             })
 
-            return {
-                data,
-                name: sharesTypes[it],
-                smooth: true,
-                label: {
-                    show: true
+            let selectedLegend = series.filter(item => {
+                return !item.data[item.data.length - 1]
+            })
+            selectedLegend = selectedLegend.reduce((obj, item) => {
+                obj[item.name] = false
+                return obj
+            }, {})
+
+            echart.setOption({
+                tooltip: {
+                    trigger: 'item',
                 },
-                type: 'line'
-            }
-        })
-
-        series.forEach(item => {
-
-        })
-
-        const echart = echarts.init(document.querySelector('.div'))
-        echart.setOption({
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
-            },
-            legend: {
-                data: legend
-            },
-            xAxis: {
-                type: 'category',
-                data: xAxis
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series
-        })
+                legend: {
+                    data: legend,
+                    selected: selectedLegend
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xAxis
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series
+            })
+        }
+        setOptions()
     </script>
 </body>
 </html>

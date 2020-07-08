@@ -5,15 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    /**
+      direction: 文字渲染方向
+      unicode-bidi: 文字反向渲染
+      text-orientation: 可以控制数字/英文字母的渲染
+      writing-mode: 文档方向
+    */
   .bible-quote {
-    direction: rtl; 
-    unicode-bidi: bidi-override; 
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    writing-mode: vertical-rl; 
+    height: 141px;
+    width: 141px;
+    background: red;
+    padding-inline-start: 20px;
+    text-orientation: upright;
   }
   </style>
 </head>
 <body>
   <div class="bible-quote">
-  文字翻转
+  文字翻转-这是一段很长非常长度的文字12
+</div>
+<div class="bible-quote">
+文字翻转
 </div>
 <div>
   Another line of text

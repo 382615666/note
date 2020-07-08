@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            padding-inline-start: 20px;
+            writing-mode: vertical-rl;
+            width: 100px;
+        }
+        .box1{
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">哈哈123456789</div>
+    <div class="box1">
+        <span>哈哈哈哈123456789</span>
+        <span>呼呼123456789</span>
+    </div>
+    <div class="box2">
+        <span>哈哈哈哈123456789</span>
+        <span>呼呼123456789</span>
+    </div>
+</body>
+</html>
