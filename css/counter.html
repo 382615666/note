@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            counter-reset: test 3;
+            counter-set: test 1;
+        }
+        li{
+            counter-increment: test 2;
+        }
+        li::before{
+            content: counters(test, ".");
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            哈哈哈哈
+            <ul>
+                <li>哈哈哈哈</li>
+                <li>哈哈哈哈</li>
+                <li>哈哈哈哈</li>
+                <li>哈哈哈哈</li>
+            </ul>
+        </li>
+        <li>哈哈哈哈</li>
+        <li>哈哈哈哈</li>
+        <li>哈哈哈哈</li>
+        <li>哈哈哈哈</li>
+    </ul>
+</body>
+</html>
