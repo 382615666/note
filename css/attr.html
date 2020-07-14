@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            float: right;
+        }
+        .box::before{
+            position: absolute;
+            display: none;
+        }
+        .box::before{
+            content: attr(data-test);
+            transform: translate(30%, 100%);
+            background: #f8f8f8;
+            box-shadow: 0 0 0 1px #767676;
+            color: #575757;
+            font-size: 12px;
+            border-radius: 3px;
+            padding: 2px 5px;
+            white-space: nowrap;
+        }
+        .box:hover::before{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box" title="测试title" data-test="测试title">哈哈哈</div>
+</body>
+</html>
