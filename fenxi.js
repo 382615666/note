@@ -55,43 +55,43 @@ const sharesTypes = {
 const sharesDatas = {
     '07-13': {
         881113: {
-            money: 27
+            money: 28.8
         },
         881122: {
-            money: 22.7
+            money: 28.4
         },
         881103: {
-            money: 12
+            money: 13
         },
         881142: {
-            money: 8.7
-        },
-        881115: {
-            money: 7.6
+            money: 9.4
         },
         881120: {
-            money: 6.6
+            money: 8.5
         },
-        881124: {
-            money: 4.2
+        881115: {
+            money: 8.3
         },
         881118: {
-            money: 4
+            money: 7.5
         },
-        881112: {
-            money: 3.9
-        },
-        881101: {
-            money: 3.7
-        },
-        881102: {
-            money: 3.7
-        },
-        881162: {
-            money: 3.4
+        881124: {
+            money: 6.8
         },
         881140: {
-            money: 3.3
+            money: 5.6
+        },
+        881101: {
+            money: 5.4
+        },
+        881112: {
+            money: 4.3
+        },
+        881102: {
+            money: 4.2
+        },
+        881162: {
+            money: 4.0
         }
     },
     '07-10': {
