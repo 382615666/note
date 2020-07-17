@@ -5,7 +5,7 @@ const app = express()
 app.use(express.static(__dirname + '/'))
 
 app.get('/', (req, res) => {
-  res.send('hello')
+  res.send(`111`)
 })
 
 app.listen(8888, () => {
