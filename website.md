@@ -134,3 +134,5 @@ unicode 字符查询网站 https://unicode-table.com
 算法演示网站 https://visualgo.net/en/sorting
 
 google页面优化 https://docs.google.com/spreadsheets/d/1up5rxd4EMCoMaxH8cppcK1x76n6HLx0e7jxb0e0FXvc/edit#gid=0
+
+清华大学慕课网 https://next.xuetangx.com/search?query=&page=1
