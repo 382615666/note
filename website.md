@@ -136,3 +136,6 @@ unicode 字符查询网站 https://unicode-table.com
 google页面优化 https://docs.google.com/spreadsheets/d/1up5rxd4EMCoMaxH8cppcK1x76n6HLx0e7jxb0e0FXvc/edit#gid=0
 
 清华大学慕课网 https://next.xuetangx.com/search?query=&page=1
+
+
+nginx-lua-module 中文文档 https://github.com/iresty/nginx-lua-module-zh-wiki
