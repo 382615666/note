@@ -23,8 +23,11 @@
             setOptions(e.target.value)
         })
         function setOptions (range = 10) {
-            const xAxis = Object.keys(sharesDatas).sort()
+            let xAxis = Object.keys(sharesDatas).sort((a, b) => {
+                return a - b
+            })
             xAxis.length = Math.min(xAxis.length, range)
+            xAxis = xAxis.reverse()
 
             let series = {}
             xAxis.forEach(item => {
