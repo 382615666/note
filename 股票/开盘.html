@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link crossorigin="anonymous" integrity="sha384-O56yuCW/A5HUnuYx7ap1CJOXGXqaD3BxgKS9EDLgNUpNIE2BY7KsLJ+H5yr+CXpf" href="http://lib.baomitu.com/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
+    <style>
+      html,body,p{
+        margin: 0;
+      }
+      .app {
+        width: 1200px;
+        margin: 0 auto;
+      }
+      .title{
+        text-align: center;
+      }
+      .form-label{
+        font-weight: bold;
+        display: list-item;
+        list-style: decimal;
+      }
+    </style>
+</head>
+<body>
+    <div id="app" class="app">
+        <h1 class="title">开盘分析</h1>
+        <el-form :model="form">
+          <p class="form-label">股市当前处于什么状态？</p>
+          <el-form-item>
+            <el-radio-group v-model="form.a">
+              <el-radio label="熊市初期"></el-radio>
+              <el-radio label="熊市中期"></el-radio>
+              <el-radio label="熊市末期"></el-radio>
+              <el-radio label="牛市初期"></el-radio>
+              <el-radio label="牛市中期"></el-radio>
+              <el-radio label="牛市末期"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <p class="form-label">大盘趋势处于什么状态？</p>
+          <el-form-item>
+            <el-radio-group v-model="form.b">
+              <el-radio label="多头市场"></el-radio>
+              <el-radio label="平衡市"></el-radio>
+              <el-radio label="空头市场"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <p class="form-label">整体市场赚钱效应如何？</p>
+          <el-form-item>
+            <el-radio-group v-model="form.b">
+              <el-radio label="很大"></el-radio>
+              <el-radio label="一般"></el-radio>
+              <el-radio label="很小"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <p class="form-label">预测今天大盘的走势如何？</p>
+          <el-form-item>
+            <el-radio-group v-model="form.c">
+              <el-radio label="大跌"></el-radio>
+              <el-radio label="跌"></el-radio>
+              <el-radio label="持平"></el-radio>
+              <el-radio label="涨"></el-radio>
+              <el-radio label="大涨"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-form>
+    </div>
+    <script crossorigin="anonymous" integrity="sha384-OZmxTjkv7EQo5XDMPAmIkkvywVeXw59YyYh6zq8UKfkbor13jS+5p8qMTBSA1q+F" src="http://lib.baomitu.com/vue/2.6.11/vue.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-WbhdtWslh0AUD1Dhf8OExUvvjZ/VN6o2HHMsYlDXb6uf3IweMH13dGL4V/KgDc7y" src="http://lib.baomitu.com/element-ui/2.13.2/index.js"></script>
+    <script>
+        new Vue({
+          el: '#app',
+          data () {
+            return {
+                form: {
+                  a: '牛市初期',
+                }
+            }
+          }
+        })
+    </script>
+</body>
+</html>
