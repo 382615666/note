@@ -124,6 +124,7 @@ git 学习网站 https://learngitbranching.js.org
 
 
 xss练习 http://escape.alf.nu/
+xss http://xsst.sinaapp.com/example/1-1.php?page=%3Cimg%20src=x
 
 
 unicode 字符查询网站 https://unicode-table.com
