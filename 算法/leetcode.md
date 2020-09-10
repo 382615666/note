@@ -1,6 +1,37 @@
 # leetcode
 
 
+[717. 1比特与2比特字符](https://leetcode-cn.com/problems/1-bit-and-2-bit-characters/)
+
+>>>
+  有两种特殊字符。第一种字符可以用一比特0来表示。第二种字符可以用两比特(10 或 11)来表示。
+
+  现给一个由若干比特组成的字符串。问最后一个字符是否必定为一个一比特字符。给定的字符串总是由0结束。
+
+  示例 1:
+
+  输入: 
+  bits = [1, 0, 0]
+  输出: True
+  解释: 
+  唯一的编码方式是一个两比特字符和一个一比特字符。所以最后一个字符是一比特字符
+
+>>>
+
+```ecmascript 6
+  // 0 往后推1， 1往后推2
+  var isOneBitCharacter = function(bits) {
+      let i = 0
+      for (; i < bits.length - 1; i++) {
+          if (bits[i] === 0) {
+              continue
+          }
+          i++
+      }
+      return i === bits.length - 1
+  };
+```
+
 [443. 压缩字符串](https://leetcode-cn.com/problems/string-compression/)
 
 >>>
@@ -1264,6 +1295,10 @@
 >>>
 
 ```ecmascript 6
+  // 解题思路 https://leetcode-cn.com/problems/add-digits/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-5-7/
+  var addDigits = function(num) {
+      return (num - 1) % 9 + 1;
+  };
    var addDigits = function(num) {
      if (num < 10) {
        return num
@@ -2800,6 +2835,7 @@
 >>>
 
 ```ecmascript 6
+  // 单个加减
         var addBinary = function(a, b) {
           let i = a.length - 1
           let j = b.length - 1
@@ -2822,6 +2858,26 @@
           if (flag) {
             result = flag + result
           }
+          return result
+        };
+    // 补位加减
+        var addBinary = function(a, b) {
+          let length = Math.max(a.length, b.length)
+          a = a.padStart(length, '0')
+          b = b.padStart(length, '0')
+          let sign = 0
+          let result = ''
+          for (let i = length - 1; i >= 0; i--) {
+              let sum = +a[i] + +b[i] + sign
+              if (sum > 1) {
+                  sign = 1
+                  sum = sum - 2
+              } else {
+                  sign = 0
+              }
+              result = sum + result
+          }
+          result = sign ? sign + result : result
           return result
         };
 ```
@@ -2883,6 +2939,39 @@
       }
       return 0
     };
+```
+
+[40. 组合总和 II](https://leetcode-cn.com/problems/combination-sum-ii/)
+
+>>>
+    报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
+    
+    1.     1
+    2.     11
+    3.     21
+    4.     1211
+    5.     111221
+>>>
+
+```ecmascript 6
+  var countAndSay = function(n) {
+    let str = '1'
+    let len = 1
+    let temp = ''
+    for (let j = 1; j < n; j++) {
+      temp = ''
+      for (let i = 0; i < str.length; i++) {
+        if (str[i] === str[i+1]) {
+          len++
+        } else {
+          temp += `${len}${str[i]}`
+          len = 1
+        }
+      }
+      str = temp
+    }
+    return str
+  };
 ```
 
 [38. 报数](https://leetcode-cn.com/problems/count-and-say/)

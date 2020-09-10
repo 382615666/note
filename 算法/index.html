@@ -82,5 +82,35 @@
   //  // console.log(duplicateZeros([1,0,2,3,0,4,5,0]))
   //  console.log(duplicateZeros([8,4,5,0,0,0,0,0]))
 
+var addStrings = function(num1, num2) {
+    let i = num1.length - 1
+    let j = num2.length - 1
+    let sign = 0
+    let result = ''
+    while (i >=0 || j >= 0) {
+        let sum = sign
+        if (i >= 0) {
+            sum = (num1[i] || 0) - 0 + sum
+            i--
+        }
+        if (j >= 0) {
+            sum = (num2[j] || 0) - 0 + sum
+            j--
+        }
+        if (sum > 9) {
+            sign = 1
+            sum = sum - 10
+        } else {
+            sign = 0
+        }
+        result = sum + result
+    }
+    if (sign) {
+        result = sign + result
+    }
+    return result
+};
+console.log(addStrings('999', '999'))
+
 </script>
 </html>
