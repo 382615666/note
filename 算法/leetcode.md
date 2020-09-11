@@ -1,6 +1,47 @@
 # leetcode
 
 
+[989. 数组形式的整数加法](https://leetcode-cn.com/problems/add-to-array-form-of-integer/)
+
+>>>
+  对于非负整数 X 而言，X 的数组形式是每位数字按从左到右的顺序形成的数组。例如，如果 X = 1231，那么其数组形式为 [1,2,3,1]。
+
+  给定非负整数 X 的数组形式 A，返回整数 X+K 的数组形式。
+
+   
+
+  示例 1：
+
+  输入：A = [1,2,0,0], K = 34
+  输出：[1,2,3,4]
+  解释：1200 + 34 = 1234
+
+>>>
+
+```ecmascript 6
+  var addToArrayForm = function(A, K) {
+      let sign = 0
+      let result = ''
+      while (A.length || K > 0) {
+          let a = A.pop() || 0
+          let b = K % 10 || 0
+          K = K / 10 | 0
+          let sum = a + b + sign
+          if (sum > 9) {
+              sum = sum - 10
+              sign = 1
+          } else {
+              sign = 0
+          }
+          result = sum + result
+      }
+      if (sign) {
+          result = sign + result
+      }
+      return result.split('')
+  };
+```
+
 [717. 1比特与2比特字符](https://leetcode-cn.com/problems/1-bit-and-2-bit-characters/)
 
 >>>
@@ -3265,4 +3306,35 @@
         }
       }
     };
+```
+
+[面试题 17.01. 不用加号的加法](https://leetcode-cn.com/problems/add-without-plus-lcci/)
+
+>>>
+  设计一个函数把两个数字相加。不得使用 + 或者其他算术运算符。
+
+  示例:
+
+  输入: a = 1, b = 1
+  输出: 2
+   
+
+  提示：
+
+  a, b 均可能是负数或 0
+  结果不会溢出 32 位整数
+>>>
+
+```ecmascript 6
+  // 异或 计算各位的值
+  // 按位与 计算进位的值，进位需要左移，因此左移1位
+  var add = function(a, b) {
+      let result = 0
+      while (b) {
+          result = a ^ b
+          b = (a & b) << 1
+          a = result
+      }
+      return a
+  };
 ```
