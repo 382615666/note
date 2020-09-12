@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .test{
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
+
 </body>
 <script>
-
-    <!-- 11 -->
+    function a () {}
+    a.prototype.test = function () {
+        console.log(11)
+    }
+    function b () {
+    }
+    b.prototype = a.prototype
+    var c = new b()
+    c.test()
 </script>
 </html>
