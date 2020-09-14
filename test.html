@@ -6,25 +6,14 @@
     <title>Document</title>
     <style>
         .test{
-            display: flex;
-            flex-flow: row;
-            justify-content: center;
-            width: 200px;
+            height: 10px;
+        }
+        div{
+            height: 10px;
         }
     </style>
 </head>
 <body>
-
+    <div class="test"></div>
 </body>
-<script>
-    function a () {}
-    a.prototype.test = function () {
-        console.log(11)
-    }
-    function b () {
-    }
-    b.prototype = a.prototype
-    var c = new b()
-    c.test()
-</script>
 </html>
