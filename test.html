@@ -15,5 +15,22 @@
 </head>
 <body>
     <div class="test"></div>
+    <script>
+      class a {
+        constructor () {
+          this.name = 'a'
+        }
+      }
+      class b extends a {
+        constructor () {
+          super()
+          this.age = 12
+        }
+      }
+      var c = new b()
+      for (let i in c) {
+        console.log(i)
+      }
+    </script>
 </body>
 </html>
