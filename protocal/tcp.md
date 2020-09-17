@@ -11,16 +11,11 @@ client -> server
 * SYN = 1
 * seq = n
 
-![数据包](../img/DUCFE8STNJN~D`B425KD06J.png)
-
-
 server(syn_rec) -> client
 * SYN = 1
 * ACK = 1
 * ack number = n(seq) + 1
 * seq = m
-
-![数据包](../img/sdfsfdfsfsfsgdfg.png)
 
 client(establish) -> server
 * ack number = m(seq) + 1
@@ -61,7 +56,5 @@ client -> server
 ![数据包](../img/1542163107(1).jpg)
 
 ![OSI七层模型和TCP四层模型](../img/1542163448(1).jpg)
-
-![数据包协议结构](../img/1542382584(1).jpg)
 
 * 数据链路层的最大限度MTU是1500字节
