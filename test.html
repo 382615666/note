@@ -14,32 +14,14 @@
     </style>
 </head>
 <body>
-    <div class="test"></div>
     <script>
-    var canMakeArithmeticProgression = function(arr) {
-      let i = 0
-      let temp = 0
-      let max = null
-      while (arr.length > 1) {
-        if (i + 1 === arr.length - 1) {
-          i = 0
-          if (max) {
-            max = arr.pop()
-          }
+      function sort (arr) {
+        for (let i = 0; i < arr.length; i++) {
           
-        } else {
-
         }
-        if (arr[i] > arr[i + 1]) {
-          temp = arr[i + 1]
-          arr[i + 1] = arr[i]
-          arr[i] = temp
-        }
-        i++
+        return arr
       }
-      return true
-    };
-      console.log(canMakeArithmeticProgression([2,4,6,8]))
+      console.log(sort([88, 79, 2, 99, 56, 38]))
     </script>
 </body>
 </html>
