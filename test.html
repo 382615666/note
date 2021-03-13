@@ -5,15 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .test{
-            height: 10px;
-        }
         div{
-            height: 10px;
+          height: 300px;
+        }
+        .div1{
+          position: relative;
+          height: 100%;
+          width: 100%;
+        }
+        .div2{
+          position: absolute;
+          top: 500px;
+          width: 100px;
+          background: red;
+          height:  100px;
+          left: 20px;
         }
     </style>
 </head>
 <body>
+  <div class="div">
+    <div class="div1">
+      <div class="div2"></div>
+    </div>
+  </div>
     <script>
       function sort (arr) {
         if (arr.length < 2) {
