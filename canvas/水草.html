@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="800" height="500" id="c" style="background: #5A92AF;"></canvas>
+  <script>
+    class Grass {
+      constructor(el) {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.grassess = []
+        this.init()
+      }
+      init() {
+        for (let i = 0; i < 60; i++) {
+          const item = {
+            x: this.canvas.width * Math.random(),
+            y: this.canvas.height / 2.5 + Math.random() * 200,
+          }
+          // 初始角度
+          item.angle = Math.PI * 2 * Math.random()
+          // 结束点
+          item.endy = item.y - Math.random() * 100
+          this.grassess.push(item)
+        }
+      }
+      drawLine() {
+        this.ctx.save()
+        this.ctx.lineWidth = 10
+        this.ctx.strokeStyle = '#3b154e'
+        this.ctx.lineCap = 'round'
+        this.ctx.globalAlpha = .8
+        this.ctx.globalCompositeOperation = 'lighter'
+        this.grassess.forEach(item => {
+          // 结束点
+          item.endx = item.x + Math.sin(item.angle) * 30
+          // 摇摆速度
+          item.angle = item.angle + (1 + Math.random() * 3) / 100
+          this.ctx.beginPath()
+          this.ctx.moveTo(item.x, this.canvas.height)
+          this.ctx.quadraticCurveTo(item.x, item.y, item.endx, item.endy)
+          this.ctx.stroke()
+        })
+        this.ctx.restore()
+      }
+      draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.drawLine()
+      }
+    }
+    const g = new Grass('#c')
+
+    function draw() {
+      requestAnimationFrame(draw)
+      g.draw()
+    }
+    draw()
+  </script>
+</body>
+
+</html>

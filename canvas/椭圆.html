@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="500" height="500" id="c"></canvas>
+  <script>
+    class Tuo {
+      constructor(el) {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.angle = Math.PI
+      }
+      drawTuo() {
+        this.ctx.save()
+        this.ctx.beginPath()
+        this.ctx.fillStyle = 'rgba(255, 255, 0, 1)'
+        const x = this.canvas.width / 2 + 200 * Math.sin(this.angle)
+        const y = this.canvas.height / 2 + 100 * Math.cos(this.angle)
+        this.ctx.arc(x, y, 5, 0, Math.PI * 2)
+        this.ctx.fill()
+        this.ctx.restore()
+        this.angle -= 0.02
+      }
+      draw() {
+        requestAnimationFrame(this.draw.bind(this))
+        this.ctx.fillStyle = 'rgba(0, 0, 0, .04)'
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+        this.drawTuo()
+      }
+    }
+    const t = new Tuo('#c')
+    t.draw()
+  </script>
+</body>
+
+</html>

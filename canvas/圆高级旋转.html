@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="500" height="500" id="c"></canvas>
+  <script>
+    class Rotate {
+      constructor(el) {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.deg = 0.05
+        this.sin = Math.sin(this.deg)
+        this.cos = Math.cos(this.deg)
+        this.x = this.canvas.width / 2 + 20
+        this.y = this.canvas.height / 2 + 20
+      }
+      drawCircle() {
+        this.ctx.save()
+        this.ctx.beginPath()
+        this.ctx.fillStyle = 'red'
+        this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2)
+        this.ctx.fill()
+        this.ctx.restore()
+
+        const x = this.x - this.canvas.width / 2
+        const y = this.y - this.canvas.height / 2
+
+        this.x = this.canvas.width / 2 + x * this.cos - y * this.sin
+        this.y = this.canvas.height / 2 + y * this.cos + x * this.sin
+
+      }
+      draw() {
+        requestAnimationFrame(this.draw.bind(this))
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.drawCircle()
+      }
+    }
+    const r = new Rotate('#c')
+    r.draw()
+  </script>
+</body>
+
+</html>

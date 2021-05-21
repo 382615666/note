@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="300" height="300" id="c"></canvas>
+  <script>
+    class Percent {
+      constructor(el, n = 100) {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.x = this.canvas.width / 2
+        this.y = this.canvas.height / 2
+        this.r = 40
+        this.number = n
+        this.currentNumber = 0
+      }
+      drawText() {
+        this.ctx.save()
+        this.ctx.fillStyle = 'red'
+        this.ctx.font = '30px Arial'
+        this.ctx.textAlign = 'center'
+        this.ctx.textBaseline = 'middle'
+        this.ctx.fillText(`${this.currentNumber | 0}%`, this.x, this.y)
+        this.ctx.restore()
+      }
+      calcNumber() {
+        this.currentNumber = Math.min(100, this.currentNumber + 0.166)
+      }
+      drawCircle(color, start = 0, end = Math.PI * 2) {
+        this.ctx.save()
+        this.ctx.beginPath()
+        this.ctx.strokeStyle = color
+        this.ctx.lineWidth = 5
+        this.ctx.arc(this.x, this.y, this.r, start, end, false)
+        this.ctx.stroke()
+        this.ctx.closePath()
+        this.ctx.restore()
+      }
+      draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.drawCircle('#a5def1')
+        this.drawText()
+        this.drawCircle('red', -Math.PI / 2, Math.PI * 2 * this.currentNumber / 100 - Math.PI / 2)
+        this.calcNumber()
+      }
+    }
+
+    function draw() {
+      requestAnimationFrame(draw)
+      p.draw()
+    }
+    const p = new Percent('#c')
+    draw()
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="500" height="500" id="c"></canvas>
+  <script>
+    class Matrix {
+      constructor(el, text = '') {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.text = text
+        this.columns = 25
+        this.rows = new Array(this.columns).fill(0)
+      }
+      drawGradient() {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, .1)'
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+      }
+      drawText() {
+        this.ctx.save()
+        this.ctx.fillStyle = 'green'
+        this.ctx.font = `${this.columns}px Arial`
+        this.ctx.textBaseline = 'top'
+        for (let i = 0; i < this.columns; i++) {
+          const random = Math.random() * this.text.length | 0
+          this.ctx.fillText(this.text[random], i * this.columns, this.rows[i] * this.columns)
+          // 超出高度 || 错落展示
+          if (this.rows[i] * this.columns > this.canvas.height || Math.random() > 0.98) {
+            this.rows[i] = -1
+          }
+          this.rows[i]++
+        }
+        this.ctx.restore()
+      }
+      draw() {
+        this.drawGradient()
+        this.drawText()
+      }
+    }
+    const m = new Matrix('#c', 'adngodngnemam;[osjpjsdgsjigh]]p89853')
+
+    function draw() {
+      requestAnimationFrame(draw)
+      m.draw()
+    }
+    draw()
+  </script>
+</body>
+
+</html>

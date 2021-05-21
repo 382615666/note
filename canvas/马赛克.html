@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+</body>
+<script>
+  const canvas1 = document.createElement('canvas')
+  const ctx1 = canvas1.getContext('2d')
+  const canvas = document.querySelector('#canvas')
+  const ctx = canvas.getContext('2d')
+
+  const img = new Image()
+  img.onload = function () {
+    canvas.width = 500 || this.naturalWidth
+    canvas.height = 500 || this.naturalHeight
+    canvas1.width = 500 || this.naturalWidth
+    canvas1.height = 500 || this.naturalHeight
+    ctx1.drawImage(this, 0, 0)
+    ctx.drawImage(this, 0, 0)
+    // ctx1.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight, 0, 0, 500, 500)
+    // ctx.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight, 0, 0, 500, 500)
+  }
+  img.src = './bg.jpg'
+
+  // 画笔半径
+  const br = 16
+  // 马赛克半径
+  const r = br / 2
+
+  function getColor(o, x, y) {
+    const w = o.width
+    const h = o.height
+    const data = o.data
+    const color = []
+    // (4 * 宽度 * 坐标y + x) + [rgba]
+    color[0] = data[4 * (w * y + x)]
+    color[1] = data[4 * (w * y + x) + 1]
+    color[2] = data[4 * (w * y + x) + 2]
+    color[3] = data[4 * (w * y + x) + 3]
+    return color
+  }
+
+  function setColor(o, x, y, color) {
+    const w = o.width
+    const h = o.height
+    const data = o.data
+    data[4 * (w * y + x)] = color[0]
+    data[4 * (w * y + x) + 1] = color[1]
+    data[4 * (w * y + x) + 2] = color[2]
+    data[4 * (w * y + x) + 3] = color[3]
+  }
+
+  function getBounding(x, y) {
+    return {
+      x: Math.min(Math.max(0, x), canvas1.width),
+      y: Math.min(Math.max(0, y), canvas1.height)
+    }
+  }
+
+
+  let lastx = null
+  let lasty = null
+
+  function mousemove(e) {
+    const x = e.clientX - canvas.offsetLeft
+    const y = e.clientY - canvas.offsetTop
+    // 超出范围直接return
+    if (x < 0 || y < 0 || x > canvas.width || y > canvas.height) {
+      return
+    }
+    const position = getBounding(x - br, y - br)
+    // 在范围内,不在重新画
+    if (lastx !== null && lasty !== null && x > lastx && x < lastx + 2 * br && y > lasty && y < lasty + 2 * br) {
+      return
+    }
+
+    const originImageData = ctx1.getImageData(position.x, position.y, br * 2, br * 2)
+    const imageData = ctx.getImageData(position.x, position.y, br * 2, br * 2)
+    // 马赛克每行个数
+    const rows = imageData.width / r | 0
+    // 马赛克每列个数
+    const cols = imageData.height / r | 0
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+
+        const x = Math.min(i * r + Math.floor(Math.random() * r), rows)
+        const y = Math.min(j * r + Math.floor(Math.random() * r), cols)
+        const color = getColor(originImageData, x, y)
+        for (let k = 0; k < r; k++) {
+          for (let l = 0; l < r; l++) {
+            setColor(imageData, i * r + k, j * r + l, color)
+          }
+        }
+      }
+    }
+    ctx.putImageData(imageData, position.x, position.y)
+
+    lastx = position.x
+    lasty = position.y
+  }
+
+  canvas.addEventListener('mousedown', function () {
+    document.addEventListener('mousemove', mousemove)
+  })
+
+  document.addEventListener('mouseup', function () {
+    document.removeEventListener('mousemove', mousemove)
+  })
+</script>
+
+</html>

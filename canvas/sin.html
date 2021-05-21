@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="500" height="500" id="c"></canvas>
+  <script>
+    class Sin {
+      constructor(el) {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.x = 0
+        this.y = this.canvas.height / 2
+        this.lastx = 0
+        this.lasty = this.canvas.height / 2
+      }
+      drawLine() {
+        this.ctx.save()
+        this.ctx.beginPath()
+        this.ctx.moveTo(0, this.canvas.height / 2)
+        this.ctx.lineTo(this.canvas.width, this.canvas.height / 2)
+        this.ctx.stroke()
+        this.ctx.restore()
+      }
+      draw() {
+        this.ctx.save()
+        this.ctx.lineWidth = 1
+        this.ctx.stokeStyle = 'red'
+        this.ctx.beginPath()
+        this.ctx.moveTo(this.lastx, this.lasty)
+        this.ctx.lineTo(this.x, this.y)
+        this.ctx.stroke()
+        this.ctx.restore()
+        this.lastx = this.x
+        this.lasty = this.y
+        this.x += 2
+        // 变换公式 y = Asin(ωx+ φ）
+        // A y轴放大多少倍
+        // ω = Math.PI * 2 / n  x轴放大n倍
+        // φ 偏移量
+        this.y = this.canvas.height / 2 + Math.sin(this.x * Math.PI * 2 / this.canvas.width + 0) * this
+          .canvas.height / 2
+      }
+    }
+    const s = new Sin('#c')
+
+    function draw() {
+      requestAnimationFrame(draw)
+      s.drawLine()
+      s.draw()
+    }
+    draw()
+  </script>
+</body>
+
+</html>

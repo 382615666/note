@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="800" height="500" id="c" style="background: #45cb96;"></canvas>
+  <script>
+    class Ball {
+      constructor(el) {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.r = Math.random() * 5 + 5
+        this.x = (this.canvas.width - this.r * 2) * Math.random() + this.r
+        this.y = (this.canvas.height - this.r * 2) * Math.random() + this.r
+
+        this.vx = Math.random() * 6 - 3
+        this.vy = Math.random() * 6 - 3
+
+        this.mass = this.r / 5
+
+        const r = Math.random() * 255
+        const g = Math.random() * 255
+        const b = Math.random() * 255
+        // this.color = `rgb(${r}, ${g}, ${b})`
+        this.color = '#fff'
+
+      }
+      draw() {
+        this.ctx.save()
+        this.ctx.beginPath()
+        this.ctx.fillStyle = this.color
+        this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
+        this.ctx.fill()
+        this.ctx.restore()
+      }
+    }
+    class Animation {
+      constructor(el) {
+        this.el = el
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+      }
+      initBalls(n) {
+        this.balls = []
+        for (let i = 0; i < n; i++) {
+          this.balls.push(new Ball(this.el))
+        }
+      }
+      drawBalls() {
+        this.balls.forEach(item => {
+          item.draw()
+        })
+      }
+      moveBalls() {
+        this.balls.forEach(item => {
+          item.x += item.vx
+          item.y += item.vy
+        })
+      }
+      bianjiejiancha() {
+        this.balls.forEach(item => {
+          if (item.x - item.r < 0) {
+            item.vx *= -1
+            item.x = item.r
+          } else if (item.x + item.r > this.canvas.width) {
+            item.vx *= -1
+            item.x = this.canvas.width - item.r
+          } else if (item.y - item.r < 0) {
+            item.vy *= -1
+            item.y = item.r
+          } else if (item.y + item.r > this.canvas.height) {
+            item.vy *= -1
+            item.y = this.canvas.height - item.r
+          }
+        })
+      }
+      pengzhuang(ball0, ball1) {
+        const dx = ball1.x - ball0.x
+        const dy = ball1.y - ball0.y
+        const distance = Math.sqrt(dx * dx + dy * dy)
+        if (distance <= ball0.r + ball1.r) {
+          const angle = Math.atan2(dy, dx)
+          const sin = Math.sin(angle)
+          const cos = Math.cos(angle)
+
+
+          // 旋转   
+          // 知识点 cos(a + b) 公式
+          let x0 = 0
+          let y0 = 0
+          // 正常角度往上为正，此处为负角度  
+          let x1 = dx * cos + dy * sin
+          let y1 = dy * cos - dx * sin
+
+          let vx0 = ball0.vx * cos + ball0.vy * sin
+          let vy0 = ball0.vy * cos - ball0.vx * sin
+          let vx1 = ball1.vx * cos + ball1.vy * sin
+          let vy1 = ball1.vy * cos - ball1.vx * sin
+
+
+          // 动量守恒 p = m*v    m1 * v1 + m2 * v2 = m1 * v1F + m2 * v2F
+          // 能量守恒 E = 0.5 * m * v^2     (0.5 * m1 * v1^2) + (0.5 * m2 * v2^2) = (0.5 * m1 * v1F^2) + (0.5 * m2 * v2F^2)
+
+          // 推导公式
+          // v1F = ((m1 - m2)*v1 + 2*m2*v2) / (m1+m2)
+          // v2F = ((m2 - m1)*v2 + 2*m1*v1) / (m1+m2)
+
+          // 计算加速度
+          // 速度相反 所以减
+          const vxTotal = vx0 - vx1
+          vx0 = ((ball0.mass - ball1.mass) * vx0 + 2 * ball1.mass * vx1) / (ball0.mass + ball1.mass)
+          // 本来 vx1 = vx0 - vxTotal
+          // 由于相撞后，速度会相反，
+          vx1 = vxTotal + vx0
+
+          x0 += vx0
+          x1 += vx1
+
+          // 旋转回去
+          const x0Final = x0 * cos - y0 * sin
+          const y0Final = y0 * cos + x0 * sin
+          const x1Final = x1 * cos - y1 * sin
+          const y1Final = y1 * cos + x1 * sin
+
+          // 修正坐标
+          ball1.x = ball0.x + x1Final
+          ball1.y = ball0.y + y1Final
+          ball0.x = ball0.x + x0Final
+          ball0.y = ball0.y + y0Final
+
+          // 修正加速度
+          ball0.vx = vx0 * cos - vy0 * sin
+          ball0.vy = vy0 * cos + vx0 * sin
+          ball1.vx = vx1 * cos - vy1 * sin
+          ball1.vy = vy1 * cos + vx1 * sin
+        }
+
+      }
+      pengzhuangjiance() {
+        for (let i = 0; i < this.balls.length; i++) {
+          for (let j = i + 1; j < this.balls.length; j++) {
+            this.pengzhuang(this.balls[i], this.balls[j])
+          }
+        }
+      }
+      drawLine() {
+        for (let i = 0; i < this.balls.length; i++) {
+          for (let j = i + 1; j < this.balls.length; j++) {
+            const dx = this.balls[i].x - this.balls[j].x
+            const dy = this.balls[i].y - this.balls[j].y
+            const distance = Math.sqrt(dx * dx + dy * dy)
+            if (distance < 85) {
+              this.ctx.save()
+              this.ctx.beginPath()
+              this.ctx.strokeStyle = '#fff'
+              this.ctx.moveTo(this.balls[i].x, this.balls[i].y)
+              this.ctx.lineTo(this.balls[j].x, this.balls[j].y)
+              this.ctx.stroke()
+              this.ctx.restore()
+            }
+          }
+        }
+      }
+      clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      }
+      draw() {
+        requestAnimationFrame(this.draw.bind(this))
+        this.clear()
+        this.drawBalls()
+        this.moveBalls()
+        this.bianjiejiancha()
+        this.pengzhuangjiance()
+        this.drawLine()
+      }
+    }
+    const a = new Animation('#c')
+    a.initBalls(50)
+    a.draw()
+  </script>
+</body>
+
+</html>

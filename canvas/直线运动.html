@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    const a = (490 * 2) / 500 / 500
+    let gap = 16.7
+    let x = 0
+    let t = 0
+
+    function draw() {
+      t = t + gap
+      x = a * t * t / 2
+      if (x > canvas.width - 10) {
+        gap = -gap
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.fillStyle = 'red'
+      ctx.fillRect(x, 0, 10, 10)
+      requestAnimationFrame(draw)
+    }
+    draw()
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="500" height="500" id="c"></canvas>
+  <script>
+    class Ball {
+      constructor(x, y, vx, vy, r) {
+        this.x = x
+        this.y = y
+        this.vx = vx
+        this.vy = vy
+        this.r = r
+        this.color = '#' + (Math.random() * 0xffffff).toString(16).substr(-6).padStart(6, '0')
+      }
+    }
+    class Box {
+      constructor(el, n) {
+        this.canvas = document.querySelector(el)
+        this.ctx = this.canvas.getContext('2d')
+        this.bounce = -1
+        this.balls = []
+        for (let i = 0; i < n; i++) {
+          const x = this.canvas.width / 2 + Math.random() * 400 - 200
+          const y = this.canvas.height / 2 + Math.random() * 400 - 200
+          const vx = Math.random() * 6 - 3
+          const vy = Math.random() * 6 - 3
+          const r = Math.random() * 5 + 5
+          const ball = new Ball(x, y, vx, vy, r)
+          this.balls.push(ball)
+        }
+      }
+      drawBall() {
+        this.ctx.save()
+        this.balls.forEach(item => {
+          this.ctx.beginPath()
+          this.ctx.fillStyle = item.color
+          this.ctx.arc(item.x, item.y, item.r, 0, Math.PI * 2)
+          this.ctx.fill()
+        })
+        this.ctx.restore()
+      }
+      move() {
+        this.balls.forEach(item => {
+          item.x += item.vx
+          item.y += item.vy
+
+          // 右反弹
+          if (item.x + item.r >= this.canvas.width) {
+            item.x = this.canvas.width - item.r
+            item.vx *= this.bounce
+            // 左反弹
+          } else if (item.x - item.r <= 0) {
+            item.x = item.r
+            item.vx *= this.bounce
+          } else if (item.y + item.r >= this.canvas.height) {
+            item.y = this.canvas.height - item.r
+            item.vy *= this.bounce
+          } else if (item.y - item.r <= 0) {
+            item.y = item.r
+            item.vy *= this.bounce
+          }
+
+        })
+      }
+      start() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.move()
+        this.drawBall()
+      }
+      draw() {
+        requestAnimationFrame(this.draw.bind(this))
+        this.start()
+      }
+    }
+    const b = new Box('#c', 10)
+    b.draw()
+  </script>
+</body>
+
+</html>
