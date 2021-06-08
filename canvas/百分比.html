@@ -11,6 +11,9 @@
 <body>
   <canvas width="300" height="300" id="c"></canvas>
   <script>
+    window.requestAnimationFrame(function (time) {
+      console.log(time)
+    })
     class Percent {
       constructor(el, n = 100) {
         this.canvas = document.querySelector(el)
