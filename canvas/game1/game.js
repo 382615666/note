@@ -19,8 +19,12 @@ class Game {
     this.imageUrls = []
     this.imagesLoaded = 0
     this.imageLoadFailed = 0
+    this.imageIndex = 0
 
     this.cloudOffset = 0
+
+
+    this.gameover = false
 
   }
   start() {
@@ -95,9 +99,10 @@ class Game {
     this.images[url] = image
   }
   loadImages() {
-    this.imageUrls.forEach(item => {
-      this.loadImage(item)
-    })
+    if (this.imageIndex < this.imageUrls.length) {
+      this.loadImage(this.imageUrls[this.imageIndex])
+      this.imageIndex++
+    }
     return (this.imagesLoaded + this.imageLoadFailed) / this.imageUrls.length * 100
   }
   queueImage(url) {
@@ -105,10 +110,18 @@ class Game {
   }
   startAnimate() {}
   paintUnderSprites() {
-    this.paintBg()
-    this.paintSun()
-    this.paintFarCloud(20, 20)
-    this.paintFarCloud(this.canvas.width + 20, 20);
+    if (!this.gameover && !this.life) {
+      this.over()
+    } else {
+      this.paintBg()
+      this.paintSun()
+      this.paintFarCloud(20, 20)
+      this.paintFarCloud(this.canvas.width + 20, 20);
+
+      if (!this.gameover) {
+        
+      }
+    }
   }
   paintBg() {
     this.ctx.save()
