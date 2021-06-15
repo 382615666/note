@@ -119,7 +119,7 @@ class Game {
       this.paintFarCloud(this.canvas.width + 20, 20);
 
       if (!this.gameover) {
-        
+
       }
     }
   }
@@ -193,6 +193,9 @@ class Game {
     this.ctx.fill();
     this.ctx.restore();
 
+  }
+  over() {
+    this.gameover = true
   }
   endAnimate() {}
 }
