@@ -14,18 +14,62 @@
 </head>
 <body>
     <canvas class="test"></canvas>
+    <script id="vertexShader" type="x-shader/x-vertex">
+        void main () {
+            gl_Position = vec4(0, 0, 0, 1);
+            gl_PointSize = 100.0;
+        }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-frament">
+        void main () {
+            gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+        }
+    </script>
     <script type="module">
         import { Color } from 'https://cdn.bootcdn.net/ajax/libs/three.js/r99/three.module.min.js'
         const dom = document.querySelector('.test')
         const gl = dom.getContext('webgl')
-        const color = new Color('red')
-        function test () {
-            color.offsetHSL(0.01, 0, 0)
-            gl.clearColor(color.r, color.g, color.b, 1)
-            gl.clear(gl.COLOR_BUFFER_BIT)
-            requestAnimationFrame(test)
+        // const color = new Color('red')
+
+        const vertex = document.querySelector('#vertexShader').innerText
+        const fragment = document.querySelector('#fragmentShader').innerText
+
+        initShaders(gl, vertex, fragment)
+
+        gl.clearColor(0, 0, 0, 1)
+        gl.clear(gl.COLOR_BUFFER_BIT)
+
+        gl.drawArrays(gl.POINTS, 0, 1)
+
+        function initShaders (gl, vs, fs) {
+            const program = gl.createProgram()
+            const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vs)
+            const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fs)
+
+            gl.attachShader(program, vertexShader)
+            gl.attachShader(program, fragmentShader)
+
+            gl.linkProgram(program)
+
+            gl.useProgram(program)
+
+            gl.program = program
+
         }
-        test()
+        function loadShader (gl, type, source) {
+            const shader = gl.createShader(type)
+            gl.shaderSource(shader, source)
+            gl.compileShader(shader)
+            return shader
+        }
+        // function test () {
+        //     color.offsetHSL(0.01, 0, 0)
+        //     gl.clearColor(color.r, color.g, color.b, 1)
+        //     gl.clear(gl.COLOR_BUFFER_BIT)
+        //     requestAnimationFrame(test)
+        // }
+        // test()
+
     </script>
 </body>
 </html>
