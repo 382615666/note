@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .test {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 10px;">
+        <canvas class="test"></canvas>
+    </div>
+    <script id="vertextShader" type="x-shader/x-vertext">
+        attribute vec4 position;
+        void main () {
+            gl_Position = position;
+            gl_PointSize = 5.0;
+        }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-frament">
+        void main () {
+            gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+        }
+    </script>
+    <!-- <script id="fra"></script> -->
+    <script type="module">
+        // 掘金 https://juejin.cn/user/4485631602599495/posts
+        // 资料 https://666java.com/9862.html
+        // 学习视频 https://pan.baidu.com/play/video#/video?path=%2F%E9%AB%98%E8%96%AAwebGL%E5%B7%A5%E7%A8%8B%E5%B8%88%2F0029-webgl%E5%85%A5%E9%97%A8-4-1-%E7%BB%98%E5%88%B6%E5%A4%9A%E7%82%B9%E3%80%90%E6%B5%B7%E9%87%8F%E4%B8%80%E6%89%8B%EF%BC%9A666java.com%E3%80%91.mp4&t=21
+        // api http://192.168.0.108:48091/doc.html#/default/%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%20-%20%E9%87%8F%E5%85%B7/getEquipmentPageUsingGET
+        
+
+
+        import * as t from 'https://cdn.bootcdn.net/ajax/libs/three.js/r99/three.module.min.js'
+
+        const dom = document.querySelector('.test')
+        const gl = dom.getContext('webgl')
+
+        const vertex = document.querySelector('#vertextShader').innerText
+        const vertexShader = gl.createShader(gl.VERTEX_SHADER)
+        gl.shaderSource(vertexShader, vertex)
+        gl.compileShader(vertexShader)
+
+
+        const fragment = document.querySelector('#fragmentShader').innerText
+        const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)
+        gl.shaderSource(fragmentShader, fragment)
+        gl.compileShader(fragmentShader)
+
+        const program = gl.createProgram()
+        gl.attachShader(program, vertexShader)
+        gl.attachShader(program, fragmentShader)
+        gl.linkProgram(program)
+        gl.useProgram(program)
+
+        const vertices = new Float32Array(
+            [
+                0, .1,
+                -.1, -.1,
+                .1, -.1
+            ]
+        )    
+        
+        const buffer = gl.createBuffer()
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+        gl.bufferData(gl.ARRAY_BUFFER,vertices, gl.STATIC_DRAW)
+
+        const position = gl.getAttribLocation(program, 'position')
+        gl.vertexAttrib3f(position, 0, .5, 0)
+
+        gl.clearColor(0, 0, 0, 1)
+        gl.clear(gl.COLOR_BUFFER_BIT)
+        gl.drawArrays(gl.POINTS, 0, 3)
+    </script>
+</body>
+</html>
